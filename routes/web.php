@@ -19,3 +19,9 @@ Route::get('/', function () {
 Route::get('store',function(){
     return view('store');
 });
+Route::get('movies',function(){
+    return view('movies/index');
+});
+Route::get('movies/the-social-dilemma',function(){
+    return view('movies/the-social-dilemma');
+});
