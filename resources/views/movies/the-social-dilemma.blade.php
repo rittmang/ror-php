@@ -21,6 +21,7 @@
    <script src="https://kit.fontawesome.com/c893428da3.js" crossorigin="anonymous"></script>
    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-database.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@2/dist/fingerprint2.min.js"></script>
 
 </head>
 
@@ -119,7 +120,9 @@
          <div class="row">
             <div class="col-lg-12">
                <div class="trending-info season-info g-border">
-                  <p id="view_count_text"></p>
+                  <p id="view_count_text"><i class='fa fa-eye'>  </i>  {{$views}} </p> 
+                  {{-- <p>Browser fingerprint: <p id="fp"></p></p> --}}
+                  <pre id="details"></pre>                 
                   <h4 class="trending-text big-title text-uppercase mt-0">The Social Dilemma</h4>
                   <div class="d-flex align-items-center text-white text-detail episode-name mb-0">
                      <span>Documentary</span>
@@ -207,43 +210,43 @@
    <!-- Custom JS-->
    <script src="../movie/js/custom.js"></script>
 </body>
-<script type="application/javascript">
-   // Your web app's Firebase configuration
-   var firebaseConfig = {
-     apiKey: "{{config('app.apiKey')}}",
-     authDomain: "{{config('app.authDomain')}}",
-     databaseURL: "{{config('app.databaseURL')}}",
-     projectId: "{{config('app.projectId')}}",
-     storageBucket: "{{config('app.storageBucket')}}",
-     messagingSenderId: "{{config('app.messagingSenderId')}}",
-     appId: "{{config('app.appId')}}"
-   };
-   // Initialize Firebase
-   firebase.initializeApp(firebaseConfig);
 
-   function get_viewers_ip(json){
-      viewers_ip=json.ip;
-      // count view with ip
-      count_view(viewers_ip);
+ {{-- <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=get_viewers_ip"></script>
+  --}}
+  <script>
+     var hasConsole=typeof console !== "undefined"
+     var fingerprintReport=function(){
+        var d1=new Date()
+        Fingerprint2.get(function(components){
+           var murmur=Fingerprint2.x64hash128(components.map(function(pair){return pair.value}).join(),31)
+           var d2=new Date()
+           var time=d2-d1
+         //   document.querySelector("#fp").textContent=murmur;
+           $.ajax({
+              url:'/movies/the-social-dilemma',
+              type:'POST',
+              data:{_token:"{{csrf_token()}}",murmur:murmur},
+            //   success:function(){alert("Sent murmur to controller");}
+           });
+           
+        })
+     }
+     var cancelId
+     var cancelFunction
 
-   }
-   function count_view(viewers_ip){
-      var views;
-      var ip_to_string=viewers_ip.toString();
+     if(window.requestIdleCallback){
+        cancelId=requestIdleCallback(fingerprintReport)
+        cancelFunction=cancelIdleCallback
+     }else{
+        canceldId=setTimeout(fingerprintReport,500)
+        cancelFunction=clearTimeout
+     }
 
-      for(var i,i=0;i<ip_to_string.length;i++){
-         ip_to_string=ip_to_string.replace(".","-");
-      }
-
-      firebase.database().ref().child("page_views/"+ip_to_string).set({
-         viewers_ip:viewers_ip
-      });
-      firebase.database().ref().child("page_views").on("value",function(snapshot){
-         views=snapshot.numChildren();
-         document.getElementById("view_count_text").innerHTML="<i class='fa fa-eye'></i> "+views;
-      });
-
-   }
- </script>
- <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=get_viewers_ip"></script>
+     if(cancelId){
+        cancelFunction(cancelId)
+        cancelId=undefined
+     }
+     fingerprintReport()
+     
+  </script>
 </html>

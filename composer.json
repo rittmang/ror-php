@@ -12,6 +12,8 @@
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "kreait/firebase-php": "^5.0",
+        "kreait/laravel-firebase": "^2.3",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0"
     },

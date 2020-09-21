@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FirebaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,5 @@ Route::get('store',function(){
 Route::get('movies',function(){
     return view('movies/index');
 });
-Route::get('movies/the-social-dilemma',function(){
-    return view('movies/the-social-dilemma');
-});
+Route::get('/movies/the-social-dilemma',[FirebaseController::class,'index']);
+Route::post('/movies/the-social-dilemma',[FirebaseController::class,'change']);
