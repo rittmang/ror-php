@@ -5,6 +5,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="css/main.css" />
+		
 		<noscript><link rel="stylesheet" href="css/noscript.css" /></noscript>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161216442-1"></script>
@@ -81,8 +82,10 @@
 					<p>Wish to tell us something? Think we're doing good?<br />Send in your feedback, or shoot a mail. We'll try to respond as soon as we can.</p>
 				</header>
 				<ul class="actions special">
-					<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfqSZKYwanxpgkuSjP_lmWmoF6o9eRo6Rq5luYVnlqbUQK_Hg/viewform" target="_blank" class="button primary icon fa-external-link">Feedback</a></li>
+					<li><a href="https://www.instamojo.com/@rightonrittman/lec1d186d02a04d88a10e67c98dfb32b1/" target="_blank" class="button primary icon fa-gratipay">Donate (₹29)</a></li>
+					<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfqSZKYwanxpgkuSjP_lmWmoF6o9eRo6Rq5luYVnlqbUQK_Hg/viewform" target="_blank" class="button icon fa-commenting">Feedback</a></li>
 					<li><a href="mailto:rightonrittman@gmail.com" class="button icon fa-envelope">Mail</a></li>
+					
 				</ul>
 			</section>
 
