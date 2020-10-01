@@ -23,5 +23,8 @@ Route::get('store',function(){
 Route::get('movies',function(){
     return view('movies/index');
 });
+Route::get('/movies/tos',function(){
+    return view('movies/tos');
+});
 Route::get('/movies/the-social-dilemma',[FirebaseController::class,'index']);
 Route::post('/movies/the-social-dilemma',[FirebaseController::class,'change']);

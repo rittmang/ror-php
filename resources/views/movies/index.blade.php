@@ -18,6 +18,7 @@
       <link rel="stylesheet" href="movie/css/style.css" />
       <!-- Responsive -->
       <link rel="stylesheet" href="movie/css/responsive.css" />
+      
    </head>
    <body>
       <!-- loader Start -->
@@ -753,7 +754,7 @@
          </div>
          <div class="copyright py-2">
             <div class="container-fluid">
-               <p class="mb-0 text-center font-size-14 text-body">STREAMIT - 2020 All Rights Reserved</p>
+               <p class="mb-0 text-center font-size-14 text-body"></p>
             </div>
          </div>
       </footer> -->
@@ -762,6 +763,7 @@
       <div id="back-to-top">
          <a class="top" href="#top" id="top"> <i class="fa fa-angle-up"></i> </a>
       </div>
+      
       <!-- back-to-top End -->
       <!-- jQuery, Popper JS -->
       <script src="movie/js/jquery-3.4.1.min.js"></script>

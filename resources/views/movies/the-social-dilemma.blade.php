@@ -16,12 +16,14 @@
    <link rel="stylesheet" href="../movie/css/typography.css">
    <!-- Style -->
    <link rel="stylesheet" href="../movie/css/style.css" />
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
    <!-- Responsive -->
    <link rel="stylesheet" href="../movie/css/responsive.css" />
    <script src="https://kit.fontawesome.com/c893428da3.js" crossorigin="anonymous"></script>
    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-database.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@2/dist/fingerprint2.min.js"></script>
+   
 
 </head>
 
@@ -109,7 +111,7 @@
    <div class="video-container iq-main-slider">
       <video class="video d-block" controls autoplay poster="../movie/images/slider/slider1.jpg" preload="auto">
          <source src="https://td.angerycat.tk/Aria/The%20Social%20Dilemma%20(2020)%20%5B1080p%5D%20%5BWEBRip%5D%20%5B5.1%5D%20%5BYTS.MX%5D/The%20Social%20Dilemma%20(2020)%20%5B1080p%5D%20%5BWEBRip%5D%20%5B5.1%5D%20%5BYTS.MX%5D/The.Social.Dilemma.2020.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4" type="video/mp4">
-            <track label="English" kind="subtitles" src="../subtitles/The.Social.Dilemma.2020.1080p.WEBRip.x264.AAC5.1-[YTS.MX].vtt" srclang="en">
+            <track label="English" kind="subtitles" src="../subtitles/tsd2020.vtt" srclang="en">
       </video>
    </div>
    
@@ -135,6 +137,7 @@
       </section>
      
    </div>
+   
    <!-- <footer class="mb-0">
       <div class="container-fluid">
          <div class="block-space">
@@ -188,11 +191,16 @@
    </footer> -->
    <!-- MainContent End-->
    <!-- back-to-top -->
+   @include('movies/noticealert')
+
    <div id="back-to-top">
       <a class="top" href="#top" id="top"> <i class="fa fa-angle-up"></i> </a>
    </div>
+   
+  
    <!-- back-to-top End -->
    <!-- jQuery, Popper JS -->
+   
    <script src="../movie/js/jquery-3.4.1.min.js"></script>
    <script src="../movie/js/popper.min.js"></script>
    <!-- Bootstrap JS -->
