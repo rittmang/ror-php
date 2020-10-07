@@ -22,10 +22,10 @@ Route::get('store',function(){
 });
 Route::get('writing',function(){
 	return view('writing');
-})
+});
 Route::get('yenta',function(){
 	return view('yenta');
-})
+});
 Route::get('movies',function(){
     return view('movies/index');
 });
