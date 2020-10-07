@@ -20,6 +20,12 @@ Route::get('/', function () {
 Route::get('store',function(){
     return view('store');
 });
+Route::get('writing',function(){
+	return view('writing');
+})
+Route::get('yenta',function(){
+	return view('yenta');
+})
 Route::get('movies',function(){
     return view('movies/index');
 });
