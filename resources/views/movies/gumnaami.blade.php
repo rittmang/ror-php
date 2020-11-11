@@ -107,9 +107,8 @@
    <!-- Header End -->
    <!-- Banner Start -->
    <div class="video-container iq-main-slider">
-      <video class="video d-block" controls autoplay poster="../movie/images/slider/gumnaami.jpg" preload="auto">
+      <video class="video d-block" controls autoplay poster="../movie/images/slider/gumnaami.jpeg" preload="auto">
          <source src="https://polished-pond-424a.muvibay.workers.dev/Bengali/Gumnaami/Gumnaami.mp4" type="video/mp4">
-            <track label="English" kind="subtitles" src="../subtitles/gmnm.vtt" srclang="en">
       </video>
    </div>
    
