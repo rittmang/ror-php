@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirebaseController;
+use App\Http\Controllers\MovieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,5 @@ Route::get('/movies/tos',function(){
 });
 Route::get('/movies/the-social-dilemma',[FirebaseController::class,'index']);
 Route::post('/movies/the-social-dilemma',[FirebaseController::class,'change']);
+
+Route::get('/movies/gumnaami',[MovieController::class,'gumnaami']);

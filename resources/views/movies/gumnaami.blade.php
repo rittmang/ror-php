@@ -7,7 +7,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>The Social Dilemma</title>
+   <title>Gumnaami</title>
    <!-- Favicon -->
    <link rel="shortcut icon" href="../movie/images/favicon.ico" />
    <!-- Bootstrap CSS -->
@@ -20,9 +20,7 @@
    <!-- Responsive -->
    <link rel="stylesheet" href="../movie/css/responsive.css" />
    <script src="https://kit.fontawesome.com/c893428da3.js" crossorigin="anonymous"></script>
-   <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-database.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@2/dist/fingerprint2.min.js"></script>
+
    
 
 </head>
@@ -109,9 +107,9 @@
    <!-- Header End -->
    <!-- Banner Start -->
    <div class="video-container iq-main-slider">
-      <video class="video d-block" controls autoplay poster="../movie/images/slider/tsd.jpg" preload="auto">
-         <source src="https://td.angerycat.tk/Aria/The%20Social%20Dilemma%20(2020)%20%5B1080p%5D%20%5BWEBRip%5D%20%5B5.1%5D%20%5BYTS.MX%5D/The%20Social%20Dilemma%20(2020)%20%5B1080p%5D%20%5BWEBRip%5D%20%5B5.1%5D%20%5BYTS.MX%5D/The.Social.Dilemma.2020.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4" type="video/mp4">
-            <track label="English" kind="subtitles" src="../subtitles/tsd2020.vtt" srclang="en">
+      <video class="video d-block" controls autoplay poster="../movie/images/slider/gumnaami.jpg" preload="auto">
+         <source src="https://polished-pond-424a.muvibay.workers.dev/Bengali/Gumnaami/Gumnaami.mp4" type="video/mp4">
+            <track label="English" kind="subtitles" src="../subtitles/gmnm.vtt" srclang="en">
       </video>
    </div>
    
@@ -123,14 +121,13 @@
             <div class="col-lg-12">
                <div class="trending-info season-info g-border">
                   <p id="view_count_text"><i class='fa fa-eye'>  </i>  {{$views}} </p> 
-                  {{-- <p>Browser fingerprint: <p id="fp"></p></p> --}}
                   <pre id="details"></pre>                 
-                  <h4 class="trending-text big-title text-uppercase mt-0">The Social Dilemma</h4>
+                  <h4 class="trending-text big-title text-uppercase mt-0">Gumnaami</h4>
                   <div class="d-flex align-items-center text-white text-detail episode-name mb-0">
-                     <span>Documentary</span>
-                     <span class="trending-year">2020</span>
+                     <span>Movie</span>
+                     <span class="trending-year">2019</span>
                   </div>
-                  <p class="trending-dec w-100 mb-0">We tweet, we like, and we share— but what are the consequences of our growing dependence on social media? As digital platforms increasingly become a lifeline to stay connected, Silicon Valley insiders reveal how social media is reprogramming civilization by exposing what’s hiding on the other side of your screen.</p>
+                  <p class="trending-dec w-100 mb-0">Gumnaami is a film based on the Mukherjee Commission Hearings which happened from 1999 to 2005 where the three theories about Netaji Subhas Chandra Bose's death were discussed and debated. It is a dramatization of the hearings where an investigative journalist supporting the 'Gumnaami Baba theory' locks horns with the official lawyer who supports the 'plane-crash theory'. In their clash, the 'Death in Russia theory' also comes up.</p>
                </div>
             </div>
          </div>
@@ -219,42 +216,4 @@
    <script src="../movie/js/custom.js"></script>
 </body>
 
- {{-- <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=get_viewers_ip"></script>
-  --}}
-  <script>
-     var hasConsole=typeof console !== "undefined"
-     var fingerprintReport=function(){
-        var d1=new Date()
-        Fingerprint2.get(function(components){
-           var murmur=Fingerprint2.x64hash128(components.map(function(pair){return pair.value}).join(),31)
-           var d2=new Date()
-           var time=d2-d1
-         //   document.querySelector("#fp").textContent=murmur;
-           $.ajax({
-              url:'/movies/the-social-dilemma',
-              type:'POST',
-              data:{_token:"{{csrf_token()}}",murmur:murmur},
-            //   success:function(){alert("Sent murmur to controller");}
-           });
-           
-        })
-     }
-     var cancelId
-     var cancelFunction
-
-     if(window.requestIdleCallback){
-        cancelId=requestIdleCallback(fingerprintReport)
-        cancelFunction=cancelIdleCallback
-     }else{
-        canceldId=setTimeout(fingerprintReport,500)
-        cancelFunction=clearTimeout
-     }
-
-     if(cancelId){
-        cancelFunction(cancelId)
-        cancelId=undefined
-     }
-     fingerprintReport()
-     
-  </script>
 </html>
