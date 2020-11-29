@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirebaseController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Admin\dashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +29,7 @@ Route::get('writing',function(){
 Route::get('yenta',function(){
 	return view('yenta');
 });
-Route::get('movies',function(){
-    return view('movies/index');
-});
+Route::get('movies',[MovieController::class,'index']);
 Route::get('/movies/tos',function(){
     return view('movies/tos');
 });
@@ -37,3 +37,18 @@ Route::get('/movies/the-social-dilemma',[FirebaseController::class,'index']);
 Route::post('/movies/the-social-dilemma',[FirebaseController::class,'change']);
 
 Route::get('/movies/gumnaami',[MovieController::class,'gumnaami']);
+//---------------------------------
+
+Route::get('login',function(){
+    return view('login');
+})->name('login');
+Route::post('login',[LoginController::class,'authenticate']);
+//---------------------------------
+Route::get('register',function(){
+    return view('register');
+});
+Route::post('register',[LoginController::class,'register']);
+//----------------------------------
+Route::get('logout',[LoginController::class,'logout']);
+//----------------------------------
+Route::get('dashboard',[dashboardController::class,'index'])->middleware('auth');
