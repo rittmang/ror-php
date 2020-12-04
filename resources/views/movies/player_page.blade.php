@@ -118,7 +118,7 @@
    <!-- Banner Start -->
    <div class="video-container iq-main-slider">
 
-   <video class="video d-block" controls autoplay poster="{{$title->wide_poster}}" preload="auto">
+   <video class="video d-block" controls autoplay poster="{{$title->wide_poster}}" preload="auto" crossorigin="anonymous">
     <source src="{{$title->asset}}" type="video/mp4">
     <track label="English" kind="subtitles" src="{{$title->vtt}}" srclang="en">
    </video>
