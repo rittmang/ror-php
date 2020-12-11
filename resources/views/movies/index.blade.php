@@ -251,29 +251,32 @@
                      </div>
                      <div class="upcoming-contens">
                         <ul class="favorites-slider list-inline row p-0 mb-0">
-                           <!-- <li class="slide-item">
-                              <a href="movie-details.html">
-                                 <div class="block-images position-relative">
-                                    <div class="img-box">
-                                       <img src="assets/movie/images/posters/002.jpg" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="block-description">
-                                       <h6>The Last Breath</h6>
-                                       <div class="movie-time d-flex align-items-center my-2">
-                                          <div class="badge badge-secondary p-1 mr-2">5+</div>
-                                          <span class="text-white">2h 30m</span>
+                           @foreach($upcoming_titles as $upcoming_title)
+                              <li class="slide-item">
+                                 <a href="/movies/{{$upcoming_title->id}}">
+                                    <div class="block-images position-relative">
+                                       <div class="img-box">
+                                          <img src="{{$upcoming_title->long_poster}}" class="img-fluid" alt="">
                                        </div>
-                                       <div class="hover-buttons">
-                                          <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                          Play Now
-                                          </span>
+                                       <div class="block-description">
+                                          <h6>{{$upcoming_title->name}}</h6>
+                                          <div class="movie-time d-flex align-items-center my-2">
+                                             <div class="badge badge-secondary p-1 mr-2">{{$upcoming_title->age}}</div>
+                                             <span class="text-white">{{$upcoming_title->duration}}</span>
+                                          </div>
+                                          <div class="hover-buttons">
+                                             <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                             Play Now
+                                             </span>
+                                          </div>
                                        </div>
+                                    
                                     </div>
-                                   
-                                 </div>
-                              </a>
-                           </li>
-                           <li class="slide-item">
+                                 </a>
+                              </li>
+                              
+                           @endforeach
+                           {{-- <li class="slide-item">
                               <a href="movie-details.html">
                                  <div class="block-images position-relative">
                                     <div class="img-box">
@@ -381,7 +384,7 @@
                                     </div>
                                  </div>
                               </a>
-                           </li> -->
+                           </li> --> --}}
                         </ul>
                      </div>
                   </div>

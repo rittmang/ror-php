@@ -10,7 +10,9 @@ use App\Http\Controllers\Controller;
 class MovieController extends Controller
 {
     public function index(){
-        return view('movies/index');
+        $upcoming_titles=array(1,2);
+        $upcoming_movielist=DB::table('title')->select('id','name','long_poster','age','duration')->whereIn('id',$upcoming_titles)->get();
+        return view('movies/index',['upcoming_titles'=>$upcoming_movielist]);
     }
     public function gumnaami(){
         
