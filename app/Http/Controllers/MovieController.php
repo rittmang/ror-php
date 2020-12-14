@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 use App\Http\Controllers\Controller;
 
 class MovieController extends Controller
 {
     public function index(){
-        $upcoming_titles=array(1,2);
+        $upcoming_titles=array(1,2,3,4);
+        $banner_titles=array(3,4,5,6);
         $upcoming_movielist=DB::table('title')->select('id','name','long_poster','age','duration')->whereIn('id',$upcoming_titles)->get();
         return view('movies/index',['upcoming_titles'=>$upcoming_movielist]);
+    }
+    public function allMovies(){
+        $all_movielist=DB::table('title')->select('id','name','long_poster','age','duration')->get();
+        return view('movies/all',['titles'=>$all_movielist]);
     }
     public function gumnaami(){
         

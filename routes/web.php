@@ -30,6 +30,7 @@ Route::get('yenta',function(){
 	return view('yenta');
 });
 Route::get('movies',[MovieController::class,'index']);
+Route::get('/movies/all',[MovieController::class,'allMovies']);
 Route::get('/movies/tos',function(){
     return view('movies/tos');
 });

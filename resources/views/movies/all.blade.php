@@ -11,13 +11,13 @@
       <!-- Favicon -->
       <!-- <link rel="shortcut icon" href="assets/movie/images/favicon.ico" /> -->
       <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="movie/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="../movie/css/bootstrap.min.css" />
       <!-- Typography CSS -->
-      <link rel="stylesheet" href="movie/css/typography.css">
+      <link rel="stylesheet" href="../movie/css/typography.css">
       <!-- Style -->
-      <link rel="stylesheet" href="movie/css/style.css" />
+      <link rel="stylesheet" href="../movie/css/style.css" />
       <!-- Responsive -->
-      <link rel="stylesheet" href="movie/css/responsive.css" />
+      <link rel="stylesheet" href="../movie/css/responsive.css" />
       
    </head>
    <body>
@@ -43,7 +43,7 @@
                               <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
                            </div>
                         </a> -->
-                        <a class="navbar-brand" href="movies"> <img class="img-fluid logo" src="movie/images/logo.png"
+                        <a class="navbar-brand" href="/movies"> <img class="img-fluid logo" src="../movie/images/logo.png"
                            alt="streamit" /> </a>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                            <div class="menu-main-menu-container">
@@ -106,137 +106,6 @@
       </header>
       <!-- Header End -->
       <!-- Slider Start -->
-      <section id="home" class="iq-main-slider p-0">
-         <div id="home-slider" class="slider m-0 p-0">
-            <div class="slide slick-bg s-bg-1">
-               <div class="container-fluid position-relative h-100">
-                  <div class="slider-inner h-100">
-                     <div class="row align-items-center  h-100">
-                        <div class="col-xl-6 col-lg-12 col-md-12">
-                           
-                           <h2 class="slider-text big-title title text-uppercase" data-animation-in="fadeInLeft"
-                              data-delay-in="0.6">the social dilemma</h2>
-                           <div class="d-flex align-items-center" data-animation-in="fadeInUp" data-delay-in="1">
-                              <span class="badge badge-secondary p-2">PG-13</span>
-                              <span class="ml-3">Documentary</span>
-                           </div>
-                           <p data-animation-in="fadeInUp" data-delay-in="1.2">As digital platforms increasingly become a lifeline to stay connected, Silicon Valley insiders reveal how social media is reprogramming civilization by exposing what’s hiding on the other side of your screen.</p>
-                           <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp" data-delay-in="1.2">
-                              <a href="movies/the-social-dilemma" class="btn btn-hover"><i class="fa fa-play mr-2"
-                                 aria-hidden="true"></i>Play Now</a>
-                              <!-- <a href="show-details.html" class="btn btn-link">More details</a> -->
-                           </div>
-                        </div>
-                     </div>
-                     <div class="trailor-video">
-                        <a href="https://www.youtube.com/watch?v=uaaC57tcci0" class="video-open playbtn">
-                           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                              x="0px" y="0px" width="80px" height="80px" viewBox="0 0 213.7 213.7"
-                              enable-background="new 0 0 213.7 213.7" xml:space="preserve">
-                              <polygon class='triangle' fill="none" stroke-width="7" stroke-linecap="round"
-                                 stroke-linejoin="round" stroke-miterlimit="10"
-                                 points="73.5,62.5 148.5,105.8 73.5,149.1 " />
-                              <circle class='circle' fill="none" stroke-width="7" stroke-linecap="round"
-                                 stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
-                           </svg>
-                           <span class="w-trailor">Watch Trailer</span>
-                        </a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <!-- <div class="slide slick-bg s-bg-2">
-               <div class="container-fluid position-relative h-100">
-                  <div class="slider-inner h-100">
-                     <div class="row align-items-center  h-100">
-                        <div class="col-xl-6 col-lg-12 col-md-12">
-                           <a href="javascript:void(0);">
-                              <div class="channel-logo" data-animation-in="fadeInLeft">
-                                 <img src="assets/movie/images/logo.png" class="c-logo" alt="streamit">
-                              </div>
-                           </a>
-                           <h1 class="slider-text big-title title text-uppercase" data-animation-in="fadeInLeft">sail coaster</h1>
-                           <div class="d-flex align-items-center" data-animation-in="fadeInUp" data-delay-in="0.5">
-                              <span class="badge badge-secondary p-2">16+</span>
-                              <span class="ml-3">2h 40m</span>
-                           </div>
-                           <p data-animation-in="fadeInUp" data-delay-in="0.7">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                              dummy text ever since the 1500s.
-                           </p>
-                           <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp" data-delay-in="1">
-                              <a href="movie-details.html" class="btn btn-hover"><i class="fa fa-play mr-2"
-                                 aria-hidden="true"></i>Play Now</a>
-                              <a href="movie-details.html" class="btn btn-link">More details</a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="trailor-video">
-                        <a href="video/trailer.mp4" class="video-open playbtn">
-                           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                              x="0px" y="0px" width="80px" height="80px" viewBox="0 0 213.7 213.7"
-                              enable-background="new 0 0 213.7 213.7" xml:space="preserve">
-                              <polygon class='triangle' fill="none" stroke-width="7" stroke-linecap="round"
-                                 stroke-linejoin="round" stroke-miterlimit="10"
-                                 points="73.5,62.5 148.5,105.8 73.5,149.1 " />
-                              <circle class='circle' fill="none" stroke-width="7" stroke-linecap="round"
-                                 stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
-                           </svg>
-                           <span class="w-trailor">Watch Trailer</span>
-                        </a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="slide slick-bg s-bg-3">
-               <div class="container-fluid position-relative h-100">
-                  <div class="slider-inner h-100">
-                     <div class="row align-items-center  h-100">
-                        <div class="col-xl-6 col-lg-12 col-md-12">
-                           <a href="javascript:void(0);">
-                              <div class="channel-logo" data-animation-in="fadeInLeft">
-                                 <img src="assets/movie/images/logo.png" class="c-logo" alt="streamit">
-                              </div>
-                           </a>
-                           <h1 class="slider-text big-title title text-uppercase" data-animation-in="fadeInLeft">the army</h1>
-                           <div class="d-flex align-items-center" data-animation-in="fadeInUp" data-delay-in="0.5">
-                              <span class="badge badge-secondary p-2">20+</span>
-                              <span class="ml-3">3h</span>
-                           </div>
-                           <p data-animation-in="fadeInUp" data-delay-in="0.7">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                              dummy text ever since the 1500s.
-                           </p>
-                           <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp" data-delay-in="1">
-                              <a href="movie-details.html" class="btn btn-hover"><i class="fa fa-play mr-2"
-                                 aria-hidden="true"></i>Play Now</a>
-                              <a href="movie-details.html" class="btn btn-link">More details</a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="trailor-video">
-                        <a href="video/trailer.mp4" class="video-open playbtn">
-                           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                              x="0px" y="0px" width="80px" height="80px" viewBox="0 0 213.7 213.7"
-                              enable-background="new 0 0 213.7 213.7" xml:space="preserve">
-                              <polygon class='triangle' fill="none" stroke-width="7" stroke-linecap="round"
-                                 stroke-linejoin="round" stroke-miterlimit="10"
-                                 points="73.5,62.5 148.5,105.8 73.5,149.1 " />
-                              <circle class='circle' fill="none" stroke-width="7" stroke-linecap="round"
-                                 stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
-                           </svg>
-                           <span class="w-trailor">Watch Trailer</span>
-                        </a>
-                     </div>
-                  </div>
-               </div>
-            </div> -->
-         </div>
-         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44px" height="44px" id="circle"
-               fill="none" stroke="currentColor">
-               <circle r="20" cy="22" cx="22" id="test"></circle>
-            </symbol>
-         </svg>
-      </section>
       <!-- Slider End -->
       <!-- MainContent -->
       <div class="main-content">
@@ -247,22 +116,22 @@
                   <div class="col-sm-12 overflow-hidden">
                      <div class="iq-main-header d-flex align-items-center justify-content-between">
                         <h4 class="main-title">Upcoming Movies</h4>
-                        <a href="/movies/all" class="text-primary">View all</a>
+                        <a href="#" class="text-primary">View all</a>
                      </div>
                      <div class="upcoming-contens">
                         <ul class="favorites-slider list-inline row p-0 mb-0">
-                           @foreach($upcoming_titles as $upcoming_title)
+                           @foreach($titles as $title)
                               <li class="slide-item">
-                                 <a href="/movies/{{$upcoming_title->id}}">
+                                 <a href="/movies/{{$title->id}}">
                                     <div class="block-images position-relative">
                                        <div class="img-box">
-                                          <img src="{{$upcoming_title->long_poster}}" class="img-fluid" alt="">
+                                          <img src="{{$title->long_poster}}" class="img-fluid" alt="">
                                        </div>
                                        <div class="block-description">
-                                          <h6>{{$upcoming_title->name}}</h6>
+                                          <h6>{{$title->name}}</h6>
                                           <div class="movie-time d-flex align-items-center my-2">
-                                             <div class="badge badge-secondary p-1 mr-2">{{$upcoming_title->age}}</div>
-                                             <span class="text-white">{{$upcoming_title->duration}}</span>
+                                             <div class="badge badge-secondary p-1 mr-2">{{$title->age}}</div>
+                                             <span class="text-white">{{$title->duration}}</span>
                                           </div>
                                           <div class="hover-buttons">
                                              <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
@@ -769,21 +638,21 @@
       
       <!-- back-to-top End -->
       <!-- jQuery, Popper JS -->
-      <script src="movie/js/jquery-3.4.1.min.js"></script>
-      <script src="movie/js/popper.min.js"></script>
+      <script src="../movie/js/jquery-3.4.1.min.js"></script>
+      <script src="../movie/js/popper.min.js"></script>
       <!-- Bootstrap JS -->
-      <script src="movie/js/bootstrap.min.js"></script>
+      <script src="../movie/js/bootstrap.min.js"></script>
       <!-- Slick JS -->
-      <script src="movie/js/slick.min.js"></script>
+      <script src="../movie/js/slick.min.js"></script>
       <!-- owl carousel Js -->
-      <script src="movie/js/owl.carousel.min.js"></script>
+      <script src="../movie/js/owl.carousel.min.js"></script>
       <!-- select2 Js -->
-      <script src="movie/js/select2.min.js"></script>
+      <script src="../movie/js/select2.min.js"></script>
       <!-- Magnific Popup-->
-      <script src="movie/js/jquery.magnific-popup.min.js"></script>
+      <script src="../movie/js/jquery.magnific-popup.min.js"></script>
       <!-- Slick Animation-->
-      <script src="movie/js/slick-animation.min.js"></script>
+      <script src="../movie/js/slick-animation.min.js"></script>
       <!-- Custom JS-->
-      <script src="movie/js/custom.js"></script>
+      <script src="../movie/js/custom.js"></script>
    </body>
 </html>
