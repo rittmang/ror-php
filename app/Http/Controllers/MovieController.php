@@ -11,8 +11,8 @@ use App\Http\Controllers\Controller;
 class MovieController extends Controller
 {
     public function index(){
-        $upcoming_titles=array(1,2,3,4);
-        $banner_titles=array(3,4,5,6);
+        $upcoming_titles=explode(',',env('UPCOMING_TITLES'));
+        $banner_titles=explode(',',env('BANNER_TITLES'));
         $upcoming_movielist=DB::table('title')->select('id','name','long_poster','age','duration')->whereIn('id',$upcoming_titles)->get();
         return view('movies/index',['upcoming_titles'=>$upcoming_movielist]);
     }
@@ -29,6 +29,14 @@ class MovieController extends Controller
             $title=DB::table('title')->where('id',$id)->first();
             $views=0;
             return view('movies/player_page',['title'=>$title,'views'=>$views]);
+        }
+        return abort('404');
+    }
+    public function selectMovieVJS($id){
+        if(DB::table('title')->where('id',$id)->exists()){
+            $title=DB::table('title')->where('id',$id)->first();
+            $views=0;
+            return view('movies/vjs_playerpage',['title'=>$title,'views'=>$views]);
         }
         return abort('404');
     }
