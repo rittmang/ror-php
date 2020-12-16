@@ -116,7 +116,7 @@
    <!-- Banner Start -->
    <div class="video-container iq-main-slider">
 
-   <video id="my-video" class="video d-block video-js" controls poster="{{$title->wide_poster}}" width="100%" height="90%" preload="auto" data-setup='{"fluid": true}'>
+   <video id="my-video" class="video d-block video-js" controls poster="{{$title->wide_poster}}" width="100%" height="90%" preload="auto" crossorigin="anonymous" data-setup='{"fluid": true}'>
     <source src="{{$title->asset}}" type="video/mp4">
     {{-- <track label="English" kind="subtitles" src="{{$title->vtt}}" srclang="en"> --}}
         <p class="vjs-no-js">
