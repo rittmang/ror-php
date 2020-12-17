@@ -27,16 +27,7 @@ class MovieController extends Controller
     public function selectMovie($id){
         if(DB::table('title')->where('id',$id)->exists()){
             $title=DB::table('title')->where('id',$id)->first();
-            $views=0;
-            return view('movies/player_page',['title'=>$title,'views'=>$views]);
-        }
-        return abort('404');
-    }
-    public function selectMovieVJS($id){
-        if(DB::table('title')->where('id',$id)->exists()){
-            $title=DB::table('title')->where('id',$id)->first();
-            $views=0;
-            return view('movies/vjs_playerpage',['title'=>$title,'views'=>$views]);
+            return view('movies/player_page',['title'=>$title]);
         }
         return abort('404');
     }

@@ -40,7 +40,6 @@ Route::post('/movies/the-social-dilemma',[FirebaseController::class,'change']);
 Route::get('/movies/gumnaami',[MovieController::class,'gumnaami']);
 
 Route::get('/movies/{id}',[MovieController::class,'selectMovie']);
-Route::get('/movies/newplayer/{id}',[MovieController::class,'selectMovieVJS']);
 
 //---------------------------------
 
