@@ -82,7 +82,7 @@ header .navbar ul li:last-child { margin-right: 0; }
 #home-slider h1.slider-text { font-size: 80px; margin: 15px 0; }
 #home-slider p { margin: 20px 0; width: 75%; }
 #home-slider .slick-bg { padding: 100px 0 50px;width:100%; background-size: cover;background-position: center center; background-repeat: no-repeat; height: 90vh; position: relative; z-index: 1;}
-#home-slider .slick-bg.s-bg-1 { background-image: url(../images/slider/slider1.jpg); }
+#home-slider .slick-bg.s-bg-1 { background-image: url(https://polished-pond-424a.muvibay.workers.dev/Bengali/Web%20Series/Feluda%20Pherot/S1/wide_poster.jpg); }
 #home-slider .slick-bg.s-bg-2 { background-image: url(../images/slider/slider2.jpg); }
 #home-slider .slick-bg.s-bg-3 { background-image: url(../images/slider/slider3.jpg); }
 .trailor-video { position: absolute; bottom: 0; right: 0; z-index: 999; }

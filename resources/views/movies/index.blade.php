@@ -115,21 +115,21 @@
                         <div class="col-xl-6 col-lg-12 col-md-12">
                            
                            <h2 class="slider-text big-title title text-uppercase" data-animation-in="fadeInLeft"
-                              data-delay-in="0.6">the social dilemma</h2>
+                              data-delay-in="0.6">ছিন্নমস্তার অভিশাপ</h2>
                            <div class="d-flex align-items-center" data-animation-in="fadeInUp" data-delay-in="1">
-                              <span class="badge badge-secondary p-2">PG-13</span>
-                              <span class="ml-3">Documentary</span>
+                              <span class="badge badge-secondary p-2">Unrated</span>
+                              <span class="ml-3">Feluda Pherot (Web Series)</span>
                            </div>
-                           <p data-animation-in="fadeInUp" data-delay-in="1.2">As digital platforms increasingly become a lifeline to stay connected, Silicon Valley insiders reveal how social media is reprogramming civilization by exposing what’s hiding on the other side of your screen.</p>
+                           <p data-animation-in="fadeInUp" data-delay-in="1.2">[S1] A family on the edge. A curse on a rampage. A tiger on the run. A sleuth on a holiday. Bengal's best detective will return to solve a mind-bending puzzle.</p>
                            <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp" data-delay-in="1.2">
-                              <a href="movies/the-social-dilemma" class="btn btn-hover"><i class="fa fa-play mr-2"
+                              <a href="" class="btn btn-hover"><i class="fa fa-play mr-2"
                                  aria-hidden="true"></i>Play Now</a>
                               <!-- <a href="show-details.html" class="btn btn-link">More details</a> -->
                            </div>
                         </div>
                      </div>
                      <div class="trailor-video">
-                        <a href="https://www.youtube.com/watch?v=uaaC57tcci0" class="video-open playbtn">
+                        <a href="https://www.youtube.com/watch?v=pQiuqtvVsL4" class="video-open playbtn">
                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                               x="0px" y="0px" width="80px" height="80px" viewBox="0 0 213.7 213.7"
                               enable-background="new 0 0 213.7 213.7" xml:space="preserve">
