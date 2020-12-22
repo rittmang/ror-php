@@ -16,7 +16,56 @@ class dashboardController extends Controller
 {
     public function index(){
         
-        $titles=DB::table('title')->get(['id','name','year','type','genre']);
+        $titles=DB::table('title')->orderBy('id','asc')->get(['id','name','year','type','genre']);
         return view('dashboard/index',['titles'=>$titles]);
+    }
+    public function titlesIndex(){
+        $titles=DB::table('title')->orderBy('id','asc')->get();
+        return view('dashboard/titles',['titles'=>$titles]);
+    }
+    public function titlesDelete(Request $request)
+    {
+        $ids=$request->ids;
+        DB::table('title')->whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['success'=>"Titles deleted succesfully"]);
+    }
+    public function titlesInsert(Request $request)
+    {
+        
+        $tname=$request->input('inputTitleName');
+        $tyear=$request->input('inputTitleYear');
+        $ttype=$request->input('inputTitleType');
+        $tgenre=$request->input('inputTitleGenre');
+        $tlp=$request->input('inputTitleLongPoster');
+        $twp=$request->input('inputTitleWidePoster');
+        $ttl=$request->input('inputTitleTrailerLink');
+        $tast=$request->input('inputTitleAsset');
+        $tvtt=$request->input('inputTitleVTT');
+        $tage=$request->input('inputTitleAge');
+        $tdur=$request->input('inputTitleDuration');
+        $tdes=$request->input('inputTitleDescription');
+
+        DB::insert('insert into title (name,year,type,genre,long_poster,wide_poster,trailer_link,asset,vtt,age,duration,description) values (?,?,?,?,?,?,?,?,?,?,?,?)',[$tname,$tyear,$ttype,$tgenre,$tlp,$twp,$ttl,$tast,$tvtt,$tage,$tdur,$tdes]);
+        return redirect('dashboard/titles')->with('insertStatus',$tname . ' was succesfully added.');
+
+    }
+    public function titlesUpdate(Request $request)
+    {
+        $tid=$request->input('editTitleId');
+        $tname=$request->input('editTitleName');
+        $tyear=$request->input('editTitleYear');
+        $ttype=$request->input('editTitleType');
+        $tgenre=$request->input('editTitleGenre');
+        $tlp=$request->input('editTitleLongPoster');
+        $twp=$request->input('editTitleWidePoster');
+        $ttl=$request->input('editTitleTrailerLink');
+        $tast=$request->input('editTitleAsset');
+        $tvtt=$request->input('editTitleVTT');
+        $tage=$request->input('editTitleAge');
+        $tdur=$request->input('editTitleDuration');
+        $tdes=$request->input('editTitleDescription');
+
+        DB::table('title')->where('id',$tid)->update(['name'=>$tname,'year'=>$tyear,'type'=>$ttype,'genre'=>$tgenre,'long_poster'=>$tlp,'wide_poster'=>$twp,'trailer_link'=>$ttl,'asset'=>$tast,'vtt'=>$tvtt,'age'=>$tage,'duration'=>$tdur,'description'=>$tdes]);
+        return redirect('dashboard/titles')->with('editStatus',$tname . ' was succesfully edited.');
     }
 }

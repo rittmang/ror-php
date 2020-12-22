@@ -37,8 +37,6 @@ Route::get('/movies/tos',function(){
 Route::get('/movies/the-social-dilemma',[FirebaseController::class,'index']);
 Route::post('/movies/the-social-dilemma',[FirebaseController::class,'change']);
 
-Route::get('/movies/gumnaami',[MovieController::class,'gumnaami']);
-
 Route::get('/movies/{id}',[MovieController::class,'selectMovie']);
 
 //---------------------------------
@@ -56,3 +54,8 @@ Route::post('register',[LoginController::class,'register']);
 Route::get('logout',[LoginController::class,'logout']);
 //----------------------------------
 Route::get('dashboard',[dashboardController::class,'index'])->middleware('auth');
+Route::get('dashboard/titles',[dashboardController::class,'titlesIndex'])->middleware('auth');
+Route::delete('dashboard/titlesDelete',[dashboardController::class,'titlesDelete'])->middleware('auth');
+Route::post('dashboard/titles',[dashboardController::class,'titlesInsert'])->middleware('auth');
+Route::post('dashboard/titlesUpdate',[dashboardController::class,'titlesUpdate'])->middleware('auth');
+//Route::delete('dashboard/packagesDeleteAll','Admin\dashboardController@packagesDeleteAll')->middleware('auth');
