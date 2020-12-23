@@ -45,7 +45,7 @@ class dashboardController extends Controller
         $tdur=$request->input('inputTitleDuration');
         $tdes=$request->input('inputTitleDescription');
 
-        DB::insert('insert into title (name,year,type,genre,long_poster,wide_poster,trailer_link,asset,vtt,age,duration,description) values (?,?,?,?,?,?,?,?,?,?,?,?)',[$tname,$tyear,$ttype,$tgenre,$tlp,$twp,$ttl,$tast,$tvtt,$tage,$tdur,$tdes]);
+        DB::insert('insert into title (name,year,type,genre,long_poster,wide_poster,trailer_link,asset,vtt,age,duration,description,views) values (?,?,?,?,?,?,?,?,?,?,?,?,?)',[$tname,$tyear,$ttype,$tgenre,$tlp,$twp,$ttl,$tast,$tvtt,$tage,$tdur,$tdes,0]);
         return redirect('dashboard/titles')->with('insertStatus',$tname . ' was succesfully added.');
 
     }

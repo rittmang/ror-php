@@ -251,17 +251,17 @@
                       <div class="form-row">
                           <div class="form-group col-md-6">
                               <label for="editTitleLongPoster">Long Poster</label>
-                              <input type="text" class="form-control" id="editTitleLongPoster" name="editTitleLongPoster" required>
+                              <input type="text" class="form-control" id="editTitleLongPoster" name="editTitleLongPoster">
                           </div>
                           <div class="form-group col-md-6">
                             <label for="editTitleWidePoster">Wide Poster</label>
-                            <input type="text" class="form-control" id="editTitleWidePoster" name="editTitleWidePoster" required>                        
+                            <input type="text" class="form-control" id="editTitleWidePoster" name="editTitleWidePoster">                        
                           </div>
                       </div>
                       <div class="form-row">
                           <div class="form-group col-md-3">
                               <label for="editTitleTrailerLink">Trailer Link</label>
-                              <input type="text" class="form-control" id="editTitleTrailerLink" name="editTitleTrailerLink" required>
+                              <input type="text" class="form-control" id="editTitleTrailerLink" name="editTitleTrailerLink">
                           </div>
                           <div class="form-group col-md-6">
                             <label for="editTitleAsset">Asset</label>
@@ -269,7 +269,7 @@
                           </div>
                           <div class="form-group col-md-3">
                               <label for="editTitleVTT">VTT</label>
-                              <input type="text" class="form-control" id="editTitleVTT" name="editTitleVTT" required>                        
+                              <input type="text" class="form-control" id="editTitleVTT" name="editTitleVTT">                        
                             </div>
                       </div>
                       <div class="form-row">
@@ -337,17 +337,17 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputTitleLongPoster">Long Poster</label>
-                            <input type="text" class="form-control" id="inputTitleLongPoster" name="inputTitleLongPoster" placeholder="eg: https://..." required>
+                            <input type="text" class="form-control" id="inputTitleLongPoster" name="inputTitleLongPoster" placeholder="eg: https://...">
                         </div>
                         <div class="form-group col-md-6">
                           <label for="inputTitleWidePoster">Wide Poster</label>
-                          <input type="text" class="form-control" id="inputTitleWidePoster" name="inputTitleWidePoster" placeholder="eg: https://..." required>                        
+                          <input type="text" class="form-control" id="inputTitleWidePoster" name="inputTitleWidePoster" placeholder="eg: https://...">                        
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="inputTitleTrailerLink">Trailer Link</label>
-                            <input type="text" class="form-control" id="inputTitleTrailerLink" name="inputTitleTrailerLink" placeholder="eg: https://youtube.com..." required>
+                            <input type="text" class="form-control" id="inputTitleTrailerLink" name="inputTitleTrailerLink" placeholder="eg: https://youtube.com...">
                         </div>
                         <div class="form-group col-md-6">
                           <label for="inputTitleAsset">Asset</label>
@@ -355,7 +355,7 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputTitleVTT">VTT</label>
-                            <input type="text" class="form-control" id="inputTitleVTT" name="inputTitleVTT" placeholder="eg: https://..." required>                        
+                            <input type="text" class="form-control" id="inputTitleVTT" name="inputTitleVTT" placeholder="eg: https://...">                        
                           </div>
                     </div>
                     <div class="form-row">
