@@ -115,13 +115,13 @@
                <div class="row">
                   <div class="col-sm-12 overflow-hidden">
                      <div class="iq-main-header d-flex align-items-center justify-content-between">
-                        <h4 class="main-title">Upcoming Movies</h4>
-                        <a href="#" class="text-primary">View all</a>
+                        <h4 class="main-title">All Movies</h4>
+                        
                      </div>
                      <div class="upcoming-contens">
-                        <ul class="favorites-slider list-inline row p-0 mb-0">
+                        <ul class="list-inline row p-0 mb-0">
                            @foreach($titles as $title)
-                              <li class="slide-item">
+                              <li class="slide-item" style="width: 25%">
                                  <a href="/movies/{{$title->id}}">
                                     <div class="block-images position-relative">
                                        <div class="img-box">
@@ -260,7 +260,7 @@
                </div>
             </div>
          </section>
-         <section id="iq-topten">
+         {{-- <section id="iq-topten">
             <div class="container-fluid">
                <div class="row">
                   <div class="col-sm-12 overflow-hidden">
@@ -423,7 +423,7 @@
                   </div>
                </div>
             </div>
-         </section>
+         </section> --}}
          <!-- <section id="iq-suggestede" class="s-margin">
             <div class="container-fluid">
                <div class="row">

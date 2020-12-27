@@ -17,7 +17,7 @@ class MovieController extends Controller
         return view('movies/index',['upcoming_titles'=>$upcoming_movielist]);
     }
     public function allMovies(){
-        $all_movielist=DB::table('title')->select('id','name','long_poster','age','duration')->get();
+        $all_movielist=DB::table('title')->orderBy('id','asc')->select('id','name','long_poster','age','duration')->get();
         return view('movies/all',['titles'=>$all_movielist]);
     }
     public function gumnaami(){
