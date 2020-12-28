@@ -132,7 +132,7 @@
          <div class="row">
             <div class="col-lg-12">
                <div class="trending-info season-info g-border">
-                  <p id="view_count_text"><i class='fa fa-eye'>  </i>{{$title->views}}</p>
+                  <p id="view_count_text"><i class='fa fa-eye'> </i> {{$views}}</p>
                   <pre id="details"></pre>
                      
                <h4 class="trending-text big-title text-uppercase mt-0">{{$title->name}}</h4>
