@@ -114,13 +114,17 @@
                 </div>
                 @endif
                 <div>
-                  <button style="margin-bottom: 10px" class="btn btn-secondary" data-toggle="modal" data-target="#insertModal">
+                  <button style="margin-bottom: 10px" class="btn btn-primary" data-toggle="modal" data-target="#insertModal">
                     <i class="fa fa-plus"></i>
                     <b>Insert a title</b>
                   </button>
                   <button style="margin-bottom: 10px" class="btn btn-danger delete_all" data-url="{{url('dashboard/titlesDelete')}}">
                     <i class="fa fa-trash"></i>  
                     Delete All Selected
+                  </button>
+                <button style="margin-bottom: 10px" class="btn btn-secondary" onclick="window.location='{{url('dashboard/syncViews')}}'">
+                    <i class="fa fa-refresh"></i>
+                    Sync views
                   </button>
                 </div>
                 <div>
@@ -436,7 +440,7 @@
                     $('.sub_chk').prop('checked',false);
                 }
             });
-        
+       
         $('.delete_all').on('click',function(e){
             var allVals=[];
             $(".sub_chk:checked").each(function(){

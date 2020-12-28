@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
+use Kreait\Firebase;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
+use Kreait\Firebase\Database;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LoginController;
@@ -67,5 +71,20 @@ class dashboardController extends Controller
 
         DB::table('title')->where('id',$tid)->update(['name'=>$tname,'year'=>$tyear,'type'=>$ttype,'genre'=>$tgenre,'long_poster'=>$tlp,'wide_poster'=>$twp,'trailer_link'=>$ttl,'asset'=>$tast,'vtt'=>$tvtt,'age'=>$tage,'duration'=>$tdur,'description'=>$tdes]);
         return redirect('dashboard/titles')->with('editStatus',$tname . ' was succesfully edited.');
+    }
+    public function syncViews(){
+        $factory=(new Factory)->withServiceAccount(__DIR__.'/../firebase-pk.json');
+        $database=$factory->createDatabase();
+        $ids=DB::table('title')->orderBy('id','asc')->get(['id']);
+
+        foreach($ids as $id)
+        {
+            $reference=$database->getReference("{$id->id}");
+            $viewcount=$reference->getValue();
+            
+            DB::table('title')->where('id',$id->id)->update(['views'=>$viewcount]);
+
+        }
+        return redirect('dashboard/titles')->with('editStatus','Views were succesfully synced with Firebase');
     }
 }

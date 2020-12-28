@@ -58,4 +58,5 @@ Route::get('dashboard/titles',[dashboardController::class,'titlesIndex'])->middl
 Route::delete('dashboard/titlesDelete',[dashboardController::class,'titlesDelete'])->middleware('auth');
 Route::post('dashboard/titles',[dashboardController::class,'titlesInsert'])->middleware('auth');
 Route::post('dashboard/titlesUpdate',[dashboardController::class,'titlesUpdate'])->middleware('auth');
+Route::get('dashboard/syncViews',[dashboardController::class,'syncViews'])->middleware('auth');
 //Route::delete('dashboard/packagesDeleteAll','Admin\dashboardController@packagesDeleteAll')->middleware('auth');
