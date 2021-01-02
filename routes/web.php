@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirebaseController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\WebisodeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\dashboardController;
 
@@ -39,6 +40,10 @@ Route::post('/movies/the-social-dilemma',[FirebaseController::class,'change']);
 
 Route::get('/movies/{id}',[MovieController::class,'selectMovie']);
 Route::get('/movies/castplayer/{id}',[MovieController::class,'castMovie']);
+
+Route::get('webseries',[WebisodeController::class,'index']);
+Route::get('/webseries/{id}',[WebisodeController::class,'seriesDetails']);
+Route::get('/webseries/{id}/{season}/{episode}',[WebisodeController::class,'selectWebisode']);
 
 //---------------------------------
 

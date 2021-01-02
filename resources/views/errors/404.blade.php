@@ -1,11 +1,13 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>JEE Material</title>
+    <title>404 Not Found</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="all"/>
     <noscript><link rel="stylesheet" href="../css/noscript.css" /></noscript>
+    <noscript><link rel="stylesheet" href="../../../../css/noscript.css" /></noscript>
   </head>
 
   <div class="vader">
