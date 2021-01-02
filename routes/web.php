@@ -38,6 +38,7 @@ Route::get('/movies/the-social-dilemma',[FirebaseController::class,'index']);
 Route::post('/movies/the-social-dilemma',[FirebaseController::class,'change']);
 
 Route::get('/movies/{id}',[MovieController::class,'selectMovie']);
+Route::get('/movies/castplayer/{id}',[MovieController::class,'castMovie']);
 
 //---------------------------------
 

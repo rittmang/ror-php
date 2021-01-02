@@ -40,4 +40,17 @@ class MovieController extends Controller
         }
         return abort('404');
     }
+    public function castMovie($id){
+        if(DB::table('title')->where('id',$id)->exists()){
+            $title=DB::table('title')->where('id',$id)->first();
+            // $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json');
+            // $database=$factory->createDatabase();
+            // $count=$database->getReference("{$id}")->getValue();
+            
+            // $data=$count+1;
+            // $ref=$database->getReference("{$id}")->set($data);
+            return view('movies/cast_player',['title'=>$title,'views'=>0]);
+        }
+        return abort('404');
+    }
 }
