@@ -132,7 +132,7 @@
          <div class="row">
             <div class="col-lg-12">
                <div class="trending-info season-info g-border">
-                  <p id="view_count_text"><i class='fa fa-eye'> </i> {{$ep->views}}</p>
+                  <p id="view_count_text"><i class='fa fa-eye'> </i> {{$views}}</p>
                   <pre id="details"></pre>
                      
                <h4 class="trending-text big-title text-uppercase mt-0">{{$ep->ep_name}}</h4>
@@ -141,6 +141,16 @@
                      <span class="trending-year">{{$title->name}}</span>
                   </div>
                   <p class="trending-dec w-100 mb-0">{{$title->description}}</p>
+                  <br/>
+                  @if(!empty($next_ep))
+                  <h5 class="text-uppercase mt-0" style="color:Red;">Up next</h5>
+                  <br/>
+                     <p class="trending-dec w-100 mb-0">
+                        <a href="../{{$next_ep->season}}/{{$next_ep->episode}}">
+                           <i class="fa fa-play-circle" aria-hidden="true"></i> S{{$next_ep->season}}E{{$next_ep->episode}} | {{$next_ep->ep_name}}
+                        </a>
+                     </p>
+                  @endif
                </div>
             </div>
          </div>

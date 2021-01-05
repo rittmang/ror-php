@@ -44,6 +44,7 @@ Route::get('/movies/castplayer/{id}',[MovieController::class,'castMovie']);
 Route::get('webseries',[WebisodeController::class,'index']);
 Route::get('/webseries/{id}',[WebisodeController::class,'seriesDetails']);
 Route::get('/webseries/{id}/{season}/{episode}',[WebisodeController::class,'selectWebisode']);
+Route::get('/webseries/castplayer/{id}/{season}/{episode}',[WebisodeController::class,'castWebisode']);
 
 //---------------------------------
 

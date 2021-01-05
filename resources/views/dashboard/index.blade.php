@@ -105,17 +105,15 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Year</th>
-                            <th>Type</th>
                             <th>Genre</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($titles as $title)
+                          @foreach($movie_titles as $title)
                             <tr>
                               <td>{{$title->id}}</td>
                               <td>{{$title->name}}</td>
                               <td>{{$title->year}}</td>
-                              <td>{{$title->type}}</td>
                               <td>{{$title->genre}}</td>
                             </tr>
                           @endforeach
@@ -141,30 +139,26 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                   <div class="card-body">
                     <div class="table-responsive">
-                      {{-- <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                           <tr>
-                            <th>id</th>
-                            <th>dataid</th>
-                            <th>datatype</th>
-                            <th>title</th>
-                            <th>details</th>
-                            <th>imgfile</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Year</th>
+                            <th>Genre</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($products as $product)
+                          @foreach($series_titles as $title)
                             <tr>
-                              <td>{{$product->id}}</td>
-                              <td>{{$product->dataid}}</td>
-                              <td>{{$product->datatype}}</td>
-                              <td>{{$product->title}}</td>
-                              <td>{{$product->details}}</td>
-                              <td>{{$product->imgfile}}</td>
+                              <td>{{$title->id}}</td>
+                              <td>{{$title->name}}</td>
+                              <td>{{$title->year}}</td>
+                              <td>{{$title->genre}}</td>
                             </tr>
                           @endforeach
                         </tbody>
-                      </table> --}}
+                      </table>
                     </div>
                   </div>
                 </div> 

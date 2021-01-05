@@ -20,8 +20,9 @@ class dashboardController extends Controller
 {
     public function index(){
         
-        $titles=DB::table('title')->orderBy('id','asc')->get(['id','name','year','type','genre']);
-        return view('dashboard/index',['titles'=>$titles]);
+        $movie_titles=DB::table('title')->where('type','Movie')->orderBy('id','asc')->get(['id','name','year','genre']);
+        $series_titles=DB::table('title')->where('type','Series')->orderBy('id','asc')->get(['id','name','year','genre']);
+        return view('dashboard/index',['movie_titles'=>$movie_titles,'series_titles'=>$series_titles]);
     }
     public function titlesIndex(){
         $titles=DB::table('title')->orderBy('id','asc')->get();
@@ -75,7 +76,7 @@ class dashboardController extends Controller
     public function syncViews(){
         $factory=(new Factory)->withServiceAccount(__DIR__.'/../firebase-pk.json');
         $database=$factory->createDatabase();
-        $ids=DB::table('title')->orderBy('id','asc')->get(['id']);
+        $ids=DB::table('title')->where('type','Movies')->orderBy('id','asc')->get(['id']);
 
         foreach($ids as $id)
         {
@@ -85,6 +86,6 @@ class dashboardController extends Controller
             DB::table('title')->where('id',$id->id)->update(['views'=>$viewcount]);
 
         }
-        return redirect('dashboard/titles')->with('editStatus','Views were succesfully synced with Firebase');
+        return redirect('dashboard/titles')->with('editStatus','Movie views were succesfully synced with Firebase');
     }
 }
