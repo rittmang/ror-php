@@ -36,7 +36,7 @@ class MovieController extends Controller
             
             $data=$count+1;
             $ref=$database->getReference("{$id}")->set($data);
-            return view('movies/player_page',['title'=>$title,'views'=>0]);
+            return view('movies/player_page',['title'=>$title,'views'=>$count]);
         }
         return abort('404');
     }
@@ -49,7 +49,7 @@ class MovieController extends Controller
             
             $data=$count+1;
             $ref=$database->getReference("{$id}")->set($data);
-            return view('movies/cast_player',['title'=>$title,'views'=>0]);
+            return view('movies/cast_player',['title'=>$title,'views'=>$count]);
         }
         return abort('404');
     }
