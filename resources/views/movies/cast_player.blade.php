@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>{{$title->name}}</title>
-<link rel="icon" type="image/x-icon" href="../../movie/images/imagefiles/favicon.ico" />
+<link rel="icon" type="image/x-icon" href="../../movie/images/favicon.ico" />
 <link rel="icon" type="image/png" href="../../movie/images/imagefiles/favicon_16x16.png" />
 <link rel="icon" type="image/png" href="../../movie/images/imagefiles/favicon_32x32.png" />
 <link rel="icon" type="image/png" href="../../movie/images/imagefiles/favicon_64x64.png" />

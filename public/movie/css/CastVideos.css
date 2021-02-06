@@ -260,7 +260,7 @@ body {
     background-image: url('../../movie/images/imagefiles/timeline_bg_progress.png');
     background-repeat: repeat-x;
   }
-  }
+  
   
   #progress_indicator {
     cursor: pointer;

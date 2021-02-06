@@ -76,11 +76,20 @@ class dashboardController extends Controller
     public function syncViews(){
         $factory=(new Factory)->withServiceAccount(__DIR__.'/../firebase-pk.json');
         $database=$factory->createDatabase();
-        $ids=DB::table('title')->where('type','Movies')->orderBy('id','asc')->get(['id']);
+        $movie_ids=DB::table('title')->where('type','Movies')->orderBy('id','asc')->get(['id']);
+        $series_ids=DB::table('title')->where('type','Series')->orderBy('id','asc')->get(['id']);
 
-        foreach($ids as $id)
+        foreach($movie_ids as $id)
         {
             $reference=$database->getReference("{$id->id}");
+            $viewcount=$reference->getValue();
+            
+            DB::table('title')->where('id',$id->id)->update(['views'=>$viewcount]);
+
+        }
+        foreach($series_ids as $id)
+        {
+            $reference=$database->getReference("{$id->id}");//getReference(30)
             $viewcount=$reference->getValue();
             
             DB::table('title')->where('id',$id->id)->update(['views'=>$viewcount]);

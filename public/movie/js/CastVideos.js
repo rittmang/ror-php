@@ -453,6 +453,9 @@ CastPlayer.prototype.setupRemotePlayer = function () {
         mediaInfo.metadata.images = [
             {'url': this.mediaContents[mediaIndex]['long_poster']}];
         mediaInfo.textTrackStyle=new chrome.cast.media.TextTrackStyle();
+        mediaInfo.textTrackStyle.fontScale=0.5;
+        mediaInfo.textTrackStyle.fontGenericFamily="SANS_SERIF"
+        mediaInfo.textTrackStyle.backgroundColor="#00000075"
         mediaInfo.tracks=tracks;
 
         
