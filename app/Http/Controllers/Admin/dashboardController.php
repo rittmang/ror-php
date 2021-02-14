@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\RedirectResponse;
 use Kreait\Firebase;
 use Kreait\Firebase\Factory;
@@ -74,27 +75,29 @@ class dashboardController extends Controller
         return redirect('dashboard/titles')->with('editStatus',$tname . ' was succesfully edited.');
     }
     public function syncViews(){
-        $factory=(new Factory)->withServiceAccount(__DIR__.'/../firebase-pk.json');
+        $factory=(new Factory)->withServiceAccount(__DIR__.'/../firebase-pk.json')->withDatabaseUri(getenv('databaseURL'));
         $database=$factory->createDatabase();
-        $movie_ids=DB::table('title')->where('type','Movies')->orderBy('id','asc')->get(['id']);
-        $series_ids=DB::table('title')->where('type','Series')->orderBy('id','asc')->get(['id']);
+        $movie_ids=DB::table('title')->where('type','Movie')->orderBy('id','asc')->get(['id']);
+        // Log::error("IDS:".$movie_ids);
+        // $series_ids=DB::table('title')->where('type','Series')->orderBy('id','asc')->get(['id']);
 
         foreach($movie_ids as $id)
         {
             $reference=$database->getReference("{$id->id}");
             $viewcount=$reference->getValue();
+            Log::error("ViewCount is".$viewcount);
             
             DB::table('title')->where('id',$id->id)->update(['views'=>$viewcount]);
 
         }
-        foreach($series_ids as $id)
-        {
-            $reference=$database->getReference("{$id->id}");//getReference(30)
-            $viewcount=$reference->getValue();
+        // foreach($series_ids as $id)
+        // {
+        //     $reference=$database->getReference("{$id->id}");//getReference(30)
+        //     $viewcount=$reference->getValue();
             
-            DB::table('title')->where('id',$id->id)->update(['views'=>$viewcount]);
+        //     DB::table('title')->where('id',$id->id)->update(['views'=>$viewcount]);
 
-        }
+        // }
         return redirect('dashboard/titles')->with('editStatus','Movie views were succesfully synced with Firebase');
     }
 }
