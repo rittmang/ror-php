@@ -30,6 +30,7 @@
    <!-- Responsive -->
    <link rel="stylesheet" href="../movie/css/responsive.css" />
    <script src="https://kit.fontawesome.com/c893428da3.js" crossorigin="anonymous"></script>
+   
 
    
 
@@ -85,6 +86,8 @@
                                        </form>
                                     </div>
                                  </li>
+                                 <li onclick="location.href='/logout';" class="nav-item" style="cursor: pointer;">Logout ({{Auth::user()->name}})
+                                 </li>
                               </ul>
                            </div>
                         </div>
@@ -104,6 +107,8 @@
                                     </div>
                                  </form>
                               </div>
+                           </li>
+                           <li onclick="location.href='/logout';" class="nav-item" style="cursor: pointer;">Logout ({{Auth::user()->name}})
                            </li>
                         </ul>
                      </div>

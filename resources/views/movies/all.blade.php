@@ -71,7 +71,8 @@
                                           </form>
                                        </div>
                                     </li>
-                                    
+                                    <li onclick="location.href='/logout';" class="nav-item" style="cursor: pointer;">Logout ({{Auth::user()->name}})
+                                    </li>
                                     
                                  </ul>
                               </div>
@@ -93,8 +94,8 @@
                                     </form>
                                  </div>
                               </li>
-                              
-                              
+                              <li onclick="location.href='/logout';" class="nav-item" style="cursor: pointer;">Logout ({{Auth::user()->name}})
+                              </li>
                            </ul>
                         </div>
                      </nav>

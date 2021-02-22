@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Kreait\Firebase;
 use Kreait\Firebase\Factory;
@@ -24,6 +25,7 @@ class dashboardController extends Controller
         $movie_titles=DB::table('title')->where('type','Movie')->orderBy('id','asc')->get(['id','name','year','genre']);
         $series_titles=DB::table('title')->where('type','Series')->orderBy('id','asc')->get(['id','name','year','genre']);
         return view('dashboard/index',['movie_titles'=>$movie_titles,'series_titles'=>$series_titles]);
+    
     }
     public function titlesIndex(){
         $titles=DB::table('title')->orderBy('id','asc')->get();

@@ -7,6 +7,7 @@ use App\Http\Controllers\WebisodeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\dashboardController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,15 +32,15 @@ Route::get('yenta',function(){
 	return view('yenta');
 });
 Route::get('movies',[MovieController::class,'index']);
-Route::get('/movies/all',[MovieController::class,'allMovies']);
+Route::get('/movies/all',[MovieController::class,'allMovies'])->middleware(['auth']);
 Route::get('/movies/tos',function(){
     return view('movies/tos');
 });
-Route::get('/movies/the-social-dilemma',[FirebaseController::class,'index']);
-Route::post('/movies/the-social-dilemma',[FirebaseController::class,'change']);
+// Route::get('/movies/the-social-dilemma',[FirebaseController::class,'index']);
+// Route::post('/movies/the-social-dilemma',[FirebaseController::class,'change']);
 
-Route::get('/movies/{id}',[MovieController::class,'selectMovie']);
-Route::get('/movies/castplayer/{id}',[MovieController::class,'castMovie']);
+Route::get('/movies/{id}',[MovieController::class,'selectMovie'])->middleware(['auth']);
+Route::get('/movies/castplayer/{id}',[MovieController::class,'castMovie'])->middleware(['auth']);
 
 Route::get('webseries',[WebisodeController::class,'index']);
 Route::get('/webseries/{id}',[WebisodeController::class,'seriesDetails']);
@@ -55,15 +56,15 @@ Route::post('login',[LoginController::class,'authenticate']);
 //---------------------------------
 Route::get('register',function(){
     return view('register');
-});
+})->name('register');
 Route::post('register',[LoginController::class,'register']);
 //----------------------------------
-Route::get('logout',[LoginController::class,'logout']);
+Route::get('logout',[LoginController::class,'logout'])->name('logout');
 //----------------------------------
-Route::get('dashboard',[dashboardController::class,'index'])->middleware('auth');
-Route::get('dashboard/titles',[dashboardController::class,'titlesIndex'])->middleware('auth');
-Route::delete('dashboard/titlesDelete',[dashboardController::class,'titlesDelete'])->middleware('auth');
-Route::post('dashboard/titles',[dashboardController::class,'titlesInsert'])->middleware('auth');
-Route::post('dashboard/titlesUpdate',[dashboardController::class,'titlesUpdate'])->middleware('auth');
-Route::get('dashboard/syncViews',[dashboardController::class,'syncViews'])->middleware('auth');
+Route::get('dashboard',[dashboardController::class,'index'])->middleware(['auth','admin']);
+Route::get('dashboard/titles',[dashboardController::class,'titlesIndex'])->middleware(['auth','admin']);
+Route::delete('dashboard/titlesDelete',[dashboardController::class,'titlesDelete'])->middleware(['auth','admin']);
+Route::post('dashboard/titles',[dashboardController::class,'titlesInsert'])->middleware(['auth','admin']);
+Route::post('dashboard/titlesUpdate',[dashboardController::class,'titlesUpdate'])->middleware(['auth','admin']);
+Route::get('dashboard/syncViews',[dashboardController::class,'syncViews'])->middleware(['auth','admin']);
 //Route::delete('dashboard/packagesDeleteAll','Admin\dashboardController@packagesDeleteAll')->middleware('auth');

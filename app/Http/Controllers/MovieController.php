@@ -23,10 +23,7 @@ class MovieController extends Controller
         $all_movielist=DB::table('title')->orderBy('id','asc')->select('id','name','long_poster','age','duration')->get();
         return view('movies/all',['titles'=>$all_movielist]);
     }
-    public function gumnaami(){
-        
-        return view('movies/gumnaami')->with('views',0);
-    }
+    
     public function selectMovie($id){
         if(DB::table('title')->where('id',$id)->exists()){
             $title=DB::table('title')->where('id',$id)->first();
