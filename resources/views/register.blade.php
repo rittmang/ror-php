@@ -35,7 +35,7 @@
   <div class="global-container">
       <div class="card login-form">
           <div class="card-body">
-              <h3 class="card-title text-center">Log in to ROR</h3>
+              <h3 class="card-title text-center">Register to ROR</h3>
               <div class="card-text">
                 @if(session('message'))
                 
@@ -96,7 +96,7 @@
                           <br>
                       </div>
                       <div class="form-group">
-                        <label for="password">Admin Key</label>
+                        <label for="password">Registration Key</label>
 
                         <input type="password" class="form-control form-control-sm " id="adminkey" name="adminkey" 
                                required/>

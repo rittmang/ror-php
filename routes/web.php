@@ -31,7 +31,7 @@ Route::get('writing',function(){
 Route::get('yenta',function(){
 	return view('yenta');
 });
-Route::get('movies',[MovieController::class,'index']);
+Route::get('movies',[MovieController::class,'index'])->middleware(['auth']);
 Route::get('/movies/all',[MovieController::class,'allMovies'])->middleware(['auth']);
 Route::get('/movies/tos',function(){
     return view('movies/tos');
