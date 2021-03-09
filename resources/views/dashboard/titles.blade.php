@@ -343,7 +343,7 @@
                       </div>
                       <div class="form-group col-md-3">
                         <label for="inputTitleStudio">Studio</label>
-                        <input type="text" class="form-control" id="inputTitleStudio" name="inputTitleStudio" placeholder="eg: Exposure Labs" required>
+                        <input type="text" class="form-control" id="inputTitleStudio" name="inputTitleStudio" placeholder="eg: Exposure Labs">
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputTitleGenre">Comma-separated genres</label>
