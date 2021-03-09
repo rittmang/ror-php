@@ -195,28 +195,30 @@
                </div>
             </div>
          </section>
+       
          <section id="iq-upcoming-movie">
             <div class="container-fluid">
                <div class="row">
                   <div class="col-sm-12 overflow-hidden">
                      <div class="iq-main-header d-flex align-items-center justify-content-between">
-                        <h4 class="main-title">Comedy</h4>
-                        <a href="/movies/all" class="text-primary">View all</a>
+                        <h4 class="main-title">
+                           From <img src="movie/images/disney.png" height="95">
+                        </h4>
                      </div>
                      <div class="upcoming-contens">
                         <ul class="favorites-slider list-inline row p-0 mb-0">
-                           @foreach($comedy_titles as $com_title)
+                           @foreach($disney_titles as $dis_title)
                               <li class="slide-item">
-                                 <a href="/movies/{{$com_title->id}}">
+                                 <a href="/movies/{{$dis_title->id}}">
                                     <div class="block-images position-relative">
                                        <div class="img-box">
-                                          <img src="{{$com_title->long_poster}}" class="img-fluid" alt="">
+                                          <img src="{{$dis_title->long_poster}}" class="img-fluid" alt="">
                                        </div>
                                        <div class="block-description">
-                                          <h6>{{$com_title->name}}</h6>
+                                          <h6>{{$dis_title->name}}</h6>
                                           <div class="movie-time d-flex align-items-center my-2">
-                                             <div class="badge badge-secondary p-1 mr-2">{{$com_title->age}}</div>
-                                             <span class="text-white">{{$com_title->duration}}</span>
+                                             <div class="badge badge-secondary p-1 mr-2">{{$dis_title->age}}</div>
+                                             <span class="text-white">{{$dis_title->duration}}</span>
                                           </div>
                                           <div class="hover-buttons">
                                              <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
@@ -236,7 +238,175 @@
                </div>
             </div>
          </section>
-         <section id="iq-topten">
+         <section id="iq-upcoming-movie">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-12 overflow-hidden">
+                     <div class="iq-main-header d-flex align-items-center justify-content-between">
+                        <h4 class="main-title">
+                           From <img src="movie/images/pixar.png" height="95">
+                        </h4>
+                     </div>
+                     <div class="upcoming-contens">
+                        <ul class="favorites-slider list-inline row p-0 mb-0">
+                           @foreach($pixar_titles as $dis_title)
+                              <li class="slide-item">
+                                 <a href="/movies/{{$dis_title->id}}">
+                                    <div class="block-images position-relative">
+                                       <div class="img-box">
+                                          <img src="{{$dis_title->long_poster}}" class="img-fluid" alt="">
+                                       </div>
+                                       <div class="block-description">
+                                          <h6>{{$dis_title->name}}</h6>
+                                          <div class="movie-time d-flex align-items-center my-2">
+                                             <div class="badge badge-secondary p-1 mr-2">{{$dis_title->age}}</div>
+                                             <span class="text-white">{{$dis_title->duration}}</span>
+                                          </div>
+                                          <div class="hover-buttons">
+                                             <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                             Play Now
+                                             </span>
+                                          </div>
+                                       </div>
+                                    
+                                    </div>
+                                 </a>
+                              </li>
+                              
+                           @endforeach
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <section id="iq-upcoming-movie">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-12 overflow-hidden">
+                     <div class="iq-main-header d-flex align-items-center justify-content-between">
+                        <h4 class="main-title">
+                           From <img src="movie/images/20thcenturystudios.png" height="95">
+                        </h4>
+                     </div>
+                     <div class="upcoming-contens">
+                        <ul class="favorites-slider list-inline row p-0 mb-0">
+                           @foreach($tcs_titles as $dis_title)
+                              <li class="slide-item">
+                                 <a href="/movies/{{$dis_title->id}}">
+                                    <div class="block-images position-relative">
+                                       <div class="img-box">
+                                          <img src="{{$dis_title->long_poster}}" class="img-fluid" alt="">
+                                       </div>
+                                       <div class="block-description">
+                                          <h6>{{$dis_title->name}}</h6>
+                                          <div class="movie-time d-flex align-items-center my-2">
+                                             <div class="badge badge-secondary p-1 mr-2">{{$dis_title->age}}</div>
+                                             <span class="text-white">{{$dis_title->duration}}</span>
+                                          </div>
+                                          <div class="hover-buttons">
+                                             <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                             Play Now
+                                             </span>
+                                          </div>
+                                       </div>
+                                    
+                                    </div>
+                                 </a>
+                              </li>
+                              
+                           @endforeach
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <section id="iq-upcoming-movie">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-12 overflow-hidden">
+                     <div class="iq-main-header d-flex align-items-center justify-content-between">
+                        <h4 class="main-title">
+                           From <img src="movie/images/marvel.png" height="95">
+                        </h4>
+                     </div>
+                     <div class="upcoming-contens">
+                        <ul class="favorites-slider list-inline row p-0 mb-0">
+                           @foreach($marvel_titles as $dis_title)
+                              <li class="slide-item">
+                                 <a href="/movies/{{$dis_title->id}}">
+                                    <div class="block-images position-relative">
+                                       <div class="img-box">
+                                          <img src="{{$dis_title->long_poster}}" class="img-fluid" alt="">
+                                       </div>
+                                       <div class="block-description">
+                                          <h6>{{$dis_title->name}}</h6>
+                                          <div class="movie-time d-flex align-items-center my-2">
+                                             <div class="badge badge-secondary p-1 mr-2">{{$dis_title->age}}</div>
+                                             <span class="text-white">{{$dis_title->duration}}</span>
+                                          </div>
+                                          <div class="hover-buttons">
+                                             <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                             Play Now
+                                             </span>
+                                          </div>
+                                       </div>
+                                    
+                                    </div>
+                                 </a>
+                              </li>
+                              
+                           @endforeach
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <section id="iq-upcoming-movie">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-12 overflow-hidden">
+                     <div class="iq-main-header d-flex align-items-center justify-content-between">
+                        <h4 class="main-title">
+                           From <img src="movie/images/svf.png" height="95">
+                        </h4>
+                     </div>
+                     <div class="upcoming-contens">
+                        <ul class="favorites-slider list-inline row p-0 mb-0">
+                           @foreach($svf_titles as $dis_title)
+                              <li class="slide-item">
+                                 <a href="/movies/{{$dis_title->id}}">
+                                    <div class="block-images position-relative">
+                                       <div class="img-box">
+                                          <img src="{{$dis_title->long_poster}}" class="img-fluid" alt="">
+                                       </div>
+                                       <div class="block-description">
+                                          <h6>{{$dis_title->name}}</h6>
+                                          <div class="movie-time d-flex align-items-center my-2">
+                                             <div class="badge badge-secondary p-1 mr-2">{{$dis_title->age}}</div>
+                                             <span class="text-white">{{$dis_title->duration}}</span>
+                                          </div>
+                                          <div class="hover-buttons">
+                                             <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                             Play Now
+                                             </span>
+                                          </div>
+                                       </div>
+                                    
+                                    </div>
+                                 </a>
+                              </li>
+                              
+                           @endforeach
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         {{-- <section id="iq-topten">
             <div class="container-fluid">
                <div class="row">
                   <div class="col-sm-12 overflow-hidden">
@@ -399,7 +569,7 @@
                   </div>
                </div>
             </div>
-         </section>
+         {{-- </section> --}}
          <!-- <section id="iq-suggestede" class="s-margin">
             <div class="container-fluid">
                <div class="row">

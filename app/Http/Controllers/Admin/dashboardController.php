@@ -41,8 +41,10 @@ class dashboardController extends Controller
     {
         
         $tname=$request->input('inputTitleName');
+        $tlang=$request->input('inputTitleLanguage');
         $tyear=$request->input('inputTitleYear');
         $ttype=$request->input('inputTitleType');
+        $tstudio=$request->input('inputTitleStudio');
         $tgenre=$request->input('inputTitleGenre');
         $tlp=$request->input('inputTitleLongPoster');
         $twp=$request->input('inputTitleWidePoster');
@@ -53,7 +55,7 @@ class dashboardController extends Controller
         $tdur=$request->input('inputTitleDuration');
         $tdes=$request->input('inputTitleDescription');
 
-        DB::insert('insert into title (name,year,type,genre,long_poster,wide_poster,trailer_link,asset,vtt,age,duration,description,views) values (?,?,?,?,?,?,?,?,?,?,?,?,?)',[$tname,$tyear,$ttype,$tgenre,$tlp,$twp,$ttl,$tast,$tvtt,$tage,$tdur,$tdes,0]);
+        DB::insert('insert into title (name,year,type,genre,long_poster,wide_poster,trailer_link,asset,vtt,age,duration,description,views,studio,lang) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$tname,$tyear,$ttype,$tgenre,$tlp,$twp,$ttl,$tast,$tvtt,$tage,$tdur,$tdes,0,$tstudio,$tlang]);
         return redirect('dashboard/titles')->with('insertStatus',$tname . ' was succesfully added.');
 
     }
@@ -61,8 +63,10 @@ class dashboardController extends Controller
     {
         $tid=$request->input('editTitleId');
         $tname=$request->input('editTitleName');
+        $tlang=$request->input('editTitleLanguage');
         $tyear=$request->input('editTitleYear');
         $ttype=$request->input('editTitleType');
+        $tstudio=$request->input('editTitleStudio');
         $tgenre=$request->input('editTitleGenre');
         $tlp=$request->input('editTitleLongPoster');
         $twp=$request->input('editTitleWidePoster');
@@ -73,7 +77,7 @@ class dashboardController extends Controller
         $tdur=$request->input('editTitleDuration');
         $tdes=$request->input('editTitleDescription');
 
-        DB::table('title')->where('id',$tid)->update(['name'=>$tname,'year'=>$tyear,'type'=>$ttype,'genre'=>$tgenre,'long_poster'=>$tlp,'wide_poster'=>$twp,'trailer_link'=>$ttl,'asset'=>$tast,'vtt'=>$tvtt,'age'=>$tage,'duration'=>$tdur,'description'=>$tdes]);
+        DB::table('title')->where('id',$tid)->update(['name'=>$tname,'year'=>$tyear,'type'=>$ttype,'genre'=>$tgenre,'long_poster'=>$tlp,'wide_poster'=>$twp,'trailer_link'=>$ttl,'asset'=>$tast,'vtt'=>$tvtt,'age'=>$tage,'duration'=>$tdur,'description'=>$tdes,'studio'=>$tstudio,'lang'=>$tlang]);
         return redirect('dashboard/titles')->with('editStatus',$tname . ' was succesfully edited.');
     }
     public function syncViews(){

@@ -16,10 +16,16 @@ class MovieController extends Controller
     public function index(){
         //$upcoming_titles=explode(',',env('UPCOMING_TITLES'));
         $banner_titles=explode(',',env('BANNER_TITLES'));
-        $upcoming_movielist=DB::table('title')->orderBy('id','desc')->where('type','Movie')->select('name','long_poster')->where('asset','/')->get();
-        $comedy_movielist=DB::table('title')->orderBy('id','asc')->where('genre','LIKE','%'.'Comedy'.'%')->select('id','name','long_poster','age','duration')->get();
         $banner_movielist=DB::table('title')->orderBy('id','desc')->select('id','name','type','wide_poster','age','duration','description','trailer_link')->whereIn('id',$banner_titles)->get();
-        return view('movies/index',['upcoming_titles'=>$upcoming_movielist,'banner_titles'=>$banner_movielist,'comedy_titles'=>$comedy_movielist]);
+        $upcoming_movielist=DB::table('title')->orderBy('id','desc')->where('type','Movie')->select('name','long_poster')->where('asset','/')->get();
+
+        // $comedy_movielist=DB::table('title')->orderBy('id','asc')->where('genre','LIKE','%'.'Comedy'.'%')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();
+        $disney_movielist=DB::table('title')->orderBy('id','desc')->where('studio','Disney')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();
+        $pixar_movielist=DB::table('title')->orderBy('id','desc')->where('studio','Pixar')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();
+        $tcs_movielist=DB::table('title')->orderBy('id','desc')->where('studio','20th Century Studios')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();
+        $svf_movielist=DB::table('title')->orderBy('id','desc')->where('studio','SVF')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();
+        $marvel_movielist=DB::table('title')->orderBy('id','desc')->where('studio','Marvel')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();
+        return view('movies/index',['upcoming_titles'=>$upcoming_movielist,'banner_titles'=>$banner_movielist,'disney_titles'=>$disney_movielist,'pixar_titles'=>$pixar_movielist,'tcs_titles'=>$tcs_movielist,'marvel_titles'=>$marvel_movielist,'svf_titles'=>$svf_movielist]);
     }
     public function allMovies(){
         $all_movielist=DB::table('title')->orderBy('id','asc')->select('id','name','long_poster','age','duration','asset')->get();

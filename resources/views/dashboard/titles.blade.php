@@ -135,17 +135,14 @@
                     <thead>
                             <tr>
                                 <th><input type="checkbox" id="master"></th>
-                                <th>id</th>
-                                <th>name</th>
-                                <th>year</th>
-                                <th>type</th>
-                                <th>genre</th>
-                                <th>links</th>
-                                <th>age</th>
-                                <th>duration</th>
-                                <th>description</th>
-                                <th>views</th>
-                                <th>actions</th>
+                                <th>ID</th>
+                                <th>About</th>
+                                <th>Type</th>
+                                <th>Genre</th>
+                                <th>Links</th>
+                                <th>Description</th>
+                                <th>Views</th>
+                                <th>Actions</th>
                             </tr>
                     </thead>
                     <tbody>
@@ -153,8 +150,13 @@
                         <tr id="{{$title->id}}">
                           <td><input type="checkbox" class="sub_chk" data-id="{{$title->id}}"></td>
                           <td>{{$title->id}}</td>
-                          <td>{{$title->name}}</td>
-                          <td>{{$title->year}}</td>
+                          <td>
+                            <p><b>{{$title->name}}</b> ({{$title->year}})</p>
+                            <p>{{$title->lang}}</p>
+                            <p>{{$title->duration}}</p>
+                            <p>{{$title->age}}</p>
+                            <p>{{$title->studio}}</p>
+                          </td>
                           <td>{{$title->type}}</td>
                           <td>{{$title->genre}}</td>
                           <td>
@@ -164,15 +166,13 @@
                               <p><a href="{{$title->asset}}" target="_blank">Asset</a></p>
                               <p><a href="{{$title->vtt}}" target="_blank">VTT</a></p>
                           </td>
-                          <td>{{$title->age}}</td>
-                          <td>{{$title->duration}}</td>
                           <td>{{$title->description}}</td>
                           <td>{{$title->views}}</td>
                           <td>
                             <button style="margin-bottom: 10px" class="btn btn-outline-danger delete_single" data-url="{{url('dashboard/titlesDelete')}}" data-id="{{$title->id}}">
                                 <i class="fa fa-trash"></i>
                             </button>
-                            <button style="margin-bottom: 10px" class="btn btn-outline-primary edit_single" data-id="{{$title->id}}" data-name="{{$title->name}}" data-year="{{$title->year}}" data-type="{{$title->type}}" data-genre="{{$title->genre}}" data-longposter="{{$title->long_poster}}" data-wideposter="{{$title->wide_poster}}" data-trailerlink="{{$title->trailer_link}}" data-asset="{{$title->asset}}" data-vtt="{{$title->vtt}}" data-age="{{$title->age}}" data-duration="{{$title->duration}}" data-description="{{$title->description}}" data-views="{{$title->views}}" data-toggle="modal" data-target="#editModal">
+                            <button style="margin-bottom: 10px" class="btn btn-outline-primary edit_single" data-id="{{$title->id}}" data-name="{{$title->name}}" data-language="{{$title->lang}}" data-year="{{$title->year}}" data-type="{{$title->type}}" data-studio="{{$title->studio}}" data-genre="{{$title->genre}}" data-longposter="{{$title->long_poster}}" data-wideposter="{{$title->wide_poster}}" data-trailerlink="{{$title->trailer_link}}" data-asset="{{$title->asset}}" data-vtt="{{$title->vtt}}" data-age="{{$title->age}}" data-duration="{{$title->duration}}" data-description="{{$title->description}}" data-views="{{$title->views}}" data-toggle="modal" data-target="#editModal">
                               <i class="fa fa-pencil"></i>
                             </button>
                           </td>
@@ -231,23 +231,29 @@
                     </div>
                     
                     <div class="form-row">
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-5">
                           <label for="editTitleName">Name</label>
                           <input type="text" class="form-control" id="editTitleName" name="editTitleName" required>
                         </div>
                         <div class="form-group col-md-4">
+                          <label for="editTitleLanguage">Language</label>
+                          <input type="text" class="form-control" id="editTitleLanguage" name="editTitleLanguage" required>
+                        </div>
+                        <div class="form-group col-md-3">
                           <label for="editTitleYear">Year of release</label>
                           <input type="text" class="form-control" id="editTitleYear" name="editTitleYear" required>
                         </div>
                       </div>
                       <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                           <label for="editTitleType">Type</label>
                           <input type="text" class="form-control" id="editTitleType" name="editTitleType" required>
-                          
                         </div>
-                        
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-3">
+                          <label for="editTitleStudio">Studio</label>
+                          <input type="text" class="form-control" id="editTitleStudio" name="editTitleStudio" required>
+                        </div>
+                        <div class="form-group col-md-6">
                           <label for="editTitleGenre">Comma-separated genres</label>
                           <input type="text" class="form-control" id="editTitleGenre" name="editTitleGenre" required>                        
                         </div>
@@ -317,23 +323,29 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     
                     <div class="form-row">
-                      <div class="form-group col-md-8">
+                      <div class="form-group col-md-5">
                         <label for="inputTitleName">Name</label>
                         <input type="text" class="form-control" id="inputTitleName" name="inputTitleName" placeholder="eg: The Social Dilemma" required>
                       </div>
                       <div class="form-group col-md-4">
+                        <label for="inputTitleLanguage">Language</label>
+                        <input type="text" class="form-control" id="inputTitleLanguage" name="inputTitleLanguage" placeholder="eg: English" required>
+                      </div>
+                      <div class="form-group col-md-3">
                         <label for="inputTitleYear">Year of release</label>
                         <input type="text" class="form-control" id="inputTitleYear" name="inputTitleYear" placeholder="eg: 2019" required>
                       </div>
                     </div>
                     <div class="form-row">
-                      <div class="form-group col-md-4">
+                      <div class="form-group col-md-3">
                         <label for="inputTitleType">Type</label>
                         <input type="text" class="form-control" id="inputTitleType" name="inputTitleType" placeholder="eg: Movie | Series" required>
-                        
                       </div>
-                      
-                      <div class="form-group col-md-8">
+                      <div class="form-group col-md-3">
+                        <label for="inputTitleStudio">Studio</label>
+                        <input type="text" class="form-control" id="inputTitleStudio" name="inputTitleStudio" placeholder="eg: Exposure Labs" required>
+                      </div>
+                      <div class="form-group col-md-6">
                         <label for="inputTitleGenre">Comma-separated genres</label>
                         <input type="text" class="form-control" id="inputTitleGenre" name="inputTitleGenre" placeholder="eg: Thriller, Mystery" required>                        
                       </div>
@@ -400,8 +412,10 @@
         {
           var id=$(e.relatedTarget).data('id');
           var titleName=$(e.relatedTarget).data('name');
+          var titleLanguage=$(e.relatedTarget).data('language');
           var titleYear=$(e.relatedTarget).data('year');
           var titleType=$(e.relatedTarget).data('type');
+          var titleStudio=$(e.relatedTarget).data('studio');
           var titleGenre=$(e.relatedTarget).data('genre');
           var titleLongPoster=$(e.relatedTarget).data('longposter');
           var titleWidePoster=$(e.relatedTarget).data('wideposter');
@@ -415,8 +429,10 @@
 
           $(e.currentTarget).find('input[name="editTitleId"]').val(id);
           $(e.currentTarget).find('input[name="editTitleName"]').val(titleName);
+          $(e.currentTarget).find('input[name="editTitleLanguage"]').val(titleLanguage);
           $(e.currentTarget).find('input[name="editTitleYear"]').val(titleYear);
           $(e.currentTarget).find('input[name="editTitleType"]').val(titleType);
+          $(e.currentTarget).find('input[name="editTitleStudio"]').val(titleStudio);
           $(e.currentTarget).find('input[name="editTitleGenre"]').val(titleGenre);
           $(e.currentTarget).find('input[name="editTitleLongPoster"]').val(titleLongPoster);
           $(e.currentTarget).find('input[name="editTitleWidePoster"]').val(titleWidePoster);
@@ -469,7 +485,7 @@
                                 $(".sub_chk:checked").each(function(){
                                     $(this).parents('tr').remove();
                                 });
-                                baap.html(`<button style="margin-bottom: 10px" class="btn btn-secondary" disabled><i class="fa fa-plus"></i><b> Insert a package</b></button> <button style="margin-bottom: 10px" class="btn btn-warning" type="button" disabled><span class="spinner-border spinner-border-sm" role="status"></span>  Refreshing..</button>`);
+                                baap.html(`<button style="margin-bottom: 10px" class="btn btn-secondary" disabled><i class="fa fa-plus"></i><b> Insert a title</b></button> <button style="margin-bottom: 10px" class="btn btn-warning" type="button" disabled><span class="spinner-border spinner-border-sm" role="status"></span>  Refreshing..</button>`);
                                 alert(data['success']);
                                 location.reload(true);
                             }
