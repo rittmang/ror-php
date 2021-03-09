@@ -251,7 +251,7 @@
                         </div>
                         <div class="form-group col-md-3">
                           <label for="editTitleStudio">Studio</label>
-                          <input type="text" class="form-control" id="editTitleStudio" name="editTitleStudio" required>
+                          <input type="text" class="form-control" id="editTitleStudio" name="editTitleStudio">
                         </div>
                         <div class="form-group col-md-6">
                           <label for="editTitleGenre">Comma-separated genres</label>
