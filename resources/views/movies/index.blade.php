@@ -175,7 +175,7 @@
                         <ul class="favorites-slider list-inline row p-0 mb-0">
                            @foreach($upcoming_titles as $upcoming_title)
                               <li class="slide-item">
-                                 <a href="/movies/{{$upcoming_title->id}}">
+                                 
                                     <div class="block-images position-relative">
                                        <div class="img-box">
                                           <img src="{{$upcoming_title->long_poster}}" class="img-fluid" alt="">
@@ -183,8 +183,40 @@
                                        <div class="block-description">
                                           <h6>{{$upcoming_title->name}}</h6>
                                           <div class="movie-time d-flex align-items-center my-2">
-                                             <div class="badge badge-secondary p-1 mr-2">{{$upcoming_title->age}}</div>
-                                             <span class="text-white">{{$upcoming_title->duration}}</span>
+                                             <div class="badge badge-secondary p-1 mr-2">N/A</div>
+                                          </div>
+                                       </div>
+                                    </div>
+                              </li>
+                           @endforeach
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <section id="iq-upcoming-movie">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-12 overflow-hidden">
+                     <div class="iq-main-header d-flex align-items-center justify-content-between">
+                        <h4 class="main-title">Comedy</h4>
+                        <a href="/movies/all" class="text-primary">View all</a>
+                     </div>
+                     <div class="upcoming-contens">
+                        <ul class="favorites-slider list-inline row p-0 mb-0">
+                           @foreach($comedy_titles as $com_title)
+                              <li class="slide-item">
+                                 <a href="/movies/{{$com_title->id}}">
+                                    <div class="block-images position-relative">
+                                       <div class="img-box">
+                                          <img src="{{$com_title->long_poster}}" class="img-fluid" alt="">
+                                       </div>
+                                       <div class="block-description">
+                                          <h6>{{$com_title->name}}</h6>
+                                          <div class="movie-time d-flex align-items-center my-2">
+                                             <div class="badge badge-secondary p-1 mr-2">{{$com_title->age}}</div>
+                                             <span class="text-white">{{$com_title->duration}}</span>
                                           </div>
                                           <div class="hover-buttons">
                                              <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
@@ -198,115 +230,6 @@
                               </li>
                               
                            @endforeach
-                           {{-- <li class="slide-item">
-                              <a href="movie-details.html">
-                                 <div class="block-images position-relative">
-                                    <div class="img-box">
-                                       <img src="assets/movie/images/posters/001.jpg" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="block-description">
-                                       <h6>Last Night</h6>
-                                       <div class="movie-time d-flex align-items-center my-2">
-                                          <div class="badge badge-secondary p-1 mr-2">22+</div>
-                                          <span class="text-white">2h 15m</span>
-                                       </div>
-                                       <div class="hover-buttons">
-                                          <span class="btn btn-hover">
-                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                          Play Now
-                                          </span>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </a>
-                           </li>
-                           <li class="slide-item">
-                              <a href="movie-details.html">
-                                 <div class="block-images position-relative">
-                                    <div class="img-box">
-                                       <img src="images/upcoming/03.jpg" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="block-description">
-                                       <h6>1980</h6>
-                                       <div class="movie-time d-flex align-items-center my-2">
-                                          <div class="badge badge-secondary p-1 mr-2">25+</div>
-                                          <span class="text-white">3h</span>
-                                       </div>
-                                       <div class="hover-buttons">
-                                          <span class="btn btn-hover">
-                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                          Play Now
-                                          </span>
-                                       </div>
-                                    </div>
-                                    <div class="block-social-info">
-                                       <ul class="list-inline p-0 m-0 music-play-lists">
-                                          <li><span><i class="ri-volume-mute-fill"></i></span></li>
-                                          <li><span><i class="ri-heart-fill"></i></span></li>
-                                          <li><span><i class="ri-add-line"></i></span></li>
-                                       </ul>
-                                    </div>
-                                 </div>
-                              </a>
-                           </li>
-                           <li class="slide-item">
-                              <a href="movie-details.html">
-                                 <div class="block-images position-relative">
-                                    <div class="img-box">
-                                       <img src="images/upcoming/04.jpg" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="block-description">
-                                       <h6>Looters</h6>
-                                       <div class="movie-time d-flex align-items-center my-2">
-                                          <div class="badge badge-secondary p-1 mr-2">11+</div>
-                                          <span class="text-white">2h 45m</span>
-                                       </div>
-                                       <div class="hover-buttons">
-                                          <span class="btn btn-hover">
-                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                          Play Now
-                                          </span>
-                                       </div>
-                                    </div>
-                                    <div class="block-social-info">
-                                       <ul class="list-inline p-0 m-0 music-play-lists">
-                                          <li><span><i class="ri-volume-mute-fill"></i></span></li>
-                                          <li><span><i class="ri-heart-fill"></i></span></li>
-                                          <li><span><i class="ri-add-line"></i></span></li>
-                                       </ul>
-                                    </div>
-                                 </div>
-                              </a>
-                           </li>
-                           <li class="slide-item">
-                              <a href="movie-details.html">
-                                 <div class="block-images position-relative">
-                                    <div class="img-box">
-                                       <img src="images/upcoming/05.jpg" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="block-description">
-                                       <h6>Vugotronic</h6>
-                                       <div class="movie-time d-flex align-items-center my-2">
-                                          <div class="badge badge-secondary p-1 mr-2">9+</div>
-                                          <span class="text-white">2h 30m</span>
-                                       </div>
-                                       <div class="hover-buttons">
-                                          <span class="btn btn-hover">
-                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                          Play Now
-                                          </span>
-                                       </div>
-                                    </div>
-                                    <div class="block-social-info">
-                                       <ul class="list-inline p-0 m-0 music-play-lists">
-                                          <li><span><i class="ri-volume-mute-fill"></i></span></li>
-                                          <li><span><i class="ri-heart-fill"></i></span></li>
-                                          <li><span><i class="ri-add-line"></i></span></li>
-                                       </ul>
-                                    </div>
-                                 </div>
-                              </a>
-                           </li> --> --}}
                         </ul>
                      </div>
                   </div>

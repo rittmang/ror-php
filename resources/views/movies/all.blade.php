@@ -128,22 +128,31 @@
                                        <div class="img-box">
                                           <img src="{{$title->long_poster}}" class="img-fluid" alt="">
                                        </div>
-                                       <div class="block-description">
-                                          <h6>{{$title->name}}</h6>
-                                          <div class="movie-time d-flex align-items-center my-2">
-                                             <div class="badge badge-secondary p-1 mr-2">{{$title->age}}</div>
-                                             <span class="text-white">{{$title->duration}}</span>
+                                       @if($title->asset != "/")
+                                          <div class="block-description">
+                                             <h6>{{$title->name}}</h6>
+                                             <div class="movie-time d-flex align-items-center my-2">
+                                                <div class="badge badge-secondary p-1 mr-2">{{$title->age}}</div>
+                                                <span class="text-white">{{$title->duration}}</span>
+                                             </div>
+                                             <div class="hover-buttons">
+                                                   <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                                   Play Now
+                                                   </span>
+                                             </div>
                                           </div>
-                                          <div class="hover-buttons">
-                                             <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                             Play Now
-                                             </span>
+                                       @else
+                                          <div class="block-description">
+                                             <h6>{{$title->name}}</h6>
+                                             <div class="movie-time d-flex align-items-center my-2">
+                                                  <div class="badge badge-secondary p-1 mr-2">N/A</div>   
+                                             </div>
                                           </div>
-                                       </div>
-                                    
+                                       @endif
                                     </div>
                                  </a>
                               </li>
+                              
                               
                            @endforeach
                            {{-- <li class="slide-item">
