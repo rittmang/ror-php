@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Notifications\AdminEventNotification;
 
 class LoginController extends Controller
 {
@@ -18,11 +20,23 @@ class LoginController extends Controller
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'is_admin'=>True])){
             //Authentication passed...
             $request->session()->regenerate();
+            $userSchema = Auth::user();
+            $adminEvent=[
+                'name'=>Auth::user()->name,
+                'body'=>'New Admin Login'
+            ];
+            Notification::send($userSchema,new AdminEventNotification($adminEvent));
             return redirect()->intended('dashboard');
         }
         elseif(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'is_admin'=>False])){
             //Authentication passed...
             $request->session()->regenerate();
+            $userSchema = Auth::user();
+            $adminEvent=[
+                'name'=>Auth::user()->name,
+                'body'=>'New User Login'
+            ];
+            Notification::send($userSchema,new AdminEventNotification($adminEvent));
             return redirect('movies/all');
         }
         return redirect('login')->with('message','YOU STUPID BISH');

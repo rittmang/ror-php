@@ -17,15 +17,12 @@ use App\Http\Controllers\LoginController;
 
 
 
-
 class dashboardController extends Controller
 {
     public function index(){
-        
         $movie_titles=DB::table('title')->where('type','Movie')->orderBy('id','asc')->get(['id','name','year','genre']);
         $series_titles=DB::table('title')->where('type','Series')->orderBy('id','asc')->get(['id','name','year','genre']);
         return view('dashboard/index',['movie_titles'=>$movie_titles,'series_titles'=>$series_titles]);
-    
     }
     public function titlesIndex(){
         $titles=DB::table('title')->orderBy('id','asc')->get();
@@ -84,9 +81,7 @@ class dashboardController extends Controller
         $factory=(new Factory)->withServiceAccount(__DIR__.'/../firebase-pk.json')->withDatabaseUri(getenv('databaseURL'));
         $database=$factory->createDatabase();
         $movie_ids=DB::table('title')->where('type','Movie')->orderBy('id','asc')->get(['id']);
-        // Log::error("IDS:".$movie_ids);
-        // $series_ids=DB::table('title')->where('type','Series')->orderBy('id','asc')->get(['id']);
-
+        
         foreach($movie_ids as $id)
         {
             $reference=$database->getReference("{$id->id}");
