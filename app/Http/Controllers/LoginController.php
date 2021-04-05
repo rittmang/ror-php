@@ -7,10 +7,12 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\AdminEventNotification;
+use App\Notifications\UserEventNotification;
 
 class LoginController extends Controller
 {
@@ -20,24 +22,30 @@ class LoginController extends Controller
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'is_admin'=>True])){
             //Authentication passed...
             $request->session()->regenerate();
+            
             $userSchema = Auth::user();
             $adminEvent=[
-                'name'=>Auth::user()->name,
                 'body'=>'New Admin Login'
             ];
             Notification::send($userSchema,new AdminEventNotification($adminEvent));
+            
             return redirect()->intended('dashboard');
         }
         elseif(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'is_admin'=>False])){
             //Authentication passed...
             $request->session()->regenerate();
-            $userSchema = Auth::user();
-            $adminEvent=[
-                'name'=>Auth::user()->name,
-                'body'=>'New User Login'
-            ];
-            Notification::send($userSchema,new AdminEventNotification($adminEvent));
-            return redirect('movies/all');
+            
+            if(DB::table('users')->where('id',Auth::user()->id)->select('service_notif')->get()==True){
+                date_default_timezone_set('Asia/Kolkata');
+                $date = date('d/m/Y h:i:s a',time());
+                $userSchema = Auth::user();
+                $userEvent = [
+                    'body'=>'New login detected at '.$date.' IST'
+                ];
+                Notification::send($userSchema,new UserEventNotification($userEvent));
+                Notification::send($userSchema,new AdminEventNotification($userEvent));
+            }
+            return redirect('movies');
         }
         return redirect('login')->with('message','YOU STUPID BISH');
     }

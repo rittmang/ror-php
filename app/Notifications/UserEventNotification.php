@@ -10,25 +10,27 @@ use Illuminate\Notifications\Notification;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramMessage;
 
-class AdminEventNotification extends Notification implements ShouldQueue
+class UserEventNotification extends Notification
 {
     use Queueable;
-    private $adminEvent;
+    private $userEvent;
 
-    public function __construct($adminEvent)
+    public function __construct($userEvent)
     {
-        $this->adminEvent=$adminEvent;
+        $this->userEvent = $userEvent;
     }
-    
+
     public function via($notifiable)
     {
         return [TelegramChannel::class];
     }
- 
+
+    
     public function toTelegram($notifiable)
     {
         return TelegramMessage::create()
-            ->to(config('admin.admin_channel'))
-            ->content($this->adminEvent['body']." by ".$notifiable->name);
+            ->to($notifiable->telegram_user_id)
+            ->content("Dear ".$notifiable->name.",\n".$this->userEvent['body']);
     }
+
 }
