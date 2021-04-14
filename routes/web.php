@@ -67,4 +67,5 @@ Route::delete('dashboard/titlesDelete',[dashboardController::class,'titlesDelete
 Route::post('dashboard/titles',[dashboardController::class,'titlesInsert'])->middleware(['auth','admin']);
 Route::post('dashboard/titlesUpdate',[dashboardController::class,'titlesUpdate'])->middleware(['auth','admin']);
 Route::get('dashboard/syncViews',[dashboardController::class,'syncViews'])->middleware(['auth','admin']);
+Route::get('dashboard/syncSearchIndex',[dashboardController::class,'syncSearchIndex'])->middleware(['auth','admin']);
 //Route::delete('dashboard/packagesDeleteAll','Admin\dashboardController@packagesDeleteAll')->middleware('auth');

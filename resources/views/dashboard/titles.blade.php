@@ -122,9 +122,13 @@
                     <i class="fa fa-trash"></i>  
                     Delete All Selected
                   </button>
-                <button style="margin-bottom: 10px" class="btn btn-secondary" onclick="window.location='{{url('dashboard/syncViews')}}'">
+                  <button style="margin-bottom: 10px" class="btn btn-secondary" onclick="window.location='{{url('dashboard/syncViews')}}'">
                     <i class="fa fa-refresh"></i>
                     Sync views
+                  </button>
+                  <button style="margin-bottom: 10px" class="btn btn-secondary" onclick="window.location='{{url('dashboard/syncSearchIndex')}}'">
+                    <i class="fa fa-refresh"></i>
+                    Sync search index
                   </button>
                 </div>
                 <div>

@@ -35,7 +35,7 @@ class LoginController extends Controller
             //Authentication passed...
             $request->session()->regenerate();
             
-            if(DB::table('users')->where('id',Auth::user()->id)->select('service_notif')->get()==True){
+            if(DB::table('users')->where('id',Auth::user()->id)->select('service_notif')->get()==TRUE && is_null(DB::table('users')->where('id',Auth::user()->id)->select('telegram_user_id')->get())==FALSE){
                 date_default_timezone_set('Asia/Kolkata');
                 $date = date('d/m/Y h:i:s a',time());
                 $userSchema = Auth::user();
@@ -65,6 +65,8 @@ class LoginController extends Controller
                 $user->email=$request->email;
                 $user->password=Hash::make($request->password);
                 $user->is_admin=True;
+                $user->service_notif=True;
+                $user->general_notif=True;
                 $user->save();
                 return redirect('login')->with('message','Login Now');
             }
@@ -81,6 +83,9 @@ class LoginController extends Controller
                 $user->email=$request->email;
                 $user->password=Hash::make($request->password);
                 $user->is_admin=False;
+                $user->service_notif=True;
+                $user->general_notif=False;
+                $user->telegram_user_id=Null;
                 $user->save();
                 return redirect('login')->with('message','Login Now');
             }

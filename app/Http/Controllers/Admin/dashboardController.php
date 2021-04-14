@@ -11,6 +11,7 @@ use Kreait\Firebase;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
+use Algolia\AlgoliaSearch\SearchClient;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LoginController;
@@ -36,6 +37,8 @@ class dashboardController extends Controller
     }
     public function titlesInsert(Request $request)
     {
+        $client=SearchClient::create(config('admin.algolia_appid'),config('admin.algolia_apikey'));
+        $index=$client->initIndex(config('admin.algolia_index'));
         
         $tname=$request->input('inputTitleName');
         $tlang=$request->input('inputTitleLanguage');
@@ -52,12 +55,19 @@ class dashboardController extends Controller
         $tdur=$request->input('inputTitleDuration');
         $tdes=$request->input('inputTitleDescription');
 
-        DB::insert('insert into title (name,year,type,genre,long_poster,wide_poster,trailer_link,asset,vtt,age,duration,description,views,studio,lang) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$tname,$tyear,$ttype,$tgenre,$tlp,$twp,$ttl,$tast,$tvtt,$tage,$tdur,$tdes,0,$tstudio,$tlang]);
-        return redirect('dashboard/titles')->with('insertStatus',$tname . ' was succesfully added.');
+        $tid=DB::table('title')->insertGetId(['name'=>$tname,'year'=>$tyear,'type'=>$ttype,'genre'=>$tgenre,'long_poster'=>$tlp,'wide_poster'=>$twp,'trailer_link'=>$ttl,'asset'=>$tast,'vtt'=>$tvtt,'age'=>$tage,'duration'=>$tdur,'description'=>$tdes,'views'=>0,'studio'=>$tstudio,'lang'=>$tlang]);
+        $records=[
+            ['objectID'=>$tid,'name'=>$tname,'year'=>$tyear,'long_poster'=>$tlp,'age'=>$tage,'duration'=>$tdur,'lang'=>$tlang]
+        ];        
+        $index->saveObjects($records,['autoGenerateObjectIDIfNotExist'=>true]);
+        return redirect('dashboard/titles')->with('insertStatus',$tname . ' was succesfully added & indexed.');
 
     }
     public function titlesUpdate(Request $request)
     {
+        $client=SearchClient::create(config('admin.algolia_appid'),config('admin.algolia_apikey'));
+        $index=$client->initIndex(config('admin.algolia_index'));
+
         $tid=$request->input('editTitleId');
         $tname=$request->input('editTitleName');
         $tlang=$request->input('editTitleLanguage');
@@ -75,6 +85,11 @@ class dashboardController extends Controller
         $tdes=$request->input('editTitleDescription');
 
         DB::table('title')->where('id',$tid)->update(['name'=>$tname,'year'=>$tyear,'type'=>$ttype,'genre'=>$tgenre,'long_poster'=>$tlp,'wide_poster'=>$twp,'trailer_link'=>$ttl,'asset'=>$tast,'vtt'=>$tvtt,'age'=>$tage,'duration'=>$tdur,'description'=>$tdes,'studio'=>$tstudio,'lang'=>$tlang]);
+        $records=[
+            ['objectID'=>$tid,'name'=>$tname,'year'=>$tyear,'long_poster'=>$tlp,'age'=>$tage,'duration'=>$tdur,'lang'=>$tlang]
+        ];
+        $index->saveObjects($records,['autoGenerateObjectIDIfNotExist'=>true]);
+
         return redirect('dashboard/titles')->with('editStatus',$tname . ' was succesfully edited.');
     }
     public function syncViews(){
@@ -91,6 +106,7 @@ class dashboardController extends Controller
             DB::table('title')->where('id',$id->id)->update(['views'=>$viewcount]);
 
         }
+
         // foreach($series_ids as $id)
         // {
         //     $reference=$database->getReference("{$id->id}");//getReference(30)
@@ -100,5 +116,12 @@ class dashboardController extends Controller
 
         // }
         return redirect('dashboard/titles')->with('editStatus','Movie views were succesfully synced with Firebase');
+    }
+    public function syncSearchIndex(){
+        $client=SearchClient::create(config('admin.algolia_appid'),config('admin.algolia_apikey'));
+        $index=$client->initIndex(config('admin.algolia_index'));
+        $titles=DB::table('title')->orderBy('id','asc')->get(['id AS objectID','name','year','type','long_poster','age','duration','studio','lang']);
+        $index->saveObjects($titles,['autoGenerateObjectIDIfNotExist'=>true]);
+        return redirect('dashboard/titles')->with('editStatus','Records synced with search index');
     }
 }
