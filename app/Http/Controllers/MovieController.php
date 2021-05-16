@@ -57,4 +57,7 @@ class MovieController extends Controller
         }
         return abort('404');
     }
+    public function testMovie(){
+        return view('movies/test',['title'=>'Elephants Dream','views'=>0]);
+    }
 }

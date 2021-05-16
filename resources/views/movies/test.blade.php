@@ -120,9 +120,7 @@
     <!-- Header End -->
     <!-- Banner Start -->
     <div class="video-container iq-main-slider">
-        <video class="video d-block" controls autoplay poster="../movie/images/slider/gumnaami.jpeg" preload="auto">
-            <source src="https://polished-pond-424a.muvibay.workers.dev/Bengali/Gumnaami/Gumnaami.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://ror-testplayer.netlify.app" title="Iframe" width="100%" height="100%" allowfullscreen="true" frameBorder="0" name="{{$title}}"></iframe>
     </div>
 
     <!-- Banner End -->
@@ -134,17 +132,12 @@
                     <div class="trending-info season-info g-border">
                         <p id="view_count_text"><i class='fa fa-eye'> </i> {{ $views }} </p>
                         <pre id="details"></pre>
-                        <h4 class="trending-text big-title text-uppercase mt-0">Gumnaami</h4>
+                        <h4 class="trending-text big-title text-uppercase mt-0">Elephants Dream</h4>
                         <div class="d-flex align-items-center text-white text-detail episode-name mb-0">
                             <span>Movie</span>
-                            <span class="trending-year">2019</span>
+                            <span class="trending-year">20xx</span>
                         </div>
-                        <p class="trending-dec w-100 mb-0">Gumnaami is a film based on the Mukherjee Commission Hearings
-                            which happened from 1999 to 2005 where the three theories about Netaji Subhas Chandra Bose's
-                            death were discussed and debated. It is a dramatization of the hearings where an
-                            investigative journalist supporting the 'Gumnaami Baba theory' locks horns with the official
-                            lawyer who supports the 'plane-crash theory'. In their clash, the 'Death in Russia theory'
-                            also comes up.</p>
+                        <p class="trending-dec w-100 mb-0">Sample</p>
                     </div>
                 </div>
             </div>
