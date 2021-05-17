@@ -143,6 +143,9 @@
                 <div class="col-lg-12">
                     <div class="trending-info season-info g-border">
                         <p id="view_count_text"><i class='fa fa-eye'> </i> {{ $views }}</p>
+                        <a class="btn btn-danger" href="/movies/castplayer/{{$title->id}}" role="button">
+                            <i class='fa fa-television'> </i>
+                        </a>
                         <pre id="details"></pre>
 
                         <h4 class="trending-text big-title text-uppercase mt-0">{{ $title->name }}</h4>

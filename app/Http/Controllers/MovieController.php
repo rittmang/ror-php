@@ -27,7 +27,7 @@ class MovieController extends Controller
         return view('movies/index',['upcoming_titles'=>$upcoming_movielist,'banner_titles'=>$banner_movielist,'disney_titles'=>$disney_movielist,'pixar_titles'=>$pixar_movielist,'tcs_titles'=>$tcs_movielist,'marvel_titles'=>$marvel_movielist,'svf_titles'=>$svf_movielist]);
     }
     public function allMovies(){
-        $all_movielist=DB::table('title')->orderBy('id','asc')->select('id','name','long_poster','age','duration','asset')->get();
+        $all_movielist=DB::table('title')->orderBy('id','asc')->where('asset','!=','/')->select('id','name','long_poster','age','duration','asset')->get();
         return view('movies/all',['titles'=>$all_movielist]);
     }
     
