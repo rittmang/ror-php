@@ -124,4 +124,55 @@ class dashboardController extends Controller
         $index->saveObjects($titles,['autoGenerateObjectIDIfNotExist'=>true]);
         return redirect('dashboard/titles')->with('editStatus','Records synced with search index');
     }
+
+    // now for webisodes
+    public function webisodesIndex(){
+        $webisodes=DB::table('webisodes')->orderBy('title_id','asc')->orderBy('season','asc')->orderBy('episode','asc')->get();
+        return view('dashboard/webisodes',['webisodes'=>$webisodes]);
+    }
+    public function webisodesDelete(Request $request)
+    {
+        $ids=$request->ids;
+        DB::table('webisodes')->whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['success'=>"Titles deleted succesfully"]);
+    }
+    public function webisodesInsert(Request $request)
+    {
+        $wname=$request->input('inputTitleName');
+        $wname=$request->input('inputWebisodeName');
+        $wseason=$request->input('inputWebisodeSeason');
+        $wepisode=$request->input('inputWebisodeEpisode');
+        $wtitleid=$request->input('inputWebisodeTitleId');
+        $wposter=$request->input('inputWebisodeWidePoster');
+        $wasset=$request->input('inputWebisodeAsset');
+        $wvtt=$request->input('inputWebisodeVTT');
+        $wduration=$request->input('inputWebisodeDuration');
+        $wviews=0;
+
+        $tid=DB::table('webisodes')->insertGetId(['ep_name'=>$wname,'season'=>$wseason,'episode'=>$wepisode,'title_id'=>$wtitleid,'wide_poster'=>$wposter,'asset'=>$wasset,'vtt'=>$wvtt,'duration'=>$wduration,'views'=>$wviews]);
+        // $records=[
+        //     ['objectID'=>$tid,'name'=>$tname,'year'=>$tyear,'long_poster'=>$tlp,'age'=>$tage,'duration'=>$tdur,'lang'=>$tlang]
+        // ];        
+        
+        return redirect('dashboard/webisodes')->with('insertStatus','Title'.$wtitleid.' S'.$wseason.'E'.$wepisode.' '.$wname . ' was succesfully added & indexed.');
+
+    }
+    public function webisodesUpdate(Request $request)
+    {
+        $wid=$request->input('editWebisodeId');
+        $wname=$request->input('editWebisodeName');
+        $wseason=$request->input('editWebisodeSeason');
+        $wepisode=$request->input('editWebisodeEpisode');
+        $wtitleid=$request->input('editWebisodeTitleId');
+        $wposter=$request->input('editWebisodeWidePoster');
+        $wasset=$request->input('editWebisodeAsset');
+        $wvtt=$request->input('editWebisodeVTT');
+        $wduration=$request->input('editWebisodeDuration');
+        $wviews=$request->input('editWebisodeViews');
+
+
+        DB::table('webisodes')->where('id',$wid)->update(['ep_name'=>$wname,'season'=>$wseason,'episode'=>$wepisode,'title_id'=>$wtitleid,'wide_poster'=>$wposter,'asset'=>$wasset,'vtt'=>$wvtt,'duration'=>$wduration,'views'=>$wviews]);
+        return redirect('dashboard/webisodes')->with('editStatus','Title'.$wtitleid . ' S'.$wseason . 'E'.$wepisode .' '. $wname . ' was succesfully edited.');
+    }
+
 }

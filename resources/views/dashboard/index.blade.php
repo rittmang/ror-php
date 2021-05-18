@@ -51,10 +51,10 @@
                     </a>
                     <ul class="sidenav-second-level collapse" id="collapseComponents">
                         <li>
-                            <a href="dashboard/titles">Movies</a>
+                            <a href="dashboard/titles">Titles</a>
                         </li>
                         <li>
-                            <a href="dashboard/series">Series</a>
+                            <a href="dashboard/webisodes">Webisodes</a>
                         </li>
                         <li>
                             <a href="">Services</a>

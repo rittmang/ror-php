@@ -5,7 +5,7 @@
     <meta charset="utf-8" http-equiv="encoding" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Titles | RightOnRittman</title>
+    <title>Webisodes | RightOnRittman</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -47,7 +47,7 @@
                         <i class="fa fa-fw fa-dashboard"></i>
                         <span class="nav-link-text">Dashboard</span>
                     </a>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                     <a class="nav-link nav-link-collapse" data-toggle="collapse" href="#collapseComponents"
                         data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-wrench"></i>
@@ -55,11 +55,10 @@
                     </a>
                     <ul class="sidenav-second-level collapse show" id="collapseComponents">
                         <li>
-                            <div class="p-3 ml-4 bg-secondary text-white">Titles</div>
-                            {{-- <a class="text-white">Packages</a> --}}
+                            <a href="titles">Titles</a>
                         </li>
                         <li>
-                            <a href="webisodes">Webisodes</a>
+                            <div class="p-3 ml-4 bg-secondary text-white">Webisodes</div>
                         </li>
                     </ul>
                 </li>
@@ -100,12 +99,12 @@
                 <li class="breadcrumb-item">
                     <a href="#">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active">Titles</li>
+                <li class="breadcrumb-item active">Webisodes</li>
             </ol>
 
             <div class="card mb-3">
                 <div class="card-header">
-                    <i class="fa fa-database"></i> Titles
+                    <i class="fa fa-database"></i> Webisodes
                 </div>
                 <div class="card-body">
                     @if (session('insertStatus'))
@@ -129,22 +128,12 @@
                         <button style="margin-bottom: 10px" class="btn btn-primary" data-toggle="modal"
                             data-target="#insertModal">
                             <i class="fa fa-plus"></i>
-                            <b>Insert a title</b>
+                            <b>Insert an episode</b>
                         </button>
                         <button style="margin-bottom: 10px" class="btn btn-danger delete_all"
-                            data-url="{{ url('dashboard/titlesDelete') }}">
+                            data-url="{{ url('dashboard/webisodesDelete') }}">
                             <i class="fa fa-trash"></i>
                             Delete All Selected
-                        </button>
-                        <button style="margin-bottom: 10px" class="btn btn-secondary"
-                            onclick="window.location='{{ url('dashboard/syncViews') }}'">
-                            <i class="fa fa-refresh"></i>
-                            Sync views
-                        </button>
-                        <button style="margin-bottom: 10px" class="btn btn-secondary"
-                            onclick="window.location='{{ url('dashboard/syncSearchIndex') }}'">
-                            <i class="fa fa-refresh"></i>
-                            Sync search index
                         </button>
                     </div>
                     <div>
@@ -156,63 +145,58 @@
                                 <tr>
                                     <th><input type="checkbox" id="master"></th>
                                     <th>ID</th>
-                                    <th>About</th>
-                                    <th>Type</th>
-                                    <th>Genre</th>
-                                    <th>Links</th>
-                                    <th>Description</th>
+                                    <th>Episode</th>
+                                    <th>Title</th>
+                                    <th>Poster</th>
+                                    <th>Asset</th>
+                                    <th>VTT</th>
+                                    <th>Duration</th>
                                     <th>Views</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($titles as $title)
-                                    <tr id="{{ $title->id }}">
-                                        <td><input type="checkbox" class="sub_chk" data-id="{{ $title->id }}"></td>
-                                        <td>{{ $title->id }}</td>
-                                        <td>
-                                            <p><b>{{ $title->name }}</b> ({{ $title->year }})</p>
-                                            <p>{{ $title->lang }}</p>
-                                            <p>{{ $title->duration }}</p>
-                                            <p>{{ $title->age }}</p>
-                                            <p>{{ $title->studio }}</p>
+                                @php
+                                    $current_title=$webisodes[0]->title_id;
+                                @endphp
+                                @foreach ($webisodes as $webisode)
+                                    @if($webisode->title_id != $current_title)
+                                       <tr height="20px"></tr> 
+                                    @endif
+                                    <tr id="{{ $webisode->id }}">
+                                        <td><input type="checkbox" class="sub_chk" data-id="{{ $webisode->id }}"></td>
+                                        <td>{{ $webisode->id }}</td>
+                                        <td><p>S{{ $webisode->season }}E{{ $webisode->episode }} {{ $webisode->ep_name }}
                                         </td>
-                                        <td>{{ $title->type }}</td>
-                                        <td>{{ $title->genre }}</td>
-                                        <td>
-                                            <p><a href="{{ $title->long_poster }}" target="_blank">Long</a></p>
-                                            <p><a href="{{ $title->wide_poster }}" target="_blank">Wide</a></p>
-                                            <p><a href="{{ $title->trailer_link }}" target="_blank">Trailer</a></p>
-                                            <p><a href="{{ $title->asset }}" target="_blank">Asset</a></p>
-                                            <p><a href="{{ $title->vtt }}" target="_blank">VTT</a></p>
-                                        </td>
-                                        <td>{{ $title->description }}</td>
-                                        <td>{{ $title->views }}</td>
+                                        <td>{{ $webisode->title_id }}</td>
+                                        <td><a href="{{ $webisode->wide_poster }}" target="_blank">Wide</a></td>
+                                        <td><a href="{{ $webisode->asset }}" target="_blank">Asset</a></td>
+                                        <td><a href="{{ $webisode->vtt }}" target="_blank">VTT</a></td>
+                                        <td>{{ $webisode->duration }}</td>
+                                        <td>{{ $webisode->views }}</td>
                                         <td>
                                             <button style="margin-bottom: 10px"
                                                 class="btn btn-outline-danger delete_single"
-                                                data-url="{{ url('dashboard/titlesDelete') }}"
-                                                data-id="{{ $title->id }}">
+                                                data-url="{{ url('dashboard/webisodesDelete') }}"
+                                                data-id="{{ $webisode->id }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                             <button style="margin-bottom: 10px"
                                                 class="btn btn-outline-primary edit_single"
-                                                data-id="{{ $title->id }}" data-name="{{ $title->name }}"
-                                                data-language="{{ $title->lang }}" data-year="{{ $title->year }}"
-                                                data-type="{{ $title->type }}" data-studio="{{ $title->studio }}"
-                                                data-genre="{{ $title->genre }}"
-                                                data-longposter="{{ $title->long_poster }}"
-                                                data-wideposter="{{ $title->wide_poster }}"
-                                                data-trailerlink="{{ $title->trailer_link }}"
-                                                data-asset="{{ $title->asset }}" data-vtt="{{ $title->vtt }}"
-                                                data-age="{{ $title->age }}" data-duration="{{ $title->duration }}"
-                                                data-description="{{ $title->description }}"
-                                                data-views="{{ $title->views }}" data-toggle="modal"
-                                                data-target="#editModal">
+                                                data-id="{{ $webisode->id }}" data-name="{{ $webisode->ep_name }}"
+                                                data-season="{{ $webisode->season }}" data-episode="{{ $webisode->episode }}"
+                                                data-titleid="{{ $webisode->title_id }}" data-wideposter="{{ $webisode->wide_poster }}" 
+                                                data-asset="{{ $webisode->asset }}" data-vtt="{{ $webisode->vtt }}" 
+                                                data-duration="{{ $webisode->duration }}" data-views="{{ $webisode->views }}"
+                                                data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil"></i>
                                             </button>
                                         </td>
                                     </tr>
+                                    
+                                    @php
+                                        $current_title=$webisode->title_id;    
+                                    @endphp
                                 @endforeach
                             </tbody>
                         </table>
@@ -253,99 +237,67 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="{{ url('dashboard/titlesUpdate') }}">
+                        <form method="post" action="{{ url('dashboard/webisodesUpdate') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="form-row">
-                                <div class="form-group col md-4">
-                                    <label for="editTitleId">DB id</label>
-                                    <input type="text" class="form-control" id="editTitleId" name="editTitleId"
+                                <div class="form-group col md-3">
+                                    <label for="editWebisodeId">DB id</label>
+                                    <input type="text" class="form-control" id="editWebisodeId" name="editWebisodeId"
                                         readonly>
                                 </div>
-                                <div class="form-group col md-8">
-                                    <label for="editTitleViews">Views</label>
-                                    <input type="text" class="form-control" id="editTitleViews" name="editTitleViews"
+                                <div class="form-group col md-3">
+                                    <label for="editWebisodeViews">Views</label>
+                                    <input type="text" class="form-control" id="editWebisodeViews" name="editWebisodeViews"
                                         readonly>
                                 </div>
                             </div>
 
                             <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <label for="editWebisodeTitleId">Title ID</label>
+                                    <input type="text" class="form-control" id="editWebisodeTitleId" name="editWebisodeTitleId"
+                                        required>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="editWebisodeSeason">Season</label>
+                                    <input type="text" class="form-control" id="editWebisodeSeason" name="editWebisodeSeason"
+                                        required>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="editWebisodeEpisode">Episode</label>
+                                    <input type="text" class="form-control" id="editWebisodeEpisode" name="editWebisodeEpisode"
+                                        required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="editWebisodeName">Name</label>
+                                    <input type="text" class="form-control" id="editWebisodeName" name="editWebisodeName"
+                                        required>
+                                </div>                                            
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="editWebisodeWidePoster">Wide Poster</label>
+                                    <input type="text" class="form-control" id="editWebisodeWidePoster"
+                                        name="editWebisodeWidePoster">
+                                </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="form-group col-md-5">
-                                    <label for="editTitleName">Name</label>
-                                    <input type="text" class="form-control" id="editTitleName" name="editTitleName"
+                                    <label for="editWebisodeAsset">Asset</label>
+                                    <input type="text" class="form-control" id="editWebisodeAsset" name="editWebisodeAsset"
                                         required>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="editTitleLanguage">Language</label>
-                                    <input type="text" class="form-control" id="editTitleLanguage"
-                                        name="editTitleLanguage" required>
+                                <div class="form-group col-md-5">
+                                    <label for="editWebisodeVTT">VTT</label>
+                                    <input type="text" class="form-control" id="editWebisodeVTT" name="editWebisodeVTT">
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="editTitleYear">Year of release</label>
-                                    <input type="text" class="form-control" id="editTitleYear" name="editTitleYear"
-                                        required>
+                                <div class="form-group col-md-2">
+                                    <label for="editWebisodeDuration">Duration</label>
+                                    <input type="text" class="form-control" id="editWebisodeDuration"
+                                        name="editWebisodeDuration" required>
                                 </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label for="editTitleType">Type</label>
-                                    <input type="text" class="form-control" id="editTitleType" name="editTitleType"
-                                        required>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="editTitleStudio">Studio</label>
-                                    <input type="text" class="form-control" id="editTitleStudio" name="editTitleStudio">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="editTitleGenre">Comma-separated genres</label>
-                                    <input type="text" class="form-control" id="editTitleGenre" name="editTitleGenre"
-                                        required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="editTitleLongPoster">Long Poster</label>
-                                    <input type="text" class="form-control" id="editTitleLongPoster"
-                                        name="editTitleLongPoster">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="editTitleWidePoster">Wide Poster</label>
-                                    <input type="text" class="form-control" id="editTitleWidePoster"
-                                        name="editTitleWidePoster">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label for="editTitleTrailerLink">Trailer Link</label>
-                                    <input type="text" class="form-control" id="editTitleTrailerLink"
-                                        name="editTitleTrailerLink">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="editTitleAsset">Asset</label>
-                                    <input type="text" class="form-control" id="editTitleAsset" name="editTitleAsset"
-                                        required>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="editTitleVTT">VTT</label>
-                                    <input type="text" class="form-control" id="editTitleVTT" name="editTitleVTT">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="editTitleAge">Age</label>
-                                    <input type="text" class="form-control" id="editTitleAge" name="editTitleAge"
-                                        required>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="editTitleAsset">Duration</label>
-                                    <input type="text" class="form-control" id="editTitleDuration"
-                                        name="editTitleDuration" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="editTitleDescription">Description</label>
-                                <textarea type="text" class="form-control" id="editTitleDescription"
-                                    name="editTitleDescription" rows="6" required></textarea>
                             </div>
                             <div class="text-right">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -365,102 +317,65 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="insertModalLongTitle">Insert a title</h5>
+                        <h5 class="modal-title" id="insertModalLongTitle">Insert an episode</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ url('dashboard/titles') }}" method="post">
+                        <form action="{{ url('dashboard/webisodes') }}" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="form-row">
-                                <div class="form-group col-md-5">
-                                    <label for="inputTitleName">Name</label>
-                                    <input type="text" class="form-control" id="inputTitleName" name="inputTitleName"
-                                        placeholder="eg: The Social Dilemma" required>
+                                <div class="form-group col-md-2">
+                                    <label for="inputWebisodeName">Title ID</label>
+                                    <input type="text" class="form-control" id="inputWebisodeTitleId" name="inputWebisodeTitleId"
+                                        placeholder="eg: 30" required>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputTitleLanguage">Language</label>
-                                    <input type="text" class="form-control" id="inputTitleLanguage"
-                                        name="inputTitleLanguage" placeholder="eg: English" required>
+                                <div class="form-group col-md-2">
+                                    <label for="inputWebisodeSeason">Season</label>
+                                    <input type="text" class="form-control" id="inputWebisodeSeason"
+                                        name="inputWebisodeSeason" placeholder="eg: 1" required>
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputTitleYear">Year of release</label>
-                                    <input type="text" class="form-control" id="inputTitleYear" name="inputTitleYear"
-                                        placeholder="eg: 2019" required>
+                                <div class="form-group col-md-2">
+                                    <label for="inputWebisodeEpisode">Episode</label>
+                                    <input type="text" class="form-control" id="inputWebisodeEpisode" name="inputWebisodeEpisode"
+                                        placeholder="eg: 1" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputWebisodeName">Name</label>
+                                    <input type="text" class="form-control" id="inputWebisodeName" name="inputWebisodeName"
+                                        placeholder="eg: Ishq Se Risk" required>
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label for="inputTitleType">Type</label>
-                                    <input type="text" class="form-control" id="inputTitleType" name="inputTitleType"
-                                        placeholder="eg: Movie | Series" required>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputTitleStudio">Studio</label>
-                                    <input type="text" class="form-control" id="inputTitleStudio"
-                                        name="inputTitleStudio" placeholder="eg: Exposure Labs">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputTitleGenre">Comma-separated genres</label>
-                                    <input type="text" class="form-control" id="inputTitleGenre" name="inputTitleGenre"
-                                        placeholder="eg: Thriller, Mystery" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputTitleLongPoster">Long Poster</label>
-                                    <input type="text" class="form-control" id="inputTitleLongPoster"
-                                        name="inputTitleLongPoster" placeholder="eg: https://...">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputTitleWidePoster">Wide Poster</label>
-                                    <input type="text" class="form-control" id="inputTitleWidePoster"
-                                        name="inputTitleWidePoster" placeholder="eg: https://...">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label for="inputTitleTrailerLink">Trailer Link</label>
-                                    <input type="text" class="form-control" id="inputTitleTrailerLink"
-                                        name="inputTitleTrailerLink" placeholder="eg: https://youtube.com...">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputTitleAsset">Asset</label>
-                                    <input type="text" class="form-control" id="inputTitleAsset" name="inputTitleAsset"
+                                <div class="form-group col-md-12">
+                                    <label for="inputWebisodeWidePoster">Wide Poster</label>
+                                    <input type="text" class="form-control" id="inputWebisodeWidePoster" name="inputWebisodeWidePoster"
                                         placeholder="eg: https://..." required>
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputTitleVTT">VTT</label>
-                                    <input type="text" class="form-control" id="inputTitleVTT" name="inputTitleVTT"
-                                        placeholder="eg: https://...">
-                                </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputTitleAge">Age</label>
-                                    <input type="text" class="form-control" id="inputTitleAge" name="inputTitleAge"
-                                        placeholder="eg: 12+" required>
+                                <div class="form-group col-md-5">
+                                    <label for="inputWebisodeAsset">Asset</label>
+                                    <input type="text" class="form-control" id="inputWebisodeAsset"
+                                        name="inputWebisodeAsset" placeholder="eg: https://..." required>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputTitleAsset">Duration</label>
-                                    <input type="text" class="form-control" id="inputTitleDuration"
-                                        name="inputTitleDuration" placeholder="eg: 1h 2m" required>
+                                <div class="form-group col-md-5">
+                                    <label for="inputWebisodeVTT">VTT</label>
+                                    <input type="text" class="form-control" id="inputWebisodeVTT" name="inputWebisodeVTT"
+                                        placeholder="eg: https://..." required>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputTitleDescription">Description</label>
-                                <textarea type="text" class="form-control" id="inputTitleDescription"
-                                    name="inputTitleDescription" placeholder="eg: This movie includes..." rows="6"
-                                    required></textarea>
+                                <div class="form-group col-md-2">
+                                    <label for="inputWebisodeDuration">Duration</label>
+                                    <input type="text" class="form-control" id="inputWebisodeDuration" name="inputWebisodeDuration"
+                                        placeholder="eg: 1h 56m">
+                                </div>
                             </div>
                             <div class="text-right">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
-
-
                         </form>
                     </div>
 
@@ -477,38 +392,26 @@
 <script type="text/javascript">
     $('#editModal').on('show.bs.modal', function(e) {
         var id = $(e.relatedTarget).data('id');
-        var titleName = $(e.relatedTarget).data('name');
-        var titleLanguage = $(e.relatedTarget).data('language');
-        var titleYear = $(e.relatedTarget).data('year');
-        var titleType = $(e.relatedTarget).data('type');
-        var titleStudio = $(e.relatedTarget).data('studio');
-        var titleGenre = $(e.relatedTarget).data('genre');
-        var titleLongPoster = $(e.relatedTarget).data('longposter');
-        var titleWidePoster = $(e.relatedTarget).data('wideposter');
-        var titleTrailerLink = $(e.relatedTarget).data('trailerlink');
-        var titleAsset = $(e.relatedTarget).data('asset');
-        var titleVTT = $(e.relatedTarget).data('vtt');
-        var titleAge = $(e.relatedTarget).data('age');
-        var titleDuration = $(e.relatedTarget).data('duration');
-        var titleDescription = $(e.relatedTarget).data('description');
-        var titleViews = $(e.relatedTarget).data('views');
+        var webisodeName = $(e.relatedTarget).data('name');
+        var webisodeSeason = $(e.relatedTarget).data('season');
+        var webisodeEpisode = $(e.relatedTarget).data('episode');
+        var webisodeTitleId = $(e.relatedTarget).data('titleid');
+        var webisodeWidePoster = $(e.relatedTarget).data('wideposter');
+        var webisodeAsset = $(e.relatedTarget).data('asset');
+        var webisodeVTT = $(e.relatedTarget).data('vtt');
+        var webisodeDuration = $(e.relatedTarget).data('duration');
+        var webisodeViews = $(e.relatedTarget).data('views');
 
-        $(e.currentTarget).find('input[name="editTitleId"]').val(id);
-        $(e.currentTarget).find('input[name="editTitleName"]').val(titleName);
-        $(e.currentTarget).find('input[name="editTitleLanguage"]').val(titleLanguage);
-        $(e.currentTarget).find('input[name="editTitleYear"]').val(titleYear);
-        $(e.currentTarget).find('input[name="editTitleType"]').val(titleType);
-        $(e.currentTarget).find('input[name="editTitleStudio"]').val(titleStudio);
-        $(e.currentTarget).find('input[name="editTitleGenre"]').val(titleGenre);
-        $(e.currentTarget).find('input[name="editTitleLongPoster"]').val(titleLongPoster);
-        $(e.currentTarget).find('input[name="editTitleWidePoster"]').val(titleWidePoster);
-        $(e.currentTarget).find('input[name="editTitleTrailerLink"]').val(titleTrailerLink);
-        $(e.currentTarget).find('input[name="editTitleAsset"]').val(titleAsset);
-        $(e.currentTarget).find('input[name="editTitleVTT"]').val(titleVTT);
-        $(e.currentTarget).find('input[name="editTitleAge"]').val(titleAge);
-        $(e.currentTarget).find('input[name="editTitleDuration"]').val(titleDuration);
-        $(e.currentTarget).find('input[name="editTitleViews"]').val(titleViews);
-        $(e.currentTarget).find('textarea[name="editTitleDescription"]').val(titleDescription);
+        $(e.currentTarget).find('input[name="editWebisodeId"]').val(id);
+        $(e.currentTarget).find('input[name="editWebisodeName"]').val(webisodeName);
+        $(e.currentTarget).find('input[name="editWebisodeSeason"]').val(webisodeSeason);
+        $(e.currentTarget).find('input[name="editWebisodeEpisode"]').val(webisodeEpisode);
+        $(e.currentTarget).find('input[name="editWebisodeTitleId"]').val(webisodeTitleId);
+        $(e.currentTarget).find('input[name="editWebisodeWidePoster"]').val(webisodeWidePoster);
+        $(e.currentTarget).find('input[name="editWebisodeAsset"]').val(webisodeAsset);
+        $(e.currentTarget).find('input[name="editWebisodeVTT"]').val(webisodeVTT);
+        $(e.currentTarget).find('input[name="editWebisodeDuration"]').val(webisodeDuration);
+        $(e.currentTarget).find('input[name="editWebisodeViews"]').val(webisodeViews);
 
     });
 
