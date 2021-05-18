@@ -128,7 +128,7 @@
                         <div class="upcoming-contens">
                             <ul class="list-inline row p-0 mb-0">
                                 @foreach ($titles as $title)
-                                    <li class="slide-item" style="width: 25%">
+                                    <li class="slide-item" style="width: 50%">
                                         <a href="/movies/{{ $title->id }}">
                                             <div class="block-images position-relative">
                                                 <div class="img-box">
