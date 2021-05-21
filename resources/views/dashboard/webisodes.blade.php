@@ -123,6 +123,14 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                    @elseif(session('errorStatus'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <h4>Error occurred!</h4>
+                            <p>{{ session('errorStatus') }}</p>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>    
                     @endif
                     <div>
                         <button style="margin-bottom: 10px" class="btn btn-primary" data-toggle="modal"

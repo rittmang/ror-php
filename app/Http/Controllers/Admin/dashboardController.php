@@ -149,12 +149,16 @@ class dashboardController extends Controller
         $wduration=$request->input('inputWebisodeDuration');
         $wviews=0;
 
-        $tid=DB::table('webisodes')->insertGetId(['ep_name'=>$wname,'season'=>$wseason,'episode'=>$wepisode,'title_id'=>$wtitleid,'wide_poster'=>$wposter,'asset'=>$wasset,'vtt'=>$wvtt,'duration'=>$wduration,'views'=>$wviews]);
+        try{
+            $tid=DB::table('webisodes')->insertGetId(['ep_name'=>$wname,'season'=>$wseason,'episode'=>$wepisode,'title_id'=>$wtitleid,'wide_poster'=>$wposter,'asset'=>$wasset,'vtt'=>$wvtt,'duration'=>$wduration,'views'=>$wviews]);
+            return redirect('dashboard/webisodes')->with('insertStatus','Title'.$wtitleid.' S'.$wseason.'E'.$wepisode.' '.$wname . ' was succesfully added & indexed.');
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            return redirect('dashboard/webisodes')->with('errorStatus',$e->getMessage());
+        }
         // $records=[
         //     ['objectID'=>$tid,'name'=>$tname,'year'=>$tyear,'long_poster'=>$tlp,'age'=>$tage,'duration'=>$tdur,'lang'=>$tlang]
-        // ];        
-        
-        return redirect('dashboard/webisodes')->with('insertStatus','Title'.$wtitleid.' S'.$wseason.'E'.$wepisode.' '.$wname . ' was succesfully added & indexed.');
+        // ];         
 
     }
     public function webisodesUpdate(Request $request)

@@ -45,7 +45,7 @@ class LoginController extends Controller
                 Notification::send($userSchema,new UserEventNotification($userEvent));
                 Notification::send($userSchema,new AdminEventNotification($userEvent));
             }
-            return redirect('movies');
+            return redirect('movies/all');
         }
         return redirect('login')->with('message','YOU STUPID BISH');
     }

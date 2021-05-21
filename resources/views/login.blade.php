@@ -58,7 +58,7 @@
 
                         </script>
                     @endif
-                    <form method="post" action="{{ url('login') }}">
+                    <form method="post" action="{{ url('login') }}" onsubmit="changeButton()">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <!-- to error: add class "has-danger" -->
                         <div class="form-group">
@@ -82,9 +82,11 @@
                             {{-- <a href="changepassword" style="float: right; font-size: 12px;">Forgot password?</a> --}}
                             <br>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block" value="">
-                            Login
-                        </button>
+                        <div id="baap">
+                            <button id="btn" type="submit" class="btn btn-primary btn-block" value="">
+                                Login
+                            </button>
+                        </div>
                         <div class="sign-up">
                             New here? <a href="register">Sign Up</a>
                         </div>
@@ -94,5 +96,10 @@
         </div>
     </div>
 </body>
+<script>
+    function changeButton(){
+        document.getElementById("baap").innerHTML='<button id="btn" type="submit" class="btn btn-warning btn-block" disabled>Loading</button>';
+    }
+</script>
 
 </html>
