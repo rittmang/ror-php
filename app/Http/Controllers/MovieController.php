@@ -34,7 +34,7 @@ class MovieController extends Controller
     public function selectMovie($id){
         if(DB::table('title')->where('id',$id)->exists()){
             $title=DB::table('title')->where('id',$id)->first();
-            $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(getenv('databaseURL'));
+            $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(config('movie.firebase'));
             $database=$factory->createDatabase();
             $count=$database->getReference("{$id}")->getValue();
             
@@ -47,7 +47,7 @@ class MovieController extends Controller
     public function castMovie($id){
         if(DB::table('title')->where('id',$id)->exists()){
             $title=DB::table('title')->where('id',$id)->first();
-            $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(getenv('databaseURL'));
+            $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(config('movie.firebase'));
             $database=$factory->createDatabase();
             $count=$database->getReference("{$id}")->getValue();
             

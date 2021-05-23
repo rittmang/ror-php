@@ -46,10 +46,10 @@ Route::get('/movies/test',[MovieController::class,'testMovie']);
 Route::get('/movies/{id}',[MovieController::class,'selectMovie'])->middleware(['auth']);
 Route::get('/movies/castplayer/{id}',[MovieController::class,'castMovie'])->middleware(['auth']);
 
-Route::get('webseries',[WebisodeController::class,'index']);
-Route::get('/webseries/{id}',[WebisodeController::class,'seriesDetails']);
-Route::get('/webseries/{id}/{season}/{episode}',[WebisodeController::class,'selectWebisode']);
-Route::get('/webseries/castplayer/{id}/{season}/{episode}',[WebisodeController::class,'castWebisode']);
+Route::get('webseries',[WebisodeController::class,'index'])->middleware(['auth']);
+Route::get('/webseries/{id}',[WebisodeController::class,'seriesDetails'])->middleware(['auth']);
+Route::get('/webseries/{id}/{season}/{episode}',[WebisodeController::class,'selectWebisode'])->middleware(['auth']);
+Route::get('/webseries/castplayer/{id}/{season}/{episode}',[WebisodeController::class,'castWebisode'])->middleware(['auth']);
 
 //---------------------------------
 

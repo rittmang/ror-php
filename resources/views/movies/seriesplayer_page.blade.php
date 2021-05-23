@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="../../../../movie/css/typography.css">
     <!-- Style -->
     <link rel="stylesheet" href="../../../../movie/css/style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css" crossorigin="anonymous">
     <!-- Responsive -->
     <link rel="stylesheet" href="../../../../movie/css/responsive.css" />
     <script src="https://kit.fontawesome.com/c893428da3.js" crossorigin="anonymous"></script>
@@ -88,6 +88,9 @@
                                                     </form>
                                                 </div>
                                             </li>
+                                            <li onclick="location.href='/logout';" class="nav-item"
+                                                style="cursor: pointer;">Logout ({{ Auth::user()->name }})
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -107,6 +110,9 @@
                                                 </div>
                                             </form>
                                         </div>
+                                    </li>
+                                    <li onclick="location.href='/logout';" class="nav-item" style="cursor: pointer;">
+                                        Logout ({{ Auth::user()->name }})
                                     </li>
                                 </ul>
                             </div>
@@ -137,12 +143,15 @@
                 <div class="col-lg-12">
                     <div class="trending-info season-info g-border">
                         <p id="view_count_text"><i class='fa fa-eye'> </i> {{ $views }}</p>
+                        <a class="btn btn-danger" href="/webseries/castplayer/{{$title->id}}/{{$ep->season}}/{{$ep->episode}}" role="button">
+                            <i class='fa fa-television'> </i>
+                        </a>
                         <pre id="details"></pre>
 
-                        <h4 class="trending-text big-title text-uppercase mt-0">{{ $ep->ep_name }}</h4>
+                        <h4 class="trending-text big-title text-uppercase mt-0">{{ $title->name }}</h4>
                         <div class="d-flex align-items-center text-white text-detail episode-name mb-0">
                             <span>S{{ $ep->season }}E{{ $ep->episode }}</span>
-                            <span class="trending-year">{{ $title->name }}</span>
+                            <span class="trending-year">{{ $ep->ep_name }}</span>
                         </div>
                         <p class="trending-dec w-100 mb-0">{{ $title->description }}</p>
                         <br />

@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'banner_titles' => env('BANNER_TITLES','1,2,3')
+    'banner_titles' => env('BANNER_TITLES','1,2,3'),
+    'firebase'=>env('databaseURL'),
 ];

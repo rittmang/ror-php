@@ -16,14 +16,20 @@ class WebisodeController extends Controller
 
     }
     public function seriesDetails($id){
-
+        if(DB::table('title')->where('id',$id)->where('type','Series')->exists()){
+            $webisodes=DB::table('webisodes')->where('title_id',$id)->orderBy('season','asc')->orderBy('episode','asc')->select('season','episode','wide_poster','ep_name','asset','duration')->get();
+            $title=DB::table('title')->where('id',$id)->select('id','name','age','type','description','wide_poster','trailer_link')->first();
+            $max_season=DB::table('webisodes')->where('title_id',$id)->max('season');
+            return view('movies/series',['title'=>$title,'webisodes'=>$webisodes,'max_season'=>$max_season]);
+        }
+        return abort('404');
     }
     public function selectWebisode($id,$season,$episode){
         if(DB::table('title')->where('id',$id)->where('type','Series')->exists()){
             if(DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode)->exists()){
                 $ep=DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode)->first();
                 $title=DB::table('title')->where('id',$id)->first();
-                $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(getenv('databaseURL'));
+                $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(config('movie.firebase'));
                 $database=$factory->createDatabase();
                 $count=$database->getReference("{$id}/S{$season}/E{$episode}")->getValue();
                 $data=$count+1;
@@ -36,7 +42,7 @@ class WebisodeController extends Controller
                 if(DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode+1)->exists()){
                     $next_ep=DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode+1)->first();
                 }
-                if(DB::table('webisodes')->where('title_id',$id)->where('season',$season+1)->where('episode',1)->exists()){
+                else if(DB::table('webisodes')->where('title_id',$id)->where('season',$season+1)->where('episode',1)->exists()){
                     $next_ep=DB::table('webisodes')->where('title_id',$id)->where('season',$season+1)->where('episode',1)->first();
                 }
                 
@@ -50,7 +56,7 @@ class WebisodeController extends Controller
             if(DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode)->exists()){
                 $ep=DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode)->first();
                 $title=DB::table('title')->where('id',$id)->first();
-                $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(getenv('databaseURL'));
+                $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(config('movie.firebase'));
                 $database=$factory->createDatabase();
                 $count=$database->getReference("{$id}/S{$season}/E{$episode}")->getValue();
                 $data=$count+1;
