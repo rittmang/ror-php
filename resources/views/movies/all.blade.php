@@ -128,40 +128,64 @@
                         <div class="upcoming-contens">
                             <ul class="list-inline row p-0 mb-0">
                                 @foreach ($titles as $title)
+                                    @if($title->type == 'Movie')
+                                       <li class="slide-item" style="width: 50%">
+                                          <a href="/movies/{{ $title->id }}">
+                                             <div class="block-images position-relative">
+                                                   <div class="img-box">
+                                                      <img src="{{ $title->long_poster }}" class="img-fluid" alt="">
+                                                   </div>
+                                                   @if ($title->asset != '/')
+                                                      <div class="block-description">
+                                                         <h6>{{ $title->name }}</h6>
+                                                         <div class="movie-time d-flex align-items-center my-2">
+                                                               <div class="badge badge-secondary p-1 mr-2">
+                                                                  {{ $title->age }}</div>
+                                                               <span class="text-white">{{ $title->duration }}</span>
+                                                         </div>
+                                                         <div class="hover-buttons">
+                                                               <span class="btn btn-hover"><i class="fa fa-play mr-1"
+                                                                     aria-hidden="true"></i>
+                                                                  Play Now
+                                                               </span>
+                                                         </div>
+                                                      </div>
+                                                   @else
+                                                      <div class="block-description">
+                                                         <h6>{{ $title->name }}</h6>
+                                                         <div class="movie-time d-flex align-items-center my-2">
+                                                               <div class="badge badge-secondary p-1 mr-2">N/A</div>
+                                                         </div>
+                                                      </div>
+                                                   @endif
+                                             </div>
+                                          </a>
+                                       </li>
+                                    @else
                                     <li class="slide-item" style="width: 50%">
-                                        <a href="/movies/{{ $title->id }}">
-                                            <div class="block-images position-relative">
+                                       <a href="/webseries/{{ $title->id }}">
+                                          <div class="block-images position-relative">
                                                 <div class="img-box">
-                                                    <img src="{{ $title->long_poster }}" class="img-fluid" alt="">
+                                                   <img src="{{ $title->long_poster }}" class="img-fluid" alt="">
                                                 </div>
-                                                @if ($title->asset != '/')
-                                                    <div class="block-description">
-                                                        <h6>{{ $title->name }}</h6>
-                                                        <div class="movie-time d-flex align-items-center my-2">
-                                                            <div class="badge badge-secondary p-1 mr-2">
-                                                                {{ $title->age }}</div>
-                                                            <span class="text-white">{{ $title->duration }}</span>
-                                                        </div>
-                                                        <div class="hover-buttons">
-                                                            <span class="btn btn-hover"><i class="fa fa-play mr-1"
-                                                                    aria-hidden="true"></i>
-                                                                Play Now
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                @else
-                                                    <div class="block-description">
-                                                        <h6>{{ $title->name }}</h6>
-                                                        <div class="movie-time d-flex align-items-center my-2">
-                                                            <div class="badge badge-secondary p-1 mr-2">N/A</div>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </a>
+                                                <div class="block-description">
+                                                   <h6>{{ $title->name }}</h6>
+                                                   <div class="movie-time d-flex align-items-center my-2">
+                                                         <div class="badge badge-secondary p-1 mr-2">
+                                                            {{ $title->age }}</div>
+                                                         <span class="text-white">{{ $title->duration }}</span>
+                                                   </div>
+                                                   <div class="hover-buttons">
+                                                         <span class="btn btn-hover"><i class="fa fa-play mr-1"
+                                                               aria-hidden="true"></i>
+                                                            Watch Now
+                                                         </span>
+                                                   </div>
+                                                </div>
+                                          </div>
+                                       </a>
                                     </li>
-
-
+                                    @endif
                                 @endforeach
                                 {{-- <li class="slide-item">
                               <a href="movie-details.html">

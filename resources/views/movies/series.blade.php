@@ -134,8 +134,10 @@
                                 </p>
                                 <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp"
                                     data-delay-in="1.2">
-                                    <a href="/webseries/{{ $title->id }}/1/1" class="btn btn-hover"><i
-                                            class="fa fa-play mr-2" aria-hidden="true"></i>Play S1E1</a>
+                                    @if($webisodes[0]->asset!='/')
+                                        <a href="/webseries/{{ $title->id }}/1/1" class="btn btn-hover"><i
+                                                class="fa fa-play mr-2" aria-hidden="true"></i>Play S1E1</a>
+                                    @endif
                                     <!-- <a href="show-details.html" class="btn btn-link">More details</a> -->
                                 </div>
                             </div>
