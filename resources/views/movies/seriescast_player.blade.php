@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>S{{ $ep->season }}E{{ $ep->episode }} | {{ $title->name }}</title>
+    <title>S{{ $ep->season }}E{{ $ep->episode }} | {{$ep->ep_name}} | {{ $title->name }}</title>
     <link rel="icon" type="image/x-icon" href="../../../../movie/images/imagefiles/favicon.ico" />
     <link rel="icon" type="image/png" href="../../../../movie/images/imagefiles/favicon_16x16.png" />
     <link rel="icon" type="image/png" href="../../../../movie/images/imagefiles/favicon_32x32.png" />
@@ -64,7 +64,7 @@
                     'sources': [{!! json_encode($ep->asset, JSON_HEX_TAG) !!}],
                     'subtitle': {!! json_encode($ep->vtt, JSON_HEX_TAG) !!},
                     'thumb': {!! json_encode($ep->wide_poster, JSON_HEX_TAG) !!},
-                    'title': "S1E1 | " + {!! json_encode($title->name, JSON_HEX_TAG) !!},
+                    'title': "S"+ {!! json_encode($ep->season, JSON_HEX_TAG) !!} + "E"+ {!! json_encode($ep->episode, JSON_HEX_TAG) !!} + " | "+ {!! json_encode($ep->ep_name, JSON_HEX_TAG) !!},
                     'long_poster': {!! json_encode($title->long_poster, JSON_HEX_TAG) !!},
                     'type': {!! json_encode($title->type, JSON_HEX_TAG) !!},
                     'year': {!! json_encode($title->year, JSON_HEX_TAG) !!}
