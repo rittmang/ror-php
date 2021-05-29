@@ -47,7 +47,7 @@ class LoginController extends Controller
             }
             return redirect('movies/all');
         }
-        return redirect('login')->with('message','YOU STUPID BISH');
+        return redirect('login')->with('message','Login Failed. Are you sure the combination is right?');
     }
     public function logout(Request $request)
     {
@@ -97,6 +97,30 @@ class LoginController extends Controller
         else{
             return redirect('register')->with('message','Invalid Key');
         }
+    }
+
+    public function profile(){
+        return redirect('movies/all');
+    }
+
+    public function continueWatching(Request $request){
+        $user_id=Auth::user()->id;
+        $title_id=$request->input('watch_title_id');
+        $ep_id=(null!= $request->input('watch_episode_id')) ? $request->input('watch_episode_id') : 1;
+        // $ep_id=$request->input('watch_episode_id');
+        $watch_time=$request->input('watch_time');//in seconds
+
+        DB::table('continue_watching')->upsert([
+            'user_id'=>$user_id,'title_id'=>$title_id,'webisode_id'=>$ep_id,'watchTime'=>$watch_time
+        ],['user_id','title_id','webisode_id'],['watchTime']);
+        return response()->json(['success'=>'Updated time in db']);
+    }
+    public function delContinueWatching(Request $request){
+        $user_id=$request->input('watch_user_id');
+        $title_id=$request->input('watch_title_id');
+        $ep_id=$request->input('watch_episode_id');
+
+        DB::table('continue_watching')->where('user_id','=',$user_id)->where('title_id','=',$user_id)->where('webisode_id','=',$ep_id)->delete();
     }
 }
 

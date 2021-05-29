@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Kreait\Firebase;
 use Kreait\Firebase\Factory;
@@ -10,6 +11,7 @@ use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class MovieController extends Controller
 {
@@ -34,13 +36,17 @@ class MovieController extends Controller
     public function selectMovie($id){
         if(DB::table('title')->where('id',$id)->exists()){
             $title=DB::table('title')->where('id',$id)->first();
+            //update firebase count
             $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(config('movie.firebase'));
             $database=$factory->createDatabase();
             $count=$database->getReference("{$id}")->getValue();
             
             $data=$count+1;
             $ref=$database->getReference("{$id}")->set($data);
-            return view('movies/player_page',['title'=>$title,'views'=>$count]);
+
+            //retrieve continue-watching time, if exists else 0
+            $titleLastWatched=DB::table('continue_watching')->where('user_id',Auth::user()->id)->where('title_id',$title->id)->select('watchTime')->first();
+            return view('movies/player_page',['title'=>$title,'views'=>$count,'lastWatched'=>$titleLastWatched->watchTime]);
         }
         return abort('404');
     }

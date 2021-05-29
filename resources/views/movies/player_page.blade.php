@@ -128,7 +128,7 @@
     <div class="video-container iq-main-slider">
 
         <video class="video d-block" controls controlsList="nodownload" autoplay poster="{{ $title->wide_poster }}"
-            preload="auto" crossorigin="anonymous">
+            preload="auto">
             <source src="{{ $title->asset }}" type="video/mp4">
             <track label="English" kind="subtitles" src="{{ $title->vtt }}" srclang="en">
         </video>
@@ -223,6 +223,7 @@
 
     <!-- back-to-top End -->
     <!-- jQuery, Popper JS -->
+    
 
     <script src="../movie/js/jquery-3.4.1.min.js"></script>
     <script src="../movie/js/popper.min.js"></script>
@@ -240,6 +241,36 @@
     <script src="../movie/js/slick-animation.min.js"></script>
     <!-- Custom JS-->
     <script src="../movie/js/custom.js"></script>
+    <script type="text/javascript">
+        let watch_title_id={!! json_encode($title->id,JSON_HEX_TAG) !!};
+        var vid=document.getElementsByClassName("video")[0];
+        vid.addEventListener('loadedmetadata',function(){
+            this.currentTime={!! json_encode($lastWatched,JSON_HEX_TAG) !!};
+        },false);
+        function updateWatchTime(){
+            if(!vid.paused){
+                $.ajax({
+                    url:'/profile/continue-watching',
+                    type:'POST',
+                    data:{
+                        "_token":"{{csrf_token()}}",
+                        "watch_title_id":watch_title_id,
+                        "watch_time":Math.floor(vid.currentTime),
+                    },
+                    // success:function(data){
+                    //     alert(data);
+                    // },
+                    // error:function(data){
+                    //     alert(data.responseText);
+                    // }
+                });
+            }
+        }
+
+        $(document).ready(function(){
+            setInterval(updateWatchTime,10000);
+        });
+    </script>
 </body>
 
 </html>

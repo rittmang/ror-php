@@ -51,6 +51,9 @@ Route::get('/webseries/{id}',[WebisodeController::class,'seriesDetails'])->middl
 Route::get('/webseries/{id}/{season}/{episode}',[WebisodeController::class,'selectWebisode'])->middleware(['auth']);
 Route::get('/webseries/castplayer/{id}/{season}/{episode}',[WebisodeController::class,'castWebisode'])->middleware(['auth']);
 
+Route::get('/profile',[LoginController::class,'profile'])->middleware(['auth']);
+Route::post('/profile/continue-watching',[LoginController::class,'continueWatching'])->middleware(['auth']);
+Route::delete('/profile/continue-watching',[LoginController::class,'delContinueWatching'])->middleware(['auth']);
 //---------------------------------
 
 Route::get('login',function(){
