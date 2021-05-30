@@ -767,7 +767,22 @@ CastPlayer.prototype.updateProgressBarByTimer = function() {
  *  End playback. Called when media ends.
  */
 CastPlayer.prototype.endPlayback = function() {
-    this.currentMediaTime = 0;
+    // this.currentMediaTime = 0;
+    let watch_title_id=mediaJSON["categories"][0]["videos"][0]["id"];
+    let csrf_token=mediaJSON["categories"][0]["videos"][0]["token"];
+    
+    $.ajax({
+        url:'/profile/continue-watching',
+        type:'DELETE',
+        data:{
+            "_token":csrf_token,
+            "watch_title_id":watch_title_id,
+        },
+        error:function(data){
+            alert(data.responseText);
+        }
+    });
+   
     this.stopProgressTimer();
     this.playerState = PLAYER_STATE.IDLE;
     this.playerHandler.updateDisplayMessage();
