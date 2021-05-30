@@ -240,7 +240,7 @@
     <!-- Custom JS-->
     <script src="../movie/js/custom.js"></script>
     <script>
-        let video = document.querySelector('video');
+        const video = document.querySelector('video');
         function updateMetadata(){
             navigator.mediaSession.metadata = new MediaMetadata({
                 title:{!! json_encode($title->name,JSON_HEX_TAG) !!},
@@ -258,7 +258,7 @@
                 navigator.mediaSession.setPositionState({
                 duration:video.duration,
                 playbackRate:video.playbackRate,
-                position:video.currentTime
+                position:video.currentTime,
                 });
             }
         }
@@ -273,6 +273,16 @@
         const skipTime = event.seekOffset || defaultSkipTime;
         video.currentTime = Math.min(video.currentTime + skipTime, video.duration);
         updatePositionState();
+        });
+        navigator.mediaSession.setActionHandler('seekto', (details) => {
+        if (details.fastSeek && 'fastSeek' in video) {
+            // Only use fast seek if supported.
+            video.fastSeek(details.seekTime);
+            updatePositionState();
+            return;
+        }
+        video.currentTime = details.seekTime;
+        // TODO: Update playback state.
         });
 
         /* Play & Pause */
