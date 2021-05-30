@@ -223,8 +223,6 @@
 
     <!-- back-to-top End -->
     <!-- jQuery, Popper JS -->
-    
-
     <script src="../movie/js/jquery-3.4.1.min.js"></script>
     <script src="../movie/js/popper.min.js"></script>
     <!-- Bootstrap JS -->
@@ -248,7 +246,7 @@
             this.currentTime={!! json_encode($lastWatched,JSON_HEX_TAG) !!};
         },false);
         function updateWatchTime(){
-            if(!vid.paused){
+            if(!vid.paused && (vid.duration-vid.currentTime)>60){
                 $.ajax({
                     url:'/profile/continue-watching',
                     type:'POST',
@@ -257,19 +255,27 @@
                         "watch_title_id":watch_title_id,
                         "watch_time":Math.floor(vid.currentTime),
                     },
-                    // success:function(data){
-                    //     alert(data);
-                    // },
-                    // error:function(data){
-                    //     alert(data.responseText);
-                    // }
+                    error:function(data){
+                        alert(data.responseText);
+                    }
                 });
             }
+            if((vid.duration-vid.currentTime)<60){
+                $.ajax({
+                    url:'/profile/continue-watching',
+                    type:'DELETE',
+                    data:{
+                        "_token":"{{csrf_token()}}",
+                        "watch_title_id":watch_title_id,
+                    },
+                    error:function(data){
+                        alert(data.responseText);
+                    }
+                });
+                clearInterval(uWT);
+            }
         }
-
-        $(document).ready(function(){
-            setInterval(updateWatchTime,10000);
-        });
+        var uWT=setInterval(updateWatchTime,10000);    
     </script>
 </body>
 

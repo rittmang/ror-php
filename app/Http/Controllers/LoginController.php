@@ -116,11 +116,11 @@ class LoginController extends Controller
         return response()->json(['success'=>'Updated time in db']);
     }
     public function delContinueWatching(Request $request){
-        $user_id=$request->input('watch_user_id');
+        $user_id=Auth::user()->id;
         $title_id=$request->input('watch_title_id');
-        $ep_id=$request->input('watch_episode_id');
-
-        DB::table('continue_watching')->where('user_id','=',$user_id)->where('title_id','=',$user_id)->where('webisode_id','=',$ep_id)->delete();
+        $ep_id=(null!= $request->input('watch_episode_id')) ? $request->input('watch_episode_id') : 1;
+        DB::table('continue_watching')->where('user_id','=',$user_id)->where('title_id','=',$title_id)->where('webisode_id','=',$ep_id)->delete();
+        return response()->json(['success'=>'Deleted title in db']);
     }
 }
 
