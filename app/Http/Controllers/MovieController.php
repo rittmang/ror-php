@@ -60,7 +60,10 @@ class MovieController extends Controller
             
             $data=$count+1;
             $ref=$database->getReference("{$id}")->set($data);
-            return view('movies/cast_player',['title'=>$title,'views'=>$count]);
+
+            $titleLastWatched=DB::table('continue_watching')->where('user_id',Auth::user()->id)->where('title_id',$title->id)->select('watchTime')->first();
+            $lastWatched = isset($titleLastWatched) ? $titleLastWatched->watchTime : 0;
+            return view('movies/cast_player',['title'=>$title,'views'=>$count,'lastWatched'=>$lastWatched]);
         }
         return abort('404');
     }

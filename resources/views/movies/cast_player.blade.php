@@ -54,12 +54,15 @@
     </div>
     <div id="carousel">
     </div>
-
+    <script src="../../movie/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
         var mediaJSON = {
             'categories': [{
                 'name': 'Movies',
                 'videos': [{
+                    'token':{!! json_encode(csrf_token(),JSON_HEX_TAG) !!},
+                    'id':{!! json_encode($title->id,JSON_HEX_TAG) !!},
+                    'lastWatched':{!! json_encode($lastWatched,JSON_HEX_TAG) !!},
                     'description': {!! json_encode($title->description, JSON_HEX_TAG) !!},
                     'sources': [{!! json_encode($title->asset, JSON_HEX_TAG) !!}],
                     'subtitle': {!! json_encode($title->vtt, JSON_HEX_TAG) !!},

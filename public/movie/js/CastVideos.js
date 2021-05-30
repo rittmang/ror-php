@@ -278,6 +278,35 @@ CastPlayer.prototype.switchPlayer = function() {
             return;
         }
     }
+    let watch_title_id=mediaJSON["categories"][0]["videos"][0]["id"];
+    let csrf_token=mediaJSON["categories"][0]["videos"][0]["token"];
+    if((this.currentMediaDuration - this.currentMediaTime)>60){
+        $.ajax({
+            url:'/profile/continue-watching',
+            type:'POST',
+            data:{
+                "_token":csrf_token,
+                "watch_title_id":watch_title_id,
+                "watch_time":Math.floor(this.currentMediaTime),
+            },
+            error:function(data){
+                alert(data.responseText);
+            }
+        });
+    }
+    else{
+        $.ajax({
+            url:'/profile/continue-watching',
+            type:'DELETE',
+            data:{
+                "_token":csrf_token,
+                "watch_title_id":watch_title_id,
+            },
+            error:function(data){
+                alert(data.responseText);
+            }
+        });
+    }
     this.setupLocalPlayer();
 };
 
@@ -359,6 +388,40 @@ CastPlayer.prototype.setupLocalPlayer = function () {
 
     this.showFullscreenButton();
 
+    let watch_title_id=mediaJSON["categories"][0]["videos"][0]["id"];
+    let csrf_token=mediaJSON["categories"][0]["videos"][0]["token"];
+    
+    function updateWatchTime(){
+        if(!localPlayer.paused && (localPlayer.duration-localPlayer.currentTime)>60){
+            $.ajax({
+                url:'/profile/continue-watching',
+                type:'POST',
+                data:{
+                    "_token":csrf_token,
+                    "watch_title_id":watch_title_id,
+                    "watch_time":Math.floor(localPlayer.currentTime),
+                },
+                error:function(data){
+                    alert(data.responseText);
+                }
+            });
+        }
+        if((localPlayer.duration-localPlayer.currentTime)<60){
+            $.ajax({
+                url:'/profile/continue-watching',
+                type:'DELETE',
+                data:{
+                    "_token":csrf_token,
+                    "watch_title_id":watch_title_id,
+                },
+                error:function(data){
+                    alert(data.responseText);
+                }
+            });
+            clearInterval(uWT);
+        }
+    }
+    var uWT=setInterval(updateWatchTime,10000);
     if (this.currentMediaTime > 0) {
         this.playerHandler.play();
     }
@@ -549,7 +612,11 @@ CastPlayer.prototype.setupRemotePlayer = function () {
 
     this.hideFullscreenButton();
 
+    if(this.currentMediaTime < mediaJSON["categories"][0]["videos"][0]["lastWatched"]){
+        this.currentMediaTime=mediaJSON["categories"][0]["videos"][0]["lastWatched"];
+    }
     this.playerHandler.play();
+    
 };
 
 
@@ -558,8 +625,7 @@ CastPlayer.prototype.setupRemotePlayer = function () {
  */
 CastPlayer.prototype.onMediaLoadedLocally = function() {
     var localPlayer = document.getElementById('video_element');
-    localPlayer.currentTime = this.currentMediaTime;
-
+    localPlayer.currentTime = mediaJSON["categories"][0]["videos"][0]["lastWatched"];
     this.playerHandler.loaded();
 };
 
