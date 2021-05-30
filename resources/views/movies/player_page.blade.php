@@ -239,11 +239,62 @@
     <script src="../movie/js/slick-animation.min.js"></script>
     <!-- Custom JS-->
     <script src="../movie/js/custom.js"></script>
+    <script>
+        let video = document.querySelector('video');
+        function updateMetadata(){
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title:{!! json_encode($title->name,JSON_HEX_TAG) !!},
+                artist:"on ROR Movies",
+                artwork:[{
+                src:{!! json_encode($title->long_poster,JSON_HEX_TAG) !!},sizes:'1920X2560',type:'image/jpg'
+                }]
+            });
+            updatePositionState();
+        }
+
+        function updatePositionState(){
+            if('setPositionState' in navigator.mediaSession){
+                console.log("Updating position state");
+                navigator.mediaSession.setPositionState({
+                duration:video.duration,
+                playbackRate:video.playbackRate,
+                position:video.currentTime
+                });
+            }
+        }
+        let defaultSkipTime=10;
+        navigator.mediaSession.setActionHandler('seekbackward', function(event) {
+        const skipTime = event.seekOffset || defaultSkipTime;
+        video.currentTime = Math.max(video.currentTime - skipTime, 0);
+        updatePositionState();
+        });
+
+        navigator.mediaSession.setActionHandler('seekforward', function(event) {
+        const skipTime = event.seekOffset || defaultSkipTime;
+        video.currentTime = Math.min(video.currentTime + skipTime, video.duration);
+        updatePositionState();
+        });
+
+        /* Play & Pause */
+
+        navigator.mediaSession.setActionHandler('play', async function() {
+        await video.play();
+        navigator.mediaSession.playbackState = "playing";
+        // Do something more than just playing video...
+        });
+
+        navigator.mediaSession.setActionHandler('pause', function() {
+        video.pause();
+        navigator.mediaSession.playbackState = "paused";
+        // Do something more than just pausing video...
+        });
+    </script>
     <script type="text/javascript">
         let watch_title_id={!! json_encode($title->id,JSON_HEX_TAG) !!};
         var vid=document.getElementsByClassName("video")[0];
         vid.addEventListener('loadedmetadata',function(){
             this.currentTime={!! json_encode($lastWatched,JSON_HEX_TAG) !!};
+            updateMetadata();
         },false);
         function updateWatchTime(){
             if(!vid.paused && (vid.duration-vid.currentTime)>60){
