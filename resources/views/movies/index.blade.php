@@ -12,6 +12,7 @@
     <!-- Favicon -->
     <!-- <link rel="shortcut icon" href="assets/movie/images/favicon.ico" /> -->
     <!-- Bootstrap CSS -->
+    
     <link rel="stylesheet" href="movie/css/bootstrap.min.css" />
     <!-- Typography CSS -->
     <link rel="stylesheet" href="movie/css/typography.css">
@@ -137,7 +138,7 @@
                                         data-delay-in="1.2">
                                         <a href="/movies/{{ $banner_title->id }}" class="btn btn-hover"><i
                                                 class="fa fa-play mr-2" aria-hidden="true"></i>Play Now</a>
-                                        <!-- <a href="show-details.html" class="btn btn-link">More details</a> -->
+                                        {{-- <a href="show-details.html" class="btn btn-link">More details</a> --}}
                                     </div>
                                 </div>
                             </div>
@@ -174,6 +175,79 @@
     <!-- Slider End -->
     <!-- MainContent -->
     <div class="main-content">
+        <section id="iq-upcoming-movie">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 overflow-hidden">
+                        <div class="iq-main-header d-flex align-items-center justify-content-between">
+                            <h4 class="main-title">
+                                Continue Watching
+                            </h4>
+                        </div>
+                        <div class="upcoming-contens">
+                            <ul class="favorites-slider list-inline row p-0 mb-0">
+                                @foreach($continue_watchlist as $continue_title)
+                                    <li class="slide-item">
+                                        <a>
+                                            <div class="continue-images position-relative" style="width:100%;">
+                                                <div class="remove-continue">
+                                                    <span class="btn btn-link delete_continue"><i class="fa fa-times mr-1"
+                                                            aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="img-box">
+                                                    <img src="{{ $continue_title->wide_poster }}" class="img-fluid" alt="" width="720" style="filter:brightness(70%);">
+                                                </div>
+                                                <div class="block-description" style="opacity:100%;">
+                                                    <h6 style="font-size:1em;">{{ $continue_title->name }}</h6>
+                                                    {{-- <div class="movie-time d-flex align-items-center my-2">
+                                                        <span class="text-white">{{ $continue_title->duration }}</span>
+                                                    </div> --}}
+                                                    <div class="hover-buttons">
+                                                        <a href="/movies/{{$continue_title->title_id}}">
+                                                            <span class="btn btn-hover"><i class="fa fa-play mr-1"
+                                                                    aria-hidden="true"></i>
+                                                            </span>
+                                                        </a>
+                                                        <a href="/movies/castplayer/{{$continue_title->title_id}}">
+                                                            <span class="btn btn-hover"><i class="fa fa-television mr-1"
+                                                                    aria-hidden="true"></i>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                    
+                                                </div>
+                                                @php
+                                                    $dur=trim($continue_title->duration);
+                                                    $hm=explode(" ",$dur);
+                                                    $hours=0;
+                                                    $minutes=0;
+                                                    if(isset($hm[0])){
+                                                        if(substr($hm[0],-1)=='h'){
+                                                            $hours=(int)substr($hm[0],0,-1);
+                                                            $minutes=0;
+                                                        }
+                                                        elseif(substr($hm[0],-1)=='m'){
+                                                            $hours=0;
+                                                            $minutes=(int)substr($hm[0],0,-1);
+                                                        }
+                                                    }
+                                                    if(isset($hm[1])){
+                                                        $minutes=(int)substr($hm[1],0,-1);
+                                                    }
+                                                    $percent=round($continue_title->watchTime / ($hours*3600 + $minutes*60) * 100,2);
+                                                @endphp
+                                                <div class="percentage" style="width:{{$percent}}%;"></div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="iq-upcoming-movie">
             <div class="container-fluid">
@@ -430,45 +504,41 @@
         </section>
 
     </div>
-    <!-- <footer class="mb-0">
+    <footer class="mb-0">
          <div class="container-fluid">
             <div class="block-space">
                <div class="row">
                   <div class="col-lg-3 col-md-4">
                      <ul class="f-link list-unstyled mb-0">
                         <li><a href="#">About Us</a></li>
-                        <li><a href="movie-category.html">Movies</a></li>
-                        <li><a href="show-category.html">Tv Shows</a></li>
-                        <li><a href="#">Coporate Information</a></li>
+                        <li><a href="/movies/all">Movies</a></li>
+                        <li><a href="/movies/all">Tv Shows</a></li>
                      </ul>
                   </div>
                   <div class="col-lg-3 col-md-4">
                      <ul class="f-link list-unstyled mb-0">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Help</a></li>
+                        <li><a href="/movies/tos">Privacy Policy</a></li>
+                        <li><a href="/movies/tos">Terms & Conditions</a></li>
+                        <li><a href="/movies/tos">Help</a></li>
                      </ul>
                   </div>
                   <div class="col-lg-3 col-md-4">
                      <ul class="f-link list-unstyled mb-0">
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Cotact Us</a></li>
-                        <li><a href="#">Legal Notice</a></li>
+                        <li><a href="/movies/tos">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        
                      </ul>
                   </div>
                   <div class="col-lg-3 col-md-12 r-mt-15">
                      <div class="d-flex">
-                        <a href="#" class="s-icon">
-                        <i class="ri-facebook-fill"></i>
+                        <a href="https://twitter.com/rittmang" target="_blank" class="s-icon">
+                        <i class="ri-twitter-fill"></i>
                         </a>
-                        <a href="#" class="s-icon">
-                        <i class="ri-skype-fill"></i>
-                        </a>
-                        <a href="#" class="s-icon">
+                        <a href="https://www.linkedin.com/in/ritomgupta" target ="_blank" class="s-icon">
                         <i class="ri-linkedin-fill"></i>
                         </a>
-                        <a href="#" class="s-icon">
-                        <i class="ri-whatsapp-fill"></i>
+                        <a href="https://t.me/rittmang" target="_blank" class="s-icon">
+                        <i class="ri-telegram-fill"></i>
                         </a>
                      </div>
                   </div>
@@ -477,10 +547,10 @@
          </div>
          <div class="copyright py-2">
             <div class="container-fluid">
-               <p class="mb-0 text-center font-size-14 text-body"></p>
+               <p class="mb-0 text-center font-size-14 text-body">ROR Movies is not a commercial streaming service, but a development exercise intended as an experiment.</p>
             </div>
          </div>
-      </footer> -->
+      </footer>
     <!-- MainContent End-->
     <!-- back-to-top -->
     <div id="back-to-top">
@@ -505,6 +575,20 @@
     <script src="movie/js/slick-animation.min.js"></script>
     <!-- Custom JS-->
     <script src="movie/js/custom.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.delete_continue').on('click', function(e) {
+                $.ajax({
+                    url:'/profile/continue-watching',
+                    type:'DELETE',
+                    data:{
+                        "_token":"{{csrf_token()}}",
+                        "watch_title_id":watch_title_id,
+                    },
+                });
+            });
+        };
+    </script>
 </body>
 
 </html>
