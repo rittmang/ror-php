@@ -591,6 +591,7 @@
                     },
                     success:function(data){
                         list_item.remove();
+                        location.reload(true);
                     },
                     error:function(data){
                         alert(data.responseText);
