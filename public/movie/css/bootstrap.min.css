@@ -4774,6 +4774,14 @@
     padding-left: .6em;
     border-radius: 10rem;
   }
+
+  .badge-outline{
+    color:#fff;
+    background-color: transparent;
+    outline-style: solid;
+    outline-width: 0.1em;
+    
+  }
   
   .badge-primary {
     color: #fff;

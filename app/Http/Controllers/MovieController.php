@@ -18,7 +18,7 @@ class MovieController extends Controller
     public function index(){
         
         $banner_titles = explode(',',config('movie.banner_titles'));        
-        $banner_movielist=DB::table('title')->orderBy('id','desc')->select('id','name','type','wide_poster','age','duration','description','trailer_link')->whereIn('id',$banner_titles)->get();
+        $banner_movielist=DB::table('title')->orderBy('id','desc')->select('id','name','type','wide_poster','age','duration','description','trailer_link','year','genre','lang')->whereIn('id',$banner_titles)->get();
         $continue_watchlist=DB::table('continue_watching')->join('title','continue_watching.title_id','=','title.id')->where('user_id',Auth::user()->id)->orderBy('watchTime','desc')->select('continue_watching.title_id','title.name','title.wide_poster','continue_watching.watchTime','title.duration')->get();
        
         $upcoming_movielist=DB::table('title')->orderBy('id','desc')->where('type','Movie')->select('name','long_poster')->where('asset','/')->get();

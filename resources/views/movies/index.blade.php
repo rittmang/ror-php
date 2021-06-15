@@ -129,8 +129,10 @@
                                     </h2>
                                     <div class="d-flex align-items-center" data-animation-in="fadeInUp"
                                         data-delay-in="1">
-                                        <span class="badge badge-secondary p-2">{{ $banner_title->age }}</span>
-                                        <span class="ml-3">{{ $banner_title->type }}</span>
+                                        <span class="badge badge-outline ml-1">{{ $banner_title->age }}</span>
+                                        <span class="badge badge-outline ml-3">{{ $banner_title->lang }}</span>
+                                        <span class="ml-3">{{ $banner_title->year }}</span>
+                                        <span class="ml-3">{{ $banner_title->genre }}</span>
                                     </div>
                                     <p data-animation-in="fadeInUp" data-delay-in="1.2">{{ $banner_title->description }}
                                     </p>
