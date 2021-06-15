@@ -175,79 +175,81 @@
     <!-- Slider End -->
     <!-- MainContent -->
     <div class="main-content">
-        <section id="iq-upcoming-movie">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12 overflow-hidden">
-                        <div class="iq-main-header d-flex align-items-center justify-content-between">
-                            <h4 class="main-title">
-                                Continue Watching
-                            </h4>
-                        </div>
-                        <div class="upcoming-contens">
-                            <ul class="favorites-slider list-inline row p-0 mb-0">
-                                @foreach($continue_watchlist as $continue_title)
-                                    <li class="slide-item">
-                                        <a>
-                                            <div class="continue-images position-relative" style="width:100%;">
-                                                <div class="remove-continue">
-                                                    <span class="btn btn-link delete_continue"><i class="fa fa-times mr-1"
-                                                            aria-hidden="true"></i>
-                                                    </span>
-                                                </div>
-                                                <div class="img-box">
-                                                    <img src="{{ $continue_title->wide_poster }}" class="img-fluid" alt="" width="720" style="filter:brightness(70%);">
-                                                </div>
-                                                <div class="block-description" style="opacity:100%;">
-                                                    <h6 style="font-size:1em;">{{ $continue_title->name }}</h6>
-                                                    {{-- <div class="movie-time d-flex align-items-center my-2">
-                                                        <span class="text-white">{{ $continue_title->duration }}</span>
-                                                    </div> --}}
-                                                    <div class="hover-buttons">
-                                                        <a href="/movies/{{$continue_title->title_id}}">
-                                                            <span class="btn btn-hover"><i class="fa fa-play mr-1"
-                                                                    aria-hidden="true"></i>
-                                                            </span>
-                                                        </a>
-                                                        <a href="/movies/castplayer/{{$continue_title->title_id}}">
-                                                            <span class="btn btn-hover"><i class="fa fa-television mr-1"
-                                                                    aria-hidden="true"></i>
-                                                            </span>
-                                                        </a>
+        @if(count($continue_watchlist)>0)
+            <section id="iq-upcoming-movie">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12 overflow-hidden">
+                            <div class="iq-main-header d-flex align-items-center justify-content-between">
+                                <h4 class="main-title">
+                                    Continue Watching
+                                </h4>
+                            </div>
+                            <div class="upcoming-contens">
+                                <ul class="favorites-slider list-inline row p-0 mb-0">
+                                    @foreach($continue_watchlist as $continue_title)
+                                        <li class="slide-item">
+                                            <a>
+                                                <div class="continue-images position-relative" style="width:100%;">
+                                                    <div class="remove-continue">
+                                                        <span class="btn btn-link delete_continue" data-title-id="{{$continue_title->title_id}}"><i class="fa fa-times mr-1"
+                                                                aria-hidden="true"></i>
+                                                        </span>
                                                     </div>
-                                                    
+                                                    <div class="img-box">
+                                                        <img src="{{ $continue_title->wide_poster }}" class="img-fluid" alt="" width="720" style="filter:brightness(70%);">
+                                                    </div>
+                                                    <div class="block-description" style="opacity:100%;">
+                                                        <h6 style="font-size:1em;">{{ $continue_title->name }}</h6>
+                                                        {{-- <div class="movie-time d-flex align-items-center my-2">
+                                                            <span class="text-white">{{ $continue_title->duration }}</span>
+                                                        </div> --}}
+                                                        <div class="hover-buttons">
+                                                            <a href="/movies/{{$continue_title->title_id}}">
+                                                                <span class="btn btn-hover"><i class="fa fa-play mr-1"
+                                                                        aria-hidden="true"></i>
+                                                                </span>
+                                                            </a>
+                                                            <a href="/movies/castplayer/{{$continue_title->title_id}}">
+                                                                <span class="btn btn-hover"><i class="fa fa-television mr-1"
+                                                                        aria-hidden="true"></i>
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    @php
+                                                        $dur=trim($continue_title->duration);
+                                                        $hm=explode(" ",$dur);
+                                                        $hours=0;
+                                                        $minutes=0;
+                                                        if(isset($hm[0])){
+                                                            if(substr($hm[0],-1)=='h'){
+                                                                $hours=(int)substr($hm[0],0,-1);
+                                                                $minutes=0;
+                                                            }
+                                                            elseif(substr($hm[0],-1)=='m'){
+                                                                $hours=0;
+                                                                $minutes=(int)substr($hm[0],0,-1);
+                                                            }
+                                                        }
+                                                        if(isset($hm[1])){
+                                                            $minutes=(int)substr($hm[1],0,-1);
+                                                        }
+                                                        $percent=round($continue_title->watchTime / ($hours*3600 + $minutes*60) * 100,2);
+                                                    @endphp
+                                                    <div class="percentage" style="width:{{$percent}}%;"></div>
                                                 </div>
-                                                @php
-                                                    $dur=trim($continue_title->duration);
-                                                    $hm=explode(" ",$dur);
-                                                    $hours=0;
-                                                    $minutes=0;
-                                                    if(isset($hm[0])){
-                                                        if(substr($hm[0],-1)=='h'){
-                                                            $hours=(int)substr($hm[0],0,-1);
-                                                            $minutes=0;
-                                                        }
-                                                        elseif(substr($hm[0],-1)=='m'){
-                                                            $hours=0;
-                                                            $minutes=(int)substr($hm[0],0,-1);
-                                                        }
-                                                    }
-                                                    if(isset($hm[1])){
-                                                        $minutes=(int)substr($hm[1],0,-1);
-                                                    }
-                                                    $percent=round($continue_title->watchTime / ($hours*3600 + $minutes*60) * 100,2);
-                                                @endphp
-                                                <div class="percentage" style="width:{{$percent}}%;"></div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
 
         <section id="iq-upcoming-movie">
             <div class="container-fluid">
@@ -578,16 +580,24 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('.delete_continue').on('click', function(e) {
+                var selected_continue_title=$(this).attr('data-title-id');
+                var list_item=$(this).parent().parent().parent().parent();
                 $.ajax({
                     url:'/profile/continue-watching',
                     type:'DELETE',
                     data:{
                         "_token":"{{csrf_token()}}",
-                        "watch_title_id":watch_title_id,
+                        "watch_title_id":selected_continue_title,
                     },
+                    success:function(data){
+                        list_item.remove();
+                    },
+                    error:function(data){
+                        alert(data.responseText);
+                    }
                 });
             });
-        };
+        });
     </script>
 </body>
 
