@@ -1,0 +1,9 @@
+- name: ls -a via ssh
+  uses: fifsky/ssh-action@master
+  with:
+    command: |
+      cd /tmp
+      ls -a
+    host: ${{ secrets.HOST }}
+    user: rittmang
+    key: ${{ secrets.PRIVATE_KEY}}

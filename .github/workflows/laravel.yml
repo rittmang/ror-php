@@ -15,8 +15,12 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Deployment
-      uses: appleboy/ssh-action@master
+      uses: fifsky/ssh-action@master
       with: 
+        command: |
+          cd /tmp
+          ls -a
+          echo "env_var:$FIRST_NAME"
         host: ${{secrets.SSH_HOST}}
         username: ${{secrets.SSH_USERNAME}}
         key: ${{secrets.SSH_PRIVATE_KEY}}
