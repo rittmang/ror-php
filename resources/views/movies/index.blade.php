@@ -143,8 +143,13 @@
                                     </p>
                                     <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp"
                                         data-delay-in="1.2">
-                                        <a href="/movies/{{ $banner_title->id }}" class="btn btn-hover"><i
+                                        @if($banner_title->type=='Series')
+                                            <a href="/webseries/{{ $banner_title->id }}" class="btn btn-hover"><i
+                                                    class="fa fa-play mr-2" aria-hidden="true"></i>Play Now</a>
+                                        @else
+                                            <a href="/movies/{{ $banner_title->id }}" class="btn btn-hover"><i
                                                 class="fa fa-play mr-2" aria-hidden="true"></i>Play Now</a>
+                                        @endif   
                                         {{-- <a href="show-details.html" class="btn btn-link">More details</a> --}}
                                     </div>
                                 </div>
