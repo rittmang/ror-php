@@ -47,7 +47,7 @@
                               <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
                            </div>
                         </a> -->
-                            <a class="navbar-brand" href="movies"> <img class="img-fluid logo"
+                            <a class="navbar-brand" href="/movies"> <img class="img-fluid logo"
                                     src="../movie/images/logo.png" alt="streamit" /> </a>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="menu-main-menu-container">
@@ -127,10 +127,15 @@
                                 </h2>
                                 <div class="d-flex align-items-center" data-animation-in="fadeInUp"
                                     data-delay-in="1">
-                                    <span class="badge badge-secondary p-2">{{ $title->age }}</span>
-                                    <span class="ml-3">{{ $title->type }}</span>
+                                    <span class="badge badge-outline ml-1">{{ $title->age }}</span>
+                                    <span class="badge badge-outline ml-3">{{ $title->lang }}</span>
+                                    <span class="ml-3">{{ $title->year }}</span>
+                                    <span class="ml-3">{{$max_season}} Seasons</span>
                                 </div>
                                 <p data-animation-in="fadeInUp" data-delay-in="1.2">{{ $title->description }}
+                                    <br/>
+                                    <br/>
+                                    <i>{{$title->genre}}</i>
                                 </p>
                                 <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp"
                                     data-delay-in="1.2">

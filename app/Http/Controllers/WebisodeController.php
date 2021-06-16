@@ -18,7 +18,7 @@ class WebisodeController extends Controller
     public function seriesDetails($id){
         if(DB::table('title')->where('id',$id)->where('type','Series')->exists()){
             $webisodes=DB::table('webisodes')->where('title_id',$id)->orderBy('season','asc')->orderBy('episode','asc')->select('season','episode','wide_poster','ep_name','asset','duration')->get();
-            $title=DB::table('title')->where('id',$id)->select('id','name','age','type','description','wide_poster','trailer_link')->first();
+            $title=DB::table('title')->where('id',$id)->select('id','name','age','year','lang','type','genre','description','wide_poster','trailer_link')->first();
             $max_season=DB::table('webisodes')->where('title_id',$id)->max('season');
             return view('movies/series',['title'=>$title,'webisodes'=>$webisodes,'max_season'=>$max_season]);
         }
