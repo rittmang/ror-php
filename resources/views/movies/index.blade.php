@@ -132,9 +132,14 @@
                                         <span class="badge badge-outline ml-1">{{ $banner_title->age }}</span>
                                         <span class="badge badge-outline ml-3">{{ $banner_title->lang }}</span>
                                         <span class="ml-3">{{ $banner_title->year }}</span>
-                                        <span class="ml-3">{{ $banner_title->genre }}</span>
+                                        @if($banner_title->type=='Series')
+                                            <span class="ml-3">{{ $banner_title->max_season}} Seasons</span>
+                                        @endif
                                     </div>
-                                    <p data-animation-in="fadeInUp" data-delay-in="1.2">{{ $banner_title->description }}
+                                    <p data-animation-in="fadeInUp" data-delay-in="1.2">
+                                        {{ $banner_title->description }}
+                                        <br/><br/>
+                                        <i>{{$banner_title->genre}}</i>
                                     </p>
                                     <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp"
                                         data-delay-in="1.2">
