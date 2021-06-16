@@ -1,9 +1,25 @@
-- name: ls -a via ssh
-  uses: fifsky/ssh-action@master
-  with:
-    command: |
-      cd /tmp
-      ls -a
-    host: ${{ secrets.HOST }}
-    user: rittmang
-    key: ${{ secrets.PRIVATE_KEY}}
+name: Sample
+on:
+  workflow_dispatch:
+    branches: [main]
+  push:
+    branches: [main]
+
+env:
+  FIRST_NAME: Mona
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ls -a via OPEN SSH Private Key
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd /tmp
+            ls -a
+            echo "env_var:$FIRST_NAME"
+          host: ${{ secrets.HOST }}
+          user: root
+          key: ${{ secrets.PRIVATE_KEY}}
+#          pass: ${{ secrets.PASS }}
+          args: "-tt -vvv"
