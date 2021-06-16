@@ -133,7 +133,11 @@
                                         <span class="badge badge-outline ml-3">{{ $banner_title->lang }}</span>
                                         <span class="ml-3">{{ $banner_title->year }}</span>
                                         @if($banner_title->type=='Series')
-                                            <span class="ml-3">{{ $banner_title->max_season}} Seasons</span>
+                                            @if($banner_title->max_season>1)
+                                                <span class="ml-3">{{ $banner_title->max_season}} Seasons</span>
+                                            @elseif($banner_title->max_season==1)
+                                                <span class="ml-3">{{$banner_title->max_season}} Season</span>
+                                            @endif
                                         @endif
                                     </div>
                                     <p data-animation-in="fadeInUp" data-delay-in="1.2">
