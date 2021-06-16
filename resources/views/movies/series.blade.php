@@ -130,7 +130,12 @@
                                     <span class="badge badge-outline ml-1">{{ $title->age }}</span>
                                     <span class="badge badge-outline ml-3">{{ $title->lang }}</span>
                                     <span class="ml-3">{{ $title->year }}</span>
-                                    <span class="ml-3">{{$max_season}} Seasons</span>
+                                    @if($max_season > 1)
+                                        <span class="ml-3">{{$max_season}} Seasons</span>
+                                    @elseif($max_season==1)
+                                        <span class="ml-3">{{$max_season}} Season</span>
+                                    @endif
+                                    
                                 </div>
                                 <p data-animation-in="fadeInUp" data-delay-in="1.2">{{ $title->description }}
                                     <br/>
