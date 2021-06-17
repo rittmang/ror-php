@@ -221,7 +221,7 @@
                                                             <span class="text-white">{{ $continue_title->duration }}</span>
                                                         </div> --}}
                                                         <div class="hover-buttons">
-                                                            <a href="/movies/{{$continue_title->title_id}}">
+                                                            <a href="/movies/play/{{$continue_title->title_id}}">
                                                                 <span class="btn btn-hover"><i class="fa fa-play mr-1"
                                                                         aria-hidden="true"></i>
                                                                 </span>

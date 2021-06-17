@@ -40,8 +40,17 @@ class MovieController extends Controller
         $all_movielist=DB::table('title')->orderBy('id','asc')->where('asset','!=','/')->orWhere('type','Series')->select('id','name','type','long_poster','age','duration','asset')->get();
         return view('movies/all',['titles'=>$all_movielist]);
     }
-    
     public function selectMovie($id){
+        if(DB::table('title')->where('id',$id)->where('type','Movie')->exists()){
+            $title=DB::table('title')->where('id',$id)->select('id','name','age','year','lang','genre','description','wide_poster','trailer_link','asset','duration')->first();
+            $titleLastWatched=DB::table('continue_watching')->where('user_id',Auth::user()->id)->where('title_id',$title->id)->select('watchTime')->first();
+            $lastWatched = isset($titleLastWatched) ? $titleLastWatched->watchTime : 0;
+            return view('movies/movie',['title'=>$title,'lastWatched'=>$lastWatched]);
+        }
+        return abort('404');
+    }
+    
+    public function playMovie($id){
         if(DB::table('title')->where('id',$id)->exists()){
             $title=DB::table('title')->where('id',$id)->first();
             //update firebase count
