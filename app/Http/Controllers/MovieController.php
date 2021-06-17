@@ -41,7 +41,7 @@ class MovieController extends Controller
         return view('movies/all',['titles'=>$all_movielist]);
     }
     
-    public function selectMovie($id){
+    public function playMovie($id){
         if(DB::table('title')->where('id',$id)->exists()){
             $title=DB::table('title')->where('id',$id)->first();
             //update firebase count

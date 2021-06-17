@@ -44,6 +44,7 @@ Route::get('/movies/tos',function(){
 
 Route::get('/movies/test',[MovieController::class,'testMovie']);
 Route::get('/movies/{id}',[MovieController::class,'selectMovie'])->middleware(['auth']);
+Route::get('/movies/play/{id}',[MovieController::class,'playMovie'])->middleware(['auth']);
 Route::get('/movies/castplayer/{id}',[MovieController::class,'castMovie'])->middleware(['auth']);
 
 Route::get('webseries',[WebisodeController::class,'index'])->middleware(['auth']);
