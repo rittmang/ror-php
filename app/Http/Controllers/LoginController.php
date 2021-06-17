@@ -50,7 +50,7 @@ class LoginController extends Controller
                 Notification::send($userSchema,new UserEventNotification($userEvent));
                 Notification::send($userSchema,new AdminEventNotification($userEvent));
             }
-            return redirect('movies/all');
+            return redirect('movies');
         }
         return redirect('login')->with('message','Login Failed. Are you sure the combination is right?');
     }

@@ -1,5 +1,7 @@
-name: Sample
+name: Deploy
 on:
+  push: 
+    branches: [main]
   workflow_dispatch:
     branches: [main]
 
