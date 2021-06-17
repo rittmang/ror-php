@@ -22,16 +22,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $title->name }}</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../movie/images/favicon.ico" />
+    <link rel="shortcut icon" href="../../movie/images/favicon.ico" />
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../movie/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../movie/css/bootstrap.min.css" />
     <!-- Typography CSS -->
-    <link rel="stylesheet" href="../movie/css/typography.css">
+    <link rel="stylesheet" href="../../movie/css/typography.css">
     <!-- Style -->
-    <link rel="stylesheet" href="../movie/css/style.css" />
+    <link rel="stylesheet" href="../../movie/css/style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
     <!-- Responsive -->
-    <link rel="stylesheet" href="../movie/css/responsive.css" />
+    <link rel="stylesheet" href="../../movie/css/responsive.css" />
     <script src="https://kit.fontawesome.com/c893428da3.js" crossorigin="anonymous"></script>
     <link rel="apple-touch-icon" sizes="40X40" href="/favicon-movies.png">
     <link rel="icon" type="image/png" sizes="40X40" href="/favicon-movies.png">
@@ -60,7 +60,7 @@
                         </div>
                      </a> -->
                             <a class="navbar-brand" href="{{ url('movies') }}"> <img class="img-fluid logo"
-                                    src="../movie/images/logo.png" alt="streamit" /> </a>
+                                    src="../../movie/images/logo.png" alt="streamit" /> </a>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="menu-main-menu-container">
 
@@ -223,22 +223,22 @@
 
     <!-- back-to-top End -->
     <!-- jQuery, Popper JS -->
-    <script src="../movie/js/jquery-3.4.1.min.js"></script>
-    <script src="../movie/js/popper.min.js"></script>
+    <script src="../../movie/js/jquery-3.4.1.min.js"></script>
+    <script src="../../movie/js/popper.min.js"></script>
     <!-- Bootstrap JS -->
-    <script src="../movie/js/bootstrap.min.js"></script>
+    <script src="../../movie/js/bootstrap.min.js"></script>
     <!-- Slick JS -->
-    <script src="../movie/js/slick.min.js"></script>
+    <script src="../../movie/js/slick.min.js"></script>
     <!-- owl carousel Js -->
-    <script src="../movie/js/owl.carousel.min.js"></script>
+    <script src="../../movie/js/owl.carousel.min.js"></script>
     <!-- select2 Js -->
-    <script src="../movie/js/select2.min.js"></script>
+    <script src="../../movie/js/select2.min.js"></script>
     <!-- Magnific Popup-->
-    <script src="../movie/js/jquery.magnific-popup.min.js"></script>
+    <script src="../../movie/js/jquery.magnific-popup.min.js"></script>
     <!-- Slick Animation-->
-    <script src="../movie/js/slick-animation.min.js"></script>
+    <script src="../../movie/js/slick-animation.min.js"></script>
     <!-- Custom JS-->
-    <script src="../movie/js/custom.js"></script>
+    <script src="../../movie/js/custom.js"></script>
     <script>
         const video = document.querySelector('video');
         function updateMetadata(){
