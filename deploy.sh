@@ -6,7 +6,6 @@ function run_cmd(){
 
 eval $(ssh-agent)
 ssh-add - <<< $SSH_KEY
-run_cmd "cd apps/ror-php"
-run_cmd "git checkout -f"
-run_cmd "git pull"
+run_cmd "git -C apps/ror-php checkout -f"
+run_cmd "git -C apps/ror-php pull"
 eval $(ssh-agent -k)
