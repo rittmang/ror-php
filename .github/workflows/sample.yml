@@ -3,8 +3,6 @@ on:
   workflow_dispatch:
     branches: [main]
 
-env:
-  FIRST_NAME: Mona
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,6 +11,5 @@ jobs:
         SSH_KEY: ${{secrets.SSH_KEY}}
         SERVER_IP: ${{secrets.SERVER_IP}}
     steps:
-      - name: ls -a via OPEN SSH Private Key
-        uses: actions/checkout@master
-        run: bash deploy.sh
+      - uses: actions/checkout@master
+      - run: bash deploy.sh
