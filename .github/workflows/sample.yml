@@ -2,24 +2,17 @@ name: Sample
 on:
   workflow_dispatch:
     branches: [main]
-  push:
-    branches: [main]
 
 env:
   FIRST_NAME: Mona
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    env:
+        SSH_KEY: ${{secrets.SSH_KEY}}
+        SERVER_IP: ${{secrets.SERVER_IP}}
     steps:
       - name: ls -a via OPEN SSH Private Key
-        uses: fifsky/ssh-action@master
-        with:
-          command: |
-            cd /tmp
-            ls -a
-            echo "env_var:$FIRST_NAME"
-          host: ${{ secrets.HOST }}
-          user: rittmang
-          key: ${{ secrets.PRIVATE_KEY}}
-#          pass: ${{ secrets.PASS }}
-          args: "-tt -vvv"
+        uses: actions/checkout@master
+        run: bash deploy.sh
