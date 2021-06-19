@@ -133,7 +133,7 @@
                                           <a href="/movies/{{ $title->id }}">
                                              <div class="block-images position-relative">
                                                    <div class="img-box">
-                                                      <img src="{{ $title->long_poster }}" class="img-fluid" alt="">
+                                                      <img src="{{ $title->long_poster }}" class="img-fluid" alt="{{$title->name}} is now playing on R O R Movies. Watch it today!" loading=lazy>
                                                    </div>
                                                    @if ($title->asset != '/')
                                                       <div class="block-description">
