@@ -126,12 +126,21 @@
     <!-- Header End -->
     <!-- Banner Start -->
     <div class="video-container iq-main-slider">
+        @production
+            <video class="video d-block" controls controlsList="nodownload" autoplay poster="{{ $title->wide_poster }}"
+                preload="auto" crossorigin="anonymous">
+                <source src="{{ $title->asset }}" type="video/mp4">
+                <track label="English" kind="subtitles" src="{{ $title->vtt }}" srclang="en">
+            </video>
+        @endproduction
 
-        <video class="video d-block" controls controlsList="nodownload" autoplay poster="{{ $title->wide_poster }}"
-            preload="auto" crossorigin="anonymous">
-            <source src="{{ $title->asset }}" type="video/mp4">
-            <track label="English" kind="subtitles" src="{{ $title->vtt }}" srclang="en">
-        </video>
+        @env('local')
+            <video class="video d-block" controls controlsList="nodownload" autoplay poster="{{ $title->wide_poster }}"
+                preload="auto">
+                <source src="{{ $title->asset }}" type="video/mp4">
+                <track label="English" kind="subtitles" src="{{ $title->vtt }}" srclang="en">
+            </video>
+        @endenv
 
     </div>
 
@@ -307,7 +316,7 @@
             updateMetadata();
         },false);
         function updateWatchTime(){
-            if(!vid.paused && (vid.duration-vid.currentTime)>60){
+            if(!vid.paused && !vid.waiting && (vid.duration-vid.currentTime)>60){
                 $.ajax({
                     url:'/profile/continue-watching',
                     type:'POST',

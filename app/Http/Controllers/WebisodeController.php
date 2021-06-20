@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Kreait\Firebase;
@@ -45,8 +46,10 @@ class WebisodeController extends Controller
                 else if(DB::table('webisodes')->where('title_id',$id)->where('season',$season+1)->where('episode',1)->exists()){
                     $next_ep=DB::table('webisodes')->where('title_id',$id)->where('season',$season+1)->where('episode',1)->first();
                 }
+                $epLastWatched=DB::table('continue_watching')->where('user_id',Auth::user()->id)->where('title_id',$title->id)->where('webisode_id',$ep->id)->select('watchTime')->first();
+                $lastWatched = isset($epLastWatched) ? $epLastWatched->watchTime : 0;
                 
-                return view('movies/seriesplayer_page',['ep'=>$ep,'next_ep'=>$next_ep,'title'=>$title,'views'=>$count]);
+                return view('movies/seriesplayer_page',['ep'=>$ep,'next_ep'=>$next_ep,'title'=>$title,'views'=>$count,'lastWatched'=>$lastWatched]);
             }
         }
         return abort('404');

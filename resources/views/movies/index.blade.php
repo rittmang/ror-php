@@ -207,11 +207,19 @@
                                         <li class="slide-item">
                                             <a>
                                                 <div class="continue-images position-relative" style="width:100%;">
-                                                    <div class="remove-continue">
-                                                        <span class="btn btn-link delete_continue" data-title-id="{{$continue_title->title_id}}"><i class="fa fa-times mr-1"
-                                                                aria-hidden="true"></i>
-                                                        </span>
-                                                    </div>
+                                                    @if($continue_title->type=='Movie')
+                                                        <div class="remove-continue">
+                                                            <span class="btn btn-link delete_continue" data-title-id="{{$continue_title->title_id}}"><i class="fa fa-times mr-1"
+                                                                    aria-hidden="true"></i>
+                                                            </span>
+                                                        </div>
+                                                    @elseif($continue_title->type=='Series')
+                                                        <div class="remove-continue">
+                                                            <span class="btn btn-link delete_continue" data-title-id="{{$continue_title->title_id}}" data-webisode-id="{{$continue_title->webisode_id}}"><i class="fa fa-times mr-1"
+                                                                    aria-hidden="true"></i>
+                                                            </span>
+                                                        </div>
+                                                    @endif
                                                     <div class="img-box">
                                                         <img src="{{ $continue_title->wide_poster }}" class="img-fluid" alt="" width="720" style="filter:brightness(70%);">
                                                     </div>
@@ -221,12 +229,12 @@
                                                             <span class="text-white">{{ $continue_title->duration }}</span>
                                                         </div> --}}
                                                         <div class="hover-buttons">
-                                                            <a href="/movies/play/{{$continue_title->title_id}}">
+                                                            <a href="{{$continue_title->link}}">
                                                                 <span class="btn btn-hover"><i class="fa fa-play mr-1"
                                                                         aria-hidden="true"></i>
                                                                 </span>
                                                             </a>
-                                                            <a href="/movies/castplayer/{{$continue_title->title_id}}">
+                                                            <a href="{{$continue_title->cast_link}}">
                                                                 <span class="btn btn-hover"><i class="fa fa-television mr-1"
                                                                         aria-hidden="true"></i>
                                                                 </span>
@@ -282,7 +290,7 @@
 
                                         <div class="block-images position-relative">
                                             <div class="img-box">
-                                                <img src="{{ $upcoming_title->long_poster }}" class="img-fluid" alt="">
+                                                <img src="{{ $upcoming_title->long_poster }}" class="img-fluid" alt="" loading=lazy>
                                             </div>
                                             <div class="block-description">
                                                 <h6>{{ $upcoming_title->name }}</h6>
@@ -316,7 +324,7 @@
                                         <a href="/movies/{{ $dis_title->id }}">
                                             <div class="block-images position-relative">
                                                 <div class="img-box">
-                                                    <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="">
+                                                    <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="" loading=lazy>
                                                 </div>
                                                 <div class="block-description">
                                                     <h6>{{ $dis_title->name }}</h6>
@@ -360,7 +368,7 @@
                                         <a href="/movies/{{ $dis_title->id }}">
                                             <div class="block-images position-relative">
                                                 <div class="img-box">
-                                                    <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="">
+                                                    <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="" loading=lazy>
                                                 </div>
                                                 <div class="block-description">
                                                     <h6>{{ $dis_title->name }}</h6>
@@ -404,7 +412,7 @@
                                         <a href="/movies/{{ $dis_title->id }}">
                                             <div class="block-images position-relative">
                                                 <div class="img-box">
-                                                    <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="">
+                                                    <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="" loading=lazy>
                                                 </div>
                                                 <div class="block-description">
                                                     <h6>{{ $dis_title->name }}</h6>
@@ -448,7 +456,7 @@
                                         <a href="/movies/{{ $dis_title->id }}">
                                             <div class="block-images position-relative">
                                                 <div class="img-box">
-                                                    <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="">
+                                                    <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="" loading=lazy>
                                                 </div>
                                                 <div class="block-description">
                                                     <h6>{{ $dis_title->name }}</h6>
@@ -492,7 +500,7 @@
                                         <a href="/movies/{{ $dis_title->id }}">
                                             <div class="block-images position-relative">
                                                 <div class="img-box">
-                                                    <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="">
+                                                    <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="" loading=lazy>
                                                 </div>
                                                 <div class="block-description">
                                                     <h6>{{ $dis_title->name }}</h6>
@@ -597,22 +605,46 @@
         $(document).ready(function() {
             $('.delete_continue').on('click', function(e) {
                 var selected_continue_title=$(this).attr('data-title-id');
+                var selected_continue_webisode=null;
                 var list_item=$(this).parent().parent().parent().parent();
-                $.ajax({
-                    url:'/profile/continue-watching',
-                    type:'DELETE',
-                    data:{
-                        "_token":"{{csrf_token()}}",
-                        "watch_title_id":selected_continue_title,
-                    },
-                    success:function(data){
-                        list_item.remove();
-                        location.reload(true);
-                    },
-                    error:function(data){
-                        alert(data.responseText);
-                    }
-                });
+                if($(this).attr('data-webisode-id')){
+                    selected_continue_webisode=$(this).attr('data-webisode-id');
+                    $.ajax({
+                        url:'/profile/continue-watching',
+                        type:'DELETE',
+                        data:{
+                            "_token":"{{csrf_token()}}",
+                            "watch_title_id":selected_continue_title,
+                            "watch_episode_id":selected_continue_webisode
+                        },
+                        success:function(data){
+                            list_item.remove();
+                            location.reload(true);
+                        },
+                        error:function(data){
+                            alert(data.responseText);
+                        }
+                    });
+                }
+                else{
+                    $.ajax({
+                        url:'/profile/continue-watching',
+                        type:'DELETE',
+                        data:{
+                            "_token":"{{csrf_token()}}",
+                            "watch_title_id":selected_continue_title,
+                        },
+                        success:function(data){
+                            list_item.remove();
+                            location.reload(true);
+                        },
+                        error:function(data){
+                            alert(data.responseText);
+                        }
+                    });
+                }
+               
+                
             });
         });
     </script>

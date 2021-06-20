@@ -26,8 +26,21 @@ class MovieController extends Controller
                 $btitle->max_season=$m_season;
             }
         }
-        $continue_watchlist=DB::table('continue_watching')->join('title','continue_watching.title_id','=','title.id')->where('user_id',Auth::user()->id)->orderBy('watchTime','desc')->select('continue_watching.title_id','title.name','title.wide_poster','continue_watching.watchTime','title.duration')->get();
-       
+        $continue_watchlist=DB::table('continue_watching')->join('title','continue_watching.title_id','=','title.id')->where('user_id',Auth::user()->id)->orderBy('watchTime','desc')->select('continue_watching.title_id','continue_watching.webisode_id','title.name','title.wide_poster','continue_watching.watchTime','title.duration','title.type')->get();
+        foreach($continue_watchlist as $cw_item){
+            if($cw_item->type=='Series'){
+                $webisode_deets=DB::table('webisodes')->where('id',$cw_item->webisode_id)->get()[0];
+                $cw_item->name="S".$webisode_deets->season."E".$webisode_deets->episode." | ".$cw_item->name;
+                $cw_item->wide_poster=$webisode_deets->wide_poster;
+                $cw_item->duration=$webisode_deets->duration;
+                $cw_item->link="/webseries/".$webisode_deets->title_id."/".$webisode_deets->season."/".$webisode_deets->episode;
+                $cw_item->cast_link="/webseries/castplayer/".$webisode_deets->title_id."/".$webisode_deets->season."/".$webisode_deets->episode;
+            }
+            elseif($cw_item->type=='Movie'){
+                $cw_item->link="/movies/play/".$cw_item->title_id;
+                $cw_item->cast_link="/movies/castplayer/".$cw_item->title_id;
+            }
+        }
         $upcoming_movielist=DB::table('title')->orderBy('id','desc')->where('type','Movie')->select('name','long_poster')->where('asset','/')->get();
         $disney_movielist=DB::table('title')->orderBy('id','desc')->where('studio','Disney')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();
         $pixar_movielist=DB::table('title')->orderBy('id','desc')->where('studio','Pixar')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();

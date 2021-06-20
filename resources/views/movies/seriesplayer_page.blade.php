@@ -126,12 +126,21 @@
     <!-- Header End -->
     <!-- Banner Start -->
     <div class="video-container iq-main-slider">
+        @production
+            <video class="video d-block" controls controlsList="nodownload" autoplay poster="{{ $ep->wide_poster }}"
+                preload="auto" crossorigin="anonymous">
+                <source src="{{ $ep->asset }}" type="video/mp4">
+                <track label="English" kind="subtitles" src="{{ $ep->vtt }}" srclang="en">
+            </video>
+        @endproduction
 
-        <video class="video d-block" controls controlsList="nodownload" autoplay poster="{{ $ep->wide_poster }}"
-            preload="auto" crossorigin="anonymous">
-            <source src="{{ $ep->asset }}" type="video/mp4">
-            <track label="English" kind="subtitles" src="{{ $ep->vtt }}" srclang="en">
-        </video>
+        @env('local')
+            <video class="video d-block" controls controlsList="nodownload" autoplay poster="{{ $ep->wide_poster }}"
+                preload="auto">
+                <source src="{{ $ep->asset }}" type="video/mp4">
+                <track label="English" kind="subtitles" src="{{ $ep->vtt }}" srclang="en">
+            </video>
+        @endenv
 
     </div>
 
@@ -251,6 +260,108 @@
     <script src="../../../../movie/js/slick-animation.min.js"></script>
     <!-- Custom JS-->
     <script src="../../../../movie/js/custom.js"></script>
+    <script>
+        const video = document.querySelector('video');
+        function updateMetadata(){
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title:"S"+{!! json_encode($ep->season,JSON_HEX_TAG) !!}+"E"+{!! json_encode($ep->episode,JSON_HEX_TAG) !!}+" | "+{!! json_encode($ep->ep_name,JSON_HEX_TAG) !!},
+                artist:{!! json_encode($title->name,JSON_HEX_TAG) !!}+" on ROR Movies",
+                artwork:[{
+                src:{!! json_encode($ep->wide_poster,JSON_HEX_TAG) !!},sizes:'1280X720',type:'image/jpg'
+                }]
+            });
+            updatePositionState();
+        }
+
+        function updatePositionState(){
+            if('setPositionState' in navigator.mediaSession){
+                console.log("Updating position state");
+                navigator.mediaSession.setPositionState({
+                duration:video.duration,
+                playbackRate:video.playbackRate,
+                position:video.currentTime,
+                });
+            }
+        }
+        let defaultSkipTime=10;
+        navigator.mediaSession.setActionHandler('seekbackward', function(event) {
+        const skipTime = event.seekOffset || defaultSkipTime;
+        video.currentTime = Math.max(video.currentTime - skipTime, 0);
+        updatePositionState();
+        });
+
+        navigator.mediaSession.setActionHandler('seekforward', function(event) {
+        const skipTime = event.seekOffset || defaultSkipTime;
+        video.currentTime = Math.min(video.currentTime + skipTime, video.duration);
+        updatePositionState();
+        });
+        navigator.mediaSession.setActionHandler('seekto', (details) => {
+        if (details.fastSeek && 'fastSeek' in video) {
+            // Only use fast seek if supported.
+            video.fastSeek(details.seekTime);
+            updatePositionState();
+            return;
+        }
+        video.currentTime = details.seekTime;
+        // TODO: Update playback state.
+        });
+
+        /* Play & Pause */
+
+        navigator.mediaSession.setActionHandler('play', async function() {
+        await video.play();
+        navigator.mediaSession.playbackState = "playing";
+        // Do something more than just playing video...
+        });
+
+        navigator.mediaSession.setActionHandler('pause', function() {
+        video.pause();
+        navigator.mediaSession.playbackState = "paused";
+        // Do something more than just pausing video...
+        });
+    </script>
+     <script type="text/javascript">
+        let watch_title_id={!! json_encode($title->id,JSON_HEX_TAG) !!};
+        let watch_ep_id={!! json_encode($ep->id,JSON_HEX_TAG) !!};
+        var vid=document.getElementsByClassName("video")[0];
+        vid.addEventListener('loadedmetadata',function(){
+            this.currentTime={!! json_encode($lastWatched,JSON_HEX_TAG) !!};
+            updateMetadata();
+        },false);
+        function updateWatchTime(){
+            if(!vid.paused && !vid.waiting && (vid.duration-vid.currentTime)>60){
+                $.ajax({
+                    url:'/profile/continue-watching',
+                    type:'POST',
+                    data:{
+                        "_token":"{{csrf_token()}}",
+                        "watch_title_id":watch_title_id,
+                        "watch_episode_id":watch_ep_id,
+                        "watch_time":Math.floor(vid.currentTime),
+                    },
+                    error:function(data){
+                        alert(data.responseText);
+                    }
+                });
+            }
+            if((vid.duration-vid.currentTime)<60){
+                $.ajax({
+                    url:'/profile/continue-watching',
+                    type:'DELETE',
+                    data:{
+                        "_token":"{{csrf_token()}}",
+                        "watch_title_id":watch_title_id,
+                        "watch_episode_id":watch_ep_id
+                    },
+                    error:function(data){
+                        alert(data.responseText);
+                    }
+                });
+                clearInterval(uWT);
+            }
+        }
+        var uWT=setInterval(updateWatchTime,10000);    
+    </script>
 </body>
 
 </html>
