@@ -21,10 +21,10 @@
 </head>
 
 <body>
-    <object data="pdf/RitomGupta_AprResume.pdf" type="application/pdf" width="100%" height="100%" style="border:none;">
-        <iframe src="pdf/RitomGupta_AprResume.pdf" width="100%" height="100%" style="border: none;">
+    <object data="pdf/RitomGuptaResume.pdf" type="application/pdf" width="100%" height="100%" style="border:none;">
+        <iframe src="pdf/RitomGuptaResume.pdf" width="100%" height="100%" style="border: none;">
             <p>Your browser does not support PDFs.
-                <a href="pdf/RitomGupta_AprResume.pdf">Download the PDF</a>.
+                <a href="pdf/RitomGuptaResume.pdf">Download the PDF</a>.
             </p>
         </iframe>
     </object>
