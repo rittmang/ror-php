@@ -48,7 +48,7 @@
                               <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
                            </div>
                         </a> -->
-                            <a class="navbar-brand" href="movies"> <img class="img-fluid logo"
+                            <a class="navbar-brand" href="/"> <img class="img-fluid logo"
                                     src="movie/images/logo.png" alt="streamit" /> </a>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="menu-main-menu-container">
