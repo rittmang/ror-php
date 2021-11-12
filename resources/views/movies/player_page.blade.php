@@ -152,7 +152,7 @@
                 <div class="col-lg-12">
                     <div class="trending-info season-info g-border">
                         <p id="view_count_text"><i class='fa fa-eye'> </i> {{ $views }}</p>
-                        <a class="btn btn-danger" href="/movies/castplayer/{{$title->id}}" role="button">
+                        <a class="btn btn-danger" href="/castplayer/{{$title->id}}" role="button">
                             <i class='fa fa-television'> </i>
                         </a>
                         <pre id="details"></pre>

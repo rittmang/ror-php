@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta property="og:title" content="RightOnRittman Movie Library">
-    <meta property="og:url" content="https://rightonrittman.in/movies.html">
+    <meta property="og:url" content="https://movies.rightonrittman.in/">
     <title>{{$title->name}}</title>
     <!-- Favicon -->
     <!-- <link rel="shortcut icon" href="assets/movie/images/favicon.ico" /> -->
@@ -47,7 +47,7 @@
                               <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
                            </div>
                         </a> -->
-                            <a class="navbar-brand" href="/movies"> <img class="img-fluid logo"
+                            <a class="navbar-brand" href="/"> <img class="img-fluid logo"
                                     src="../movie/images/logo.png" alt="streamit" /> </a>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="menu-main-menu-container">

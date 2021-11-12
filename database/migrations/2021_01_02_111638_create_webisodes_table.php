@@ -27,6 +27,7 @@ class CreateWebisodesTable extends Migration
             $table->text('vtt');
             $table->string('duration');
             $table->bigInteger('views');
+            $table->unique('season','episode','title_id');
         });
     }
 

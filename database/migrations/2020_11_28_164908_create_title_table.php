@@ -19,11 +19,17 @@ class CreateTitleTable extends Migration
             $table->integer('year');
             $table->string('type');
             $table->string('genre');
-            $table->text('long_poster');
-            $table->text('wide_poster');
-            $table->text('trailer_link');
+            $table->text('long_poster')->nullable();
+            $table->text('wide_poster')->nullable();
+            $table->text('trailer_link')->nullable();
             $table->text('asset');
-            $table->text('vtt');
+            $table->text('vtt')->nullable();
+            $table->text('age')->nullable();
+            $table->text('duration')->nullable();
+            $table->text('description')->nullable();
+            $table->text('studio')->nullable();
+            $table->bigInteger('views')->nullable();
+            $table->text('lang')->nullable();
 
         });
     }

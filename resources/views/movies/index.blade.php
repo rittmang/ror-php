@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta property="og:title" content="RightOnRittman Movie Library">
-    <meta property="og:url" content="https://rightonrittman.in/movies.html">
+    <meta property="og:url" content="https://movies.rightonrittman.in/">
     <title>Movie Library</title>
     <!-- Favicon -->
     <!-- <link rel="shortcut icon" href="assets/movie/images/favicon.ico" /> -->
@@ -151,7 +151,7 @@
                                             <a href="/webseries/{{ $banner_title->id }}" class="btn btn-hover"><i
                                                     class="fa fa-play mr-2" aria-hidden="true"></i>Play Now</a>
                                         @else
-                                            <a href="/movies/{{ $banner_title->id }}" class="btn btn-hover"><i
+                                            <a href="/{{ $banner_title->id }}" class="btn btn-hover"><i
                                                 class="fa fa-play mr-2" aria-hidden="true"></i>Play Now</a>
                                         @endif   
                                         {{-- <a href="show-details.html" class="btn btn-link">More details</a> --}}
@@ -281,7 +281,7 @@
                     <div class="col-sm-12 overflow-hidden">
                         <div class="iq-main-header d-flex align-items-center justify-content-between">
                             <h4 class="main-title">Upcoming Movies</h4>
-                            <a href="/movies/all" class="text-primary">View all</a>
+                            <a href="/all" class="text-primary">View all</a>
                         </div>
                         <div class="upcoming-contens">
                             <ul class="favorites-slider list-inline row p-0 mb-0">
@@ -321,7 +321,7 @@
                             <ul class="favorites-slider list-inline row p-0 mb-0">
                                 @foreach ($disney_titles as $dis_title)
                                     <li class="slide-item">
-                                        <a href="/movies/{{ $dis_title->id }}">
+                                        <a href="/{{ $dis_title->id }}">
                                             <div class="block-images position-relative">
                                                 <div class="img-box">
                                                     <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="" loading=lazy>
@@ -365,7 +365,7 @@
                             <ul class="favorites-slider list-inline row p-0 mb-0">
                                 @foreach ($pixar_titles as $dis_title)
                                     <li class="slide-item">
-                                        <a href="/movies/{{ $dis_title->id }}">
+                                        <a href="/{{ $dis_title->id }}">
                                             <div class="block-images position-relative">
                                                 <div class="img-box">
                                                     <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="" loading=lazy>
@@ -409,7 +409,7 @@
                             <ul class="favorites-slider list-inline row p-0 mb-0">
                                 @foreach ($tcs_titles as $dis_title)
                                     <li class="slide-item">
-                                        <a href="/movies/{{ $dis_title->id }}">
+                                        <a href="/{{ $dis_title->id }}">
                                             <div class="block-images position-relative">
                                                 <div class="img-box">
                                                     <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="" loading=lazy>
@@ -453,7 +453,7 @@
                             <ul class="favorites-slider list-inline row p-0 mb-0">
                                 @foreach ($marvel_titles as $dis_title)
                                     <li class="slide-item">
-                                        <a href="/movies/{{ $dis_title->id }}">
+                                        <a href="/{{ $dis_title->id }}">
                                             <div class="block-images position-relative">
                                                 <div class="img-box">
                                                     <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="" loading=lazy>
@@ -497,7 +497,7 @@
                             <ul class="favorites-slider list-inline row p-0 mb-0">
                                 @foreach ($svf_titles as $dis_title)
                                     <li class="slide-item">
-                                        <a href="/movies/{{ $dis_title->id }}">
+                                        <a href="/{{ $dis_title->id }}">
                                             <div class="block-images position-relative">
                                                 <div class="img-box">
                                                     <img src="{{ $dis_title->long_poster }}" class="img-fluid" alt="" loading=lazy>
@@ -537,20 +537,20 @@
                   <div class="col-lg-3 col-md-4">
                      <ul class="f-link list-unstyled mb-0">
                         <li><a href="#">About Us</a></li>
-                        <li><a href="/movies/all">Movies</a></li>
-                        <li><a href="/movies/all">Tv Shows</a></li>
+                        <li><a href="/all">Movies</a></li>
+                        <li><a href="/all">Tv Shows</a></li>
                      </ul>
                   </div>
                   <div class="col-lg-3 col-md-4">
                      <ul class="f-link list-unstyled mb-0">
-                        <li><a href="/movies/tos">Privacy Policy</a></li>
-                        <li><a href="/movies/tos">Terms & Conditions</a></li>
-                        <li><a href="/movies/tos">Help</a></li>
+                        <li><a href="/tos">Privacy Policy</a></li>
+                        <li><a href="/tos">Terms & Conditions</a></li>
+                        <li><a href="/mtos">Help</a></li>
                      </ul>
                   </div>
                   <div class="col-lg-3 col-md-4">
                      <ul class="f-link list-unstyled mb-0">
-                        <li><a href="/movies/tos">FAQ</a></li>
+                        <li><a href="/tos">FAQ</a></li>
                         <li><a href="#">Contact Us</a></li>
                         
                      </ul>

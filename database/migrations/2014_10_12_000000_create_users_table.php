@@ -21,6 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->boolean('is_admin');
+            $table->boolean('service_notif');
+            $table->boolean('general_notif');
+            $table->string('telegram_user_id')->nullable();
         });
     }
 

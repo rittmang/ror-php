@@ -19,9 +19,6 @@ use App\Http\Controllers\Admin\dashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
 Route::get('store',function(){
     return view('store');
 });
@@ -34,23 +31,23 @@ Route::get('yenta',function(){
 Route::get('resume',function(){
 	return view('resume');
 });
-Route::get('movies',[MovieController::class,'index'])->middleware(['auth']);
-Route::get('/movies/all',[MovieController::class,'allMovies'])->middleware(['auth']);
-Route::get('/movies/tos',function(){
+Route::get('/',[MovieController::class,'index'])->middleware(['auth']);
+Route::get('/all',[MovieController::class,'allMovies'])->middleware(['auth']);
+Route::get('/tos',function(){
     return view('movies/tos');
 });
 // Route::get('/movies/the-social-dilemma',[FirebaseController::class,'index']);
 // Route::post('/movies/the-social-dilemma',[FirebaseController::class,'change']);
 
-Route::get('/movies/test',[MovieController::class,'testMovie']);
-Route::get('/movies/{id}',[MovieController::class,'selectMovie'])->middleware(['auth']);
-Route::get('/movies/play/{id}',[MovieController::class,'playMovie'])->middleware(['auth']);
-Route::get('/movies/castplayer/{id}',[MovieController::class,'castMovie'])->middleware(['auth']);
+Route::get('/test',[MovieController::class,'testMovie']);
+Route::get('/{id}',[MovieController::class,'selectMovie'])->middleware(['auth'])->where('id','[0-9]+');
+Route::get('/play/{id}',[MovieController::class,'playMovie'])->middleware(['auth'])->where('id','[0-9]+');
+Route::get('/castplayer/{id}',[MovieController::class,'castMovie'])->middleware(['auth'])->where('id','[0-9]+');
 
 Route::get('webseries',[WebisodeController::class,'index'])->middleware(['auth']);
-Route::get('/webseries/{id}',[WebisodeController::class,'seriesDetails'])->middleware(['auth']);
-Route::get('/webseries/{id}/{season}/{episode}',[WebisodeController::class,'selectWebisode'])->middleware(['auth']);
-Route::get('/webseries/castplayer/{id}/{season}/{episode}',[WebisodeController::class,'castWebisode'])->middleware(['auth']);
+Route::get('/webseries/{id}',[WebisodeController::class,'seriesDetails'])->middleware(['auth'])->where('id','[0-9]+');
+Route::get('/webseries/{id}/{season}/{episode}',[WebisodeController::class,'selectWebisode'])->middleware(['auth'])->where(['id'=>'[0-9]+','season'=>'[0-9]+','episode'=>'[0-9]']);
+Route::get('/webseries/castplayer/{id}/{season}/{episode}',[WebisodeController::class,'castWebisode'])->middleware(['auth'])->where(['id'=>'[0-9]+','season'=>'[0-9]+','episode'=>'[0-9]']);
 
 Route::get('/profile',[LoginController::class,'profile'])->middleware(['auth']);
 Route::post('/profile/continue-watching',[LoginController::class,'continueWatching'])->middleware(['auth']);

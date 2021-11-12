@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta property="og:title" content="RightOnRittman Movie Library">
-    <meta property="og:url" content="https://rightonrittman.in/movies">
+    <meta property="og:url" content="https://movies.rightonrittman.in">
     <title>{{$title->name}}</title>
     <!-- Favicon -->
     <!-- <link rel="shortcut icon" href="assets/movie/images/favicon.ico" /> -->
@@ -47,7 +47,7 @@
                               <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
                            </div>
                         </a> -->
-                            <a class="navbar-brand" href="/movies"> <img class="img-fluid logo"
+                            <a class="navbar-brand" href="/"> <img class="img-fluid logo"
                                     src="../movie/images/logo.png" alt="streamit" /> </a>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="menu-main-menu-container">
@@ -172,15 +172,15 @@
                                                     $timeLeft.=(int)$rem_minutes."m";
                                                 }
                                             @endphp
-                                            <a href="/movies/play/{{ $title->id }}" class="btn btn-hover"><i
+                                            <a href="/play/{{ $title->id }}" class="btn btn-hover"><i
                                                 class="fa fa-play ml-2" aria-hidden="true"></i>  {{$timeLeft}} left
                                             </a>
                                         @else
-                                            <a href="/movies/play/{{ $title->id }}" class="btn btn-hover"><i
+                                            <a href="/play/{{ $title->id }}" class="btn btn-hover"><i
                                                 class="fa fa-play ml-2" aria-hidden="true"></i>  Play Now
                                             </a>
                                         @endif
-                                        <a href="/movies/castplayer/{{ $title->id }}" class="btn btn-hover" style="margin-left:1em"><i
+                                        <a href="/castplayer/{{ $title->id }}" class="btn btn-hover" style="margin-left:1em"><i
                                             class="fa fa-television ml-1" aria-hidden="true"></i>  Cast</a>
                                     @endif
                                     <!-- <a href="show-details.html" class="btn btn-link">More details</a> -->
@@ -224,20 +224,20 @@
                  <div class="col-lg-3 col-md-4">
                     <ul class="f-link list-unstyled mb-0">
                        <li><a href="#">About Us</a></li>
-                       <li><a href="/movies/all">Movies</a></li>
-                       <li><a href="/movies/all">Tv Shows</a></li>
+                       <li><a href="/all">Movies</a></li>
+                       <li><a href="/all">Tv Shows</a></li>
                     </ul>
                  </div>
                  <div class="col-lg-3 col-md-4">
                     <ul class="f-link list-unstyled mb-0">
-                       <li><a href="/movies/tos">Privacy Policy</a></li>
-                       <li><a href="/movies/tos">Terms & Conditions</a></li>
-                       <li><a href="/movies/tos">Help</a></li>
+                       <li><a href="/tos">Privacy Policy</a></li>
+                       <li><a href="/tos">Terms & Conditions</a></li>
+                       <li><a href="/tos">Help</a></li>
                     </ul>
                  </div>
                  <div class="col-lg-3 col-md-4">
                     <ul class="f-link list-unstyled mb-0">
-                       <li><a href="/movies/tos">FAQ</a></li>
+                       <li><a href="/tos">FAQ</a></li>
                        <li><a href="#">Contact Us</a></li>
                        
                     </ul>
