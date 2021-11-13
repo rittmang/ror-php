@@ -245,24 +245,24 @@
                                                     @php
                                                         $dur=trim($continue_title->duration);
                                                         $hm=explode(" ",$dur);
-                                                        $hours=0;
-                                                        $minutes=0;
-                                                        if(isset($hm[0])){
-                                                            if(substr($hm[0],-1)=='h'){
-                                                                $hours=(int)substr($hm[0],0,-1);
-                                                                $minutes=0;
+                                                        
+                                                        $seconds=0;
+                                                        foreach($hm as $time_value){
+                                                            if(substr($time_value,-1)=='h'){
+                                                                $hours=(int)substr($time_value,0,-1);
+                                                                $seconds+=$hours*3600;
                                                             }
-                                                            elseif(substr($hm[0],-1)=='m'){
-                                                                $hours=0;
-                                                                $minutes=(int)substr($hm[0],0,-1);
+                                                            elseif(substr($time_value,-1)=='m'){
+                                                                $minutes=(int)substr($time_value,0,-1);
+                                                                $seconds+=$minutes*60;
+                                                            }
+                                                            elseif(substr($time_value,-1)=='s'){
+                                                                $ss=(int)substr($time_value,0,-1);
+                                                                $seconds+=$ss;
                                                             }
                                                         }
-                                                        if(isset($hm[1])){
-                                                            if(substr($hm[1],-1)=='m'){
-                                                                $minutes=(int)substr($hm[1],0,-1);
-                                                            }
-                                                        }
-                                                        $percent=round($continue_title->watchTime / ($hours*3600 + $minutes*60) * 100,2);
+                                                        
+                                                        $percent=round($continue_title->watchTime / ($seconds) * 100,2);
                                                     @endphp
                                                     <div class="percentage" style="width:{{$percent}}%;"></div>
                                                 </div>
