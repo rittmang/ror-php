@@ -258,7 +258,7 @@
                                                             }
                                                         }
                                                         if(isset($hm[1])){
-                                                            if(substr($hm[0],-1)=='m'){
+                                                            if(substr($hm[1],-1)=='m'){
                                                                 $minutes=(int)substr($hm[1],0,-1);
                                                             }
                                                         }
