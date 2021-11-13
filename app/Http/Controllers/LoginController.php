@@ -105,7 +105,7 @@ class LoginController extends Controller
     }
 
     public function profile(){
-        return redirect('movies/all');
+        return redirect('all');
     }
 
     public function continueWatching(Request $request){

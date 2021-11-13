@@ -258,7 +258,9 @@
                                                             }
                                                         }
                                                         if(isset($hm[1])){
-                                                            $minutes=(int)substr($hm[1],0,-1);
+                                                            if(substr($hm[0],-1)=='m'){
+                                                                $minutes=(int)substr($hm[1],0,-1);
+                                                            }
                                                         }
                                                         $percent=round($continue_title->watchTime / ($hours*3600 + $minutes*60) * 100,2);
                                                     @endphp
