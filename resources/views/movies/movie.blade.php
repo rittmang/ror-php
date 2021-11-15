@@ -16,7 +16,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $title->name }} | ror movies">
     <meta name="twitter:description" content="{{ $title->description }}">
-    <meta name="twitter:image" content="{{ $title->wide_poster }}">
+    <meta name="twitter:image" content="https://og-image-amber-two.vercel.app/{{ $title->name }}.png?title={{ $title->name }}&agerating={{ $title->age }}&language={{ $title->lang }}&year={{ $title->year }}&description={{ $title->description }}&coverimage={{ $title->wide_poster }}">
     <title>{{$title->name}}</title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/movie/images/favicon.ico" />
