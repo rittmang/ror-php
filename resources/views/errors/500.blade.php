@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>404 Not Found</title>
+    <title>500 Internal Server Error</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="all" />

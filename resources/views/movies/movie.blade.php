@@ -6,11 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta property="og:title" content="RightOnRittman Movie Library">
-    <meta property="og:url" content="https://movies.rightonrittman.in">
+    <meta property="og:site_name" content="ror movies">
+    <meta property="og:type" content="video.movie">
+    <meta property="og:title" content="{{ $title->name }} | ror movies">
+    <meta property="og:url" content="{{ Request::url() }}">
+    <meta property="og:image" content="{{ $title->wide_poster }}">
+    <meta property="og:description" content="{{ $title->description }}">
+    <!-- Twitter meta tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $title->name }} | ror movies">
+    <meta name="twitter:description" content="{{ $title->description }}">
+    <meta name="twitter:image" content="{{ $title->wide_poster }}">
     <title>{{$title->name}}</title>
     <!-- Favicon -->
-    <!-- <link rel="shortcut icon" href="assets/movie/images/favicon.ico" /> -->
+    <link rel="shortcut icon" href="assets/movie/images/favicon.ico" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../movie/css/bootstrap.min.css" />
     <!-- Typography CSS -->
@@ -75,10 +84,15 @@
                                                     </form>
                                                 </div>
                                             </li>
-                                            <li onclick="location.href='/logout';" class="nav-item"
-                                                style="cursor: pointer;">Logout ({{ Auth::user()->name }})
-                                            </li>
-
+                                            @if(Auth::check())
+                                                <li onclick="location.href='/logout';" class="nav-item"
+                                                    style="cursor: pointer;">Logout ({{ Auth::user()->name }})
+                                                </li>
+                                            @else
+                                                <li onclick="location.href='/login';" class="nav-item"
+                                                    style="cursor: pointer;">Login
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -99,10 +113,15 @@
                                             </form>
                                         </div>
                                     </li>
-                                    <li onclick="location.href='/logout';" class="nav-item" style="cursor: pointer;">
-                                        Logout ({{ Auth::user()->name }})
-                                    </li>
-
+                                    @if(Auth::check())
+                                        <li onclick="location.href='/logout';" class="nav-item" style="cursor: pointer;">
+                                            Logout ({{ Auth::user()->name }})
+                                        </li>
+                                    @else
+                                        <li onclick="location.href='/login';" class="nav-item" style="cursor: pointer;">
+                                            Login 
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                         </nav>

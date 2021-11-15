@@ -22,15 +22,7 @@ use App\Http\Controllers\Admin\dashboardController;
 Route::get('store',function(){
     return view('store');
 });
-Route::get('writing',function(){
-	return view('writing');
-});
-Route::get('yenta',function(){
-	return view('yenta');
-});
-Route::get('resume',function(){
-	return view('resume');
-});
+
 Route::get('/',[MovieController::class,'index'])->middleware(['auth']);
 Route::get('/all',[MovieController::class,'allMovies'])->middleware(['auth']);
 Route::get('/tos',function(){
@@ -40,12 +32,12 @@ Route::get('/tos',function(){
 // Route::post('/movies/the-social-dilemma',[FirebaseController::class,'change']);
 
 Route::get('/test',[MovieController::class,'testMovie']);
-Route::get('/{id}',[MovieController::class,'selectMovie'])->middleware(['auth'])->where('id','[0-9]+');
+Route::get('/{id}',[MovieController::class,'selectMovie'])->where('id','[0-9]+');
 Route::get('/play/{id}',[MovieController::class,'playMovie'])->middleware(['auth'])->where('id','[0-9]+');
 Route::get('/castplayer/{id}',[MovieController::class,'castMovie'])->middleware(['auth'])->where('id','[0-9]+');
 
 Route::get('webseries',[WebisodeController::class,'index'])->middleware(['auth']);
-Route::get('/webseries/{id}',[WebisodeController::class,'seriesDetails'])->middleware(['auth'])->where('id','[0-9]+');
+Route::get('/webseries/{id}',[WebisodeController::class,'seriesDetails'])->where('id','[0-9]+');
 Route::get('/webseries/{id}/{season}/{episode}',[WebisodeController::class,'selectWebisode'])->middleware(['auth'])->where(['id'=>'[0-9]+','season'=>'[0-9]+','episode'=>'[0-9]']);
 Route::get('/webseries/castplayer/{id}/{season}/{episode}',[WebisodeController::class,'castWebisode'])->middleware(['auth'])->where(['id'=>'[0-9]+','season'=>'[0-9]+','episode'=>'[0-9]']);
 
