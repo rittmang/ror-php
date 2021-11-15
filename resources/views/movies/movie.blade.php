@@ -10,7 +10,7 @@
     <meta property="og:type" content="video.movie">
     <meta property="og:title" content="{{ $title->name }} | ror movies">
     <meta property="og:url" content="{{ Request::url() }}">
-    <meta property="og:image" content="{{ $title->wide_poster }}">
+    <meta property="og:image" content="https://og-image-amber-two.vercel.app/{{ $title->name }}.png?title={{ $title->name }}&agerating={{ $title->age }}&language={{ $title->lang }}&year={{ $title->year }}&description={{ $title->description }}&coverimage={{ $title->wide_poster }}">
     <meta property="og:description" content="{{ $title->description }}">
     <!-- Twitter meta tags -->
     <meta name="twitter:card" content="summary_large_image">
