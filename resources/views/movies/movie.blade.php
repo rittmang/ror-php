@@ -13,6 +13,7 @@
     <meta property="og:image" content="https://preview.muvibey.ml/{{ $title->name }}.jpeg?title={{ $title->name }}&agerating={{ $title->age }}%2b&language={{ $title->lang }}&year={{ $title->year }}&description={{ $title->description }}&coverimage={{ $title->wide_poster }}">
     <meta property="og:image:alt" content="Poster image for {{ $title->name }}">
     <meta property="og:description" content="{{ $title->description }}">
+    <meta property="og:locale" content="en_IN">
     <!-- Twitter meta tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $title->name }} | ror movies">
