@@ -37,8 +37,8 @@ class MovieController extends Controller
                 $cw_item->cast_link="/webseries/castplayer/".$webisode_deets->title_id."/".$webisode_deets->season."/".$webisode_deets->episode;
             }
             elseif($cw_item->type=='Movie'){
-                $cw_item->link="/movies/play/".$cw_item->title_id;
-                $cw_item->cast_link="/movies/castplayer/".$cw_item->title_id;
+                $cw_item->link="/play/".$cw_item->title_id;
+                $cw_item->cast_link="/castplayer/".$cw_item->title_id;
             }
         }
         $upcoming_movielist=DB::table('title')->orderBy('id','desc')->where('type','Movie')->select('name','long_poster')->where('asset','/')->get();
