@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Kreait\Firebase;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
@@ -12,6 +13,7 @@ use Kreait\Firebase\Database;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Notifications\AdminEventNotification;
 
 class MovieController extends Controller
 {
@@ -60,6 +62,13 @@ class MovieController extends Controller
             if(Auth::check()){
                 $titleLastWatched=DB::table('continue_watching')->where('user_id',Auth::user()->id)->where('title_id',$title->id)->select('watchTime')->first();
                 $lastWatched = isset($titleLastWatched) ? $titleLastWatched->watchTime : 0;
+                date_default_timezone_set('Asia/Kolkata');
+                $date = date('d/m/Y h:i:s a',time());
+                $userSchema = Auth::user();
+                $adminEvent=[
+                    'body'=>$title->name.' visited at '.$date.' IST'
+                ];
+                Notification::send($userSchema,new AdminEventNotification($adminEvent));
             }
             return view('movies/movie',['title'=>$title,'lastWatched'=>$lastWatched]);
         }
@@ -80,6 +89,13 @@ class MovieController extends Controller
             //retrieve continue-watching time, if exists else 0
             $titleLastWatched=DB::table('continue_watching')->where('user_id',Auth::user()->id)->where('title_id',$title->id)->select('watchTime')->first();
             $lastWatched = isset($titleLastWatched) ? $titleLastWatched->watchTime : 0;
+            date_default_timezone_set('Asia/Kolkata');
+            $date = date('d/m/Y h:i:s a',time());
+            $userSchema = Auth::user();
+            $adminEvent=[
+                'body'=>$title->name.' played at '.$date.' IST'
+            ];
+            Notification::send($userSchema,new AdminEventNotification($adminEvent));
             return view('movies/player_page',['title'=>$title,'views'=>$count,'lastWatched'=>$lastWatched]);
         }
         return abort('404');
@@ -96,6 +112,12 @@ class MovieController extends Controller
 
             $titleLastWatched=DB::table('continue_watching')->where('user_id',Auth::user()->id)->where('title_id',$title->id)->select('watchTime')->first();
             $lastWatched = isset($titleLastWatched) ? $titleLastWatched->watchTime : 0;
+            $date = date('d/m/Y h:i:s a',time());
+            $userSchema = Auth::user();
+            $adminEvent=[
+                'body'=>$title->name.' casted at '.$date.' IST'
+            ];
+            Notification::send($userSchema,new AdminEventNotification($adminEvent));
             return view('movies/cast_player',['title'=>$title,'views'=>$count,'lastWatched'=>$lastWatched]);
         }
         return abort('404');
