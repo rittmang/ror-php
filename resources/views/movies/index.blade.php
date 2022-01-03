@@ -261,8 +261,12 @@
                                                                 $seconds+=$ss;
                                                             }
                                                         }
-                                                        
-                                                        $percent=round($continue_title->watchTime / ($seconds) * 100,2);
+                                                        if($seconds==0){
+                                                            $percent=0;
+                                                        }
+                                                        else{
+                                                            $percent=round($continue_title->watchTime / ($seconds) * 100,2);
+                                                        }
                                                     @endphp
                                                     <div class="percentage" style="width:{{$percent}}%;"></div>
                                                 </div>
