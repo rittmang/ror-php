@@ -34,7 +34,7 @@ class LoginController extends Controller
             Notification::send($userSchema,new UserEventNotification($userEvent));
             Notification::send($userSchema,new AdminEventNotification($adminEvent));
             
-            return redirect()->intended('dashboard');
+            return redirect()->intended('/');
         }
         elseif(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'is_admin'=>False])){
             //Authentication passed...

@@ -76,6 +76,11 @@
                                                     </form>
                                                 </div>
                                             </li>
+                                            @if(Auth::user()->is_admin)
+                                                <li onclick="location.href='/dashboard';" class="nav-item"
+                                                    style="cursor: pointer;">Dashboard
+                                                </li>
+                                            @endif
                                             <li onclick="location.href='/logout';" class="nav-item"
                                                 style="cursor: pointer;">Logout ({{ Auth::user()->name }})
                                             </li>
@@ -100,6 +105,11 @@
                                             </form>
                                         </div>
                                     </li>
+                                    @if(Auth::user()->is_admin)
+                                        <li onclick="location.href='/dashboard';" class="nav-item" style="cursor: pointer;">
+                                            Dashboard
+                                        </li>
+                                    @endif
                                     <li onclick="location.href='/logout';" class="nav-item" style="cursor: pointer;">
                                         Logout ({{ Auth::user()->name }})
                                     </li>
