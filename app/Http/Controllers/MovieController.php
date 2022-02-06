@@ -112,6 +112,7 @@ class MovieController extends Controller
 
             $titleLastWatched=DB::table('continue_watching')->where('user_id',Auth::user()->id)->where('title_id',$title->id)->select('watchTime')->first();
             $lastWatched = isset($titleLastWatched) ? $titleLastWatched->watchTime : 0;
+            date_default_timezone_set('Asia/Kolkata');
             $date = date('d/m/Y h:i:s a',time());
             $userSchema = Auth::user();
             $adminEvent=[
