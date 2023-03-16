@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Kreait\Firebase;
 use Kreait\Firebase\Factory;
@@ -17,6 +18,16 @@ use App\Notifications\AdminEventNotification;
 
 class MovieController extends Controller
 {
+    public function fixBrokenUrls($url){
+        if(!parse_url($url,PHP_URL_HOST)){
+            $url = env('IMAGE_ORIGIN') . $url;
+        }
+        else{
+            $host = strtolower(parse_url($url,PHP_URL_HOST)) . '/';
+            $url = str_ireplace('https://' . $host,env('IMAGE_ORIGIN'),$url);
+        }
+        return $url;
+    }
     public function index(){
         
         $banner_titles = explode(',',config('movie.banner_titles'));        
@@ -27,6 +38,8 @@ class MovieController extends Controller
                 $m_season=DB::table('webisodes')->where('title_id',$btitle->id)->max('season');
                 $btitle->max_season=$m_season;
             }
+            $btitle->wide_poster = $this->fixBrokenUrls($btitle->wide_poster);
+            // error_log($this->fixBrokenUrls($btitle->wide_poster));
         }
         $continue_watchlist=DB::table('continue_watching')->join('title','continue_watching.title_id','=','title.id')->where('user_id',Auth::user()->id)->orderBy('watchTime','desc')->select('continue_watching.title_id','continue_watching.webisode_id','title.name','title.wide_poster','continue_watching.watchTime','title.duration','title.type')->get();
         foreach($continue_watchlist as $cw_item){
@@ -43,6 +56,7 @@ class MovieController extends Controller
                 $cw_item->cast_link="/castplayer/".$cw_item->title_id;
             }
         }
+        ;
         $upcoming_movielist=DB::table('title')->orderBy('id','desc')->where('type','Movie')->select('name','long_poster')->where('asset','/')->get();
         $disney_movielist=DB::table('title')->orderBy('id','desc')->where('studio','Disney')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();
         $pixar_movielist=DB::table('title')->orderBy('id','desc')->where('studio','Pixar')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();
