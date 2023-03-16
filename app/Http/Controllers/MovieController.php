@@ -103,6 +103,7 @@ class MovieController extends Controller
             $title=DB::table('title')->where('id',$id)->first();
             $title->wide_poster = $this->fixBrokenUrls($title->wide_poster);
             $title->long_poster = $this->fixBrokenUrls($title->long_poster);
+            $title->vtt = $this->fixBrokenUrls($title->vtt);
             //update firebase count
             $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(config('movie.firebase'));
             $database=$factory->createDatabase();
