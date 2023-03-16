@@ -46,7 +46,7 @@ class MovieController extends Controller
             if($cw_item->type=='Series'){
                 $webisode_deets=DB::table('webisodes')->where('id',$cw_item->webisode_id)->get()[0];
                 $cw_item->name="S".$webisode_deets->season."E".$webisode_deets->episode." | ".$cw_item->name;
-                $cw_item->wide_poster=$webisode_deets->wide_poster;
+                $cw_item->wide_poster=$this->fixBrokenUrls($webisode_deets->wide_poster);
                 $cw_item->duration=$webisode_deets->duration;
                 $cw_item->link="/webseries/".$webisode_deets->title_id."/".$webisode_deets->season."/".$webisode_deets->episode;
                 $cw_item->cast_link="/webseries/castplayer/".$webisode_deets->title_id."/".$webisode_deets->season."/".$webisode_deets->episode;
@@ -63,15 +63,24 @@ class MovieController extends Controller
         $tcs_movielist=DB::table('title')->orderBy('id','desc')->where('studio','20th Century Studios')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();
         $svf_movielist=DB::table('title')->orderBy('id','desc')->where('studio','SVF')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();
         $marvel_movielist=DB::table('title')->orderBy('id','desc')->where('studio','Marvel')->where('asset','!=','/')->select('id','name','long_poster','age','duration')->get();
+        // $concatenated = array_merge($upcoming_movielist,$disney_movielist,$pixar_movielist,$tcs_movielist,$svf_movielist,$marvel_movielist);
+        $concatenated = $upcoming_movielist->merge($disney_movielist)->merge($pixar_movielist)->merge($tcs_movielist)->merge($svf_movielist)->merge($marvel_movielist);
+        foreach($concatenated as $movie){
+            $movie->long_poster = $this->fixBrokenUrls($movie->long_poster);
+        }
         return view('movies/index',['upcoming_titles'=>$upcoming_movielist,'banner_titles'=>$banner_movielist,'continue_watchlist'=>$continue_watchlist,'disney_titles'=>$disney_movielist,'pixar_titles'=>$pixar_movielist,'tcs_titles'=>$tcs_movielist,'marvel_titles'=>$marvel_movielist,'svf_titles'=>$svf_movielist]);
     }
     public function allMovies(){
         $all_movielist=DB::table('title')->orderBy('id','asc')->where('asset','!=','/')->orWhere('type','Series')->select('id','name','type','long_poster','age','duration','asset')->get();
+        foreach($all_movielist as $movie){
+            $movie->long_poster = $this->fixBrokenUrls($movie->long_poster);
+        }
         return view('movies/all',['titles'=>$all_movielist]);
     }
     public function selectMovie($id){
         if(DB::table('title')->where('id',$id)->where('type','Movie')->exists()){
             $title=DB::table('title')->where('id',$id)->select('id','name','age','year','lang','genre','description','wide_poster','trailer_link','asset','duration')->first();
+            $title->wide_poster = $this->fixBrokenUrls($title->wide_poster);
             $lastWatched=0;
             if(Auth::check()){
                 $titleLastWatched=DB::table('continue_watching')->where('user_id',Auth::user()->id)->where('title_id',$title->id)->select('watchTime')->first();
@@ -92,6 +101,8 @@ class MovieController extends Controller
     public function playMovie($id){
         if(DB::table('title')->where('id',$id)->exists()){
             $title=DB::table('title')->where('id',$id)->first();
+            $title->wide_poster = $this->fixBrokenUrls($title->wide_poster);
+            $title->long_poster = $this->fixBrokenUrls($title->long_poster);
             //update firebase count
             $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(config('movie.firebase'));
             $database=$factory->createDatabase();
@@ -117,6 +128,8 @@ class MovieController extends Controller
     public function castMovie($id){
         if(DB::table('title')->where('id',$id)->exists()){
             $title=DB::table('title')->where('id',$id)->first();
+            $title->wide_poster = $this->fixBrokenUrls($title->wide_poster);
+            $title->long_poster = $this->fixBrokenUrls($title->long_poster);
             $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(config('movie.firebase'));
             $database=$factory->createDatabase();
             $count=$database->getReference("{$id}")->getValue();
