@@ -18,16 +18,7 @@ use App\Notifications\AdminEventNotification;
 
 class MovieController extends Controller
 {
-    public function fixBrokenUrls($url){
-        if(!parse_url($url,PHP_URL_HOST)){
-            $url = env('IMAGE_ORIGIN') . $url;
-        }
-        else{
-            $host = strtolower(parse_url($url,PHP_URL_HOST)) . '/';
-            $url = str_ireplace('https://' . $host,env('IMAGE_ORIGIN'),$url);
-        }
-        return $url;
-    }
+    
     public function index(){
         
         $banner_titles = explode(',',config('movie.banner_titles'));        
@@ -52,6 +43,7 @@ class MovieController extends Controller
                 $cw_item->cast_link="/webseries/castplayer/".$webisode_deets->title_id."/".$webisode_deets->season."/".$webisode_deets->episode;
             }
             elseif($cw_item->type=='Movie'){
+                $cw_item->wide_poster=$this->fixBrokenUrls($cw_item->wide_poster);
                 $cw_item->link="/play/".$cw_item->title_id;
                 $cw_item->cast_link="/castplayer/".$cw_item->title_id;
             }
