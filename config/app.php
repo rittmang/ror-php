@@ -237,6 +237,8 @@ return [
     'storageBucket'=>env('storageBucket'),
     'messagingSenderId'=>env('messagingSenderId'),
     'appId'=>env('appId'),
+    'imagesUrl'=>env('IMAGE_ORIGIN'),
+    'previewUrl'=>env('PREVIEW_ORIGIN')
 
 
 ];

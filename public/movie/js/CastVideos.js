@@ -1052,12 +1052,6 @@ CastPlayer.getErrorMessage = function(error) {
 
 // var mediaJSON = { 'categories' : [{ 'name' : 'Movies',
 //     'videos' : [
-//         { 'description' : "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.\n\nLicensed under the Creative Commons Attribution license\nhttp://www.bigbuckbunny.org",
-//             'sources' : ['https://polished-pond-424a.muvibay.workers.dev/Bengali/Jekhane%20Bhooter%20Bhoy/JekhaneBhooterBhoy.mp4'],
-//             'subtitle' : 'https://polished-pond-424a.muvibay.workers.dev/Bengali/Jekhane%20Bhooter%20Bhoy/sub.vtt',
-//             'thumb' : 'https://polished-pond-424a.muvibay.workers.dev/Bengali/Jekhane%20Bhooter%20Bhoy/wide_poster.jpg',
-//             'title' : 'Jekhane Bhuter Bhoy'
-//         },
 //         { 'description' : 'The first Blender Open Movie from 2006',
 //             'sources' : ['http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'],
 //             'subtitle' : 'By Blender Foundation',
