@@ -111,8 +111,8 @@ class LoginController extends Controller
     public function continueWatching(Request $request){
         $user_id=Auth::user()->id;
         $title_id=$request->input('watch_title_id');
-        $ep_id=(null!= $request->input('watch_episode_id')) ? $request->input('watch_episode_id') : 1;
-        // $ep_id=$request->input('watch_episode_id');
+        $ep_id = (null!= $request->input('watch_episode_id')) ? $request->input('watch_episode_id') : 1;
+        // $ep_id = $request->input('watch_episode_id');
         $watch_time=$request->input('watch_time');//in seconds
 
         DB::table('continue_watching')->upsert([

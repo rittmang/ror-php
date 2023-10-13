@@ -21,7 +21,9 @@ class MovieController extends Controller
     
     public function index(){
         
-        $banner_titles = explode(',',config('movie.banner_titles'));        
+        // $banner_titles = explode(',',config('movie.banner_titles'));
+        // dd($banner_titles);
+        $banner_titles = DB::table('banner_movielist_homepage')->select('banner_id')->get()->pluck('banner_id')->toArray();
         $banner_movielist=DB::table('title')->orderBy('id','desc')->select('id','name','type','wide_poster','age','duration','description','trailer_link','year','genre','lang')->whereIn('id',$banner_titles)->get();
         foreach($banner_movielist as $btitle)
         {

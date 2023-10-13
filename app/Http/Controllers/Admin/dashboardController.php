@@ -178,5 +178,9 @@ class dashboardController extends Controller
         DB::table('webisodes')->where('id',$wid)->update(['ep_name'=>$wname,'season'=>$wseason,'episode'=>$wepisode,'title_id'=>$wtitleid,'wide_poster'=>$wposter,'asset'=>$wasset,'vtt'=>$wvtt,'duration'=>$wduration,'views'=>$wviews]);
         return redirect('dashboard/webisodes')->with('editStatus','Title'.$wtitleid . ' S'.$wseason . 'E'.$wepisode .' '. $wname . ' was succesfully edited.');
     }
+    public function servicesIndex(){
+        $banner_titles = DB::table('banner_movielist_homepage')->get()->pluck('banner_id')->toArray();
+        return view('dashboard/services',['banner_titles'=>$banner_titles]);
+    }
 
 }

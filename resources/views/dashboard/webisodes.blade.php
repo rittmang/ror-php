@@ -60,6 +60,9 @@
                         <li>
                             <div class="p-3 ml-4 bg-secondary text-white">Webisodes</div>
                         </li>
+                        <li>
+                            <a href="services">Services</a>
+                        </li>
                     </ul>
                 </li>
 
@@ -165,7 +168,7 @@
                             </thead>
                             <tbody>
                                 @php
-                                    $current_title=$webisodes[0]->title_id;
+                                    $current_title=$webisodes[0]->title_id ?? NULL;
                                 @endphp
                                 @foreach ($webisodes as $webisode)
                                     @if($webisode->title_id != $current_title)
