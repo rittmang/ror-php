@@ -55,7 +55,7 @@
                     </a>
                     <ul class="sidenav-second-level collapse show" id="collapseComponents">
                         <li>
-                            <a href="webisodes">Titles</a>
+                            <a href="titles">Titles</a>
                         </li>
                         <li>
                             <a href="webisodes">Webisodes</a>
@@ -127,12 +127,17 @@
                             </button>
                         </div>
                     @endif
-                    <div class="input-group mb-3 mt-4 col-md-6 pl-0 ml-0">
-                        <span class="input-group-text" id="banner-title">Banner titles</span>
-                        <input id="banner-ids" type="text" class="form-control" placeholder="1,2,3" aria-label="Banner titles" value="{{implode(',', $banner_titles)}}" readonly></input>
-                        <button id="edit-banner" class="btn btn-outline-primary" style="display:block;"><i class="fa fa-pencil"></i></button>
-                        <button id="update-banner" class="btn btn-outline-success" style="display:none;"><i class="fa fa-check"></i></button>
-                    </div>
+                    <form id="serviceForm" action="{{ url('dashboard/servicesUpdate') }}" method="post">
+                        <div class="input-group mb-3 mt-4 col-md-6 pl-0 ml-0">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                            <span class="input-group-text rounded-0" id="banner-title">Banner titles</span>
+                            <input id="banner-ids" name="banner-ids" type="text" class="form-control rounded-0" placeholder="1,2,3" aria-label="Banner titles" value="{{implode(',', $banner_titles)}}" readonly></input>
+                            <button id="edit-banner" type="button" class="btn btn-outline-primary rounded-0" style="display:block;"><i class="fa fa-pencil"></i></button>
+                            <button id="update-banner" type="submit" class="btn btn-outline-success rounded-0" style="display:none;"><i class="fa fa-check"></i></button>                        
+                        </div>
+                    </form>
+                    
                 </div>
                 <div class="card-footer small text-muted">
                     {{-- Retrieved <span id="datetime"></span>
@@ -166,6 +171,13 @@
         document.getElementById('edit-banner').style.display = 'none'; 
     });
 
+    document.getElementById('update-banner').addEventListener('click',function(){
+
+        
+        document.getElementById('update-banner').style.display = 'none';
+        document.getElementById('banner-ids').setAttribute('readonly',true);
+        document.getElementById('edit-banner').style.display = 'block';
+    });
 </script>
 
 </html>

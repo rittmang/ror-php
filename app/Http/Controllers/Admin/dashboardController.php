@@ -182,5 +182,23 @@ class dashboardController extends Controller
         $banner_titles = DB::table('banner_movielist_homepage')->get()->pluck('banner_id')->toArray();
         return view('dashboard/services',['banner_titles'=>$banner_titles]);
     }
+    public function servicesUpdate(Request $request)
+    {
+        $numberList = explode(',',$request->input('banner-ids'));
+        $numberList = array_map('trim', $numberList);
+        $numberList = array_filter($numberList, 'is_numeric');
+        $numberList = array_map('intval', $numberList);
+
+        DB::table('banner_movielist_homepage')->truncate();
+
+        $dataToInsert = array_map(function($banner_id) {
+            return ['banner_id' => $banner_id];
+        }, $numberList);
+        // dd($numberList);
+
+        DB::table('banner_movielist_homepage')->insert($dataToInsert);
+        return redirect('dashboard/services')->with('editStatus','Banners updated.');
+
+    }
 
 }

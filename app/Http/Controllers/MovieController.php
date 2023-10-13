@@ -24,7 +24,13 @@ class MovieController extends Controller
         // $banner_titles = explode(',',config('movie.banner_titles'));
         // dd($banner_titles);
         $banner_titles = DB::table('banner_movielist_homepage')->select('banner_id')->get()->pluck('banner_id')->toArray();
-        $banner_movielist=DB::table('title')->orderBy('id','desc')->select('id','name','type','wide_poster','age','duration','description','trailer_link','year','genre','lang')->whereIn('id',$banner_titles)->get();
+        $banner_movielist=DB::table('title')->select('id','name','type','wide_poster','age','duration','description','trailer_link','year','genre','lang')->whereIn('id',$banner_titles)->get();
+
+        //need to reorder to match original title order as per db
+        $banner_movielist = collect($banner_titles)
+            ->map(function ($id) use ($banner_movielist) {
+                return $banner_movielist->firstWhere('id', $id);
+            });
         foreach($banner_movielist as $btitle)
         {
             if($btitle->type=='Series'){

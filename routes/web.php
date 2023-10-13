@@ -73,3 +73,4 @@ Route::post('dashboard/webisodesUpdate',[dashboardController::class,'webisodesUp
 //Route::delete('dashboard/packagesDeleteAll','Admin\dashboardController@packagesDeleteAll')->middleware('auth');
 
 Route::get('dashboard/services',[dashboardController::class,'servicesIndex'])->middleware(['auth','admin']);
+Route::post('dashboard/servicesUpdate',[dashboardController::class,'servicesUpdate'])->middleware(['auth','admin']);
