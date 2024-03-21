@@ -34,9 +34,10 @@ class WebisodeController extends Controller
             if(DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode)->exists()){
                 $ep=DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode)->first();
                 $ep->wide_poster = $this->fixBrokenUrls($ep->wide_poster, 'IMAGE_ORIGIN');
+                $ep->vtt = $this->fixBrokenUrls($ep->vtt, 'IMAGE_ORIGIN');
                 $title=DB::table('title')->where('id',$id)->first();
                 $title->long_poster = $this->fixBrokenUrls($title->long_poster, 'IMAGE_ORIGIN');
-                $ep->asset = $this->fixBrokenUrls($title->asset, 'VIDEO_ORIGIN');
+                $ep->asset = $this->fixBrokenUrls($ep->asset, 'VIDEO_ORIGIN');
 
                 $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(config('movie.firebase'));
                 $database=$factory->createDatabase();
@@ -67,7 +68,8 @@ class WebisodeController extends Controller
             if(DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode)->exists()){
                 $ep=DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode)->first();
                 $ep->wide_poster = $this->fixBrokenUrls($ep->wide_poster, 'IMAGE_ORIGIN');
-                $ep->asset = $this->fixBrokenUrls($title->asset, 'VIDEO_ORIGIN');
+                $ep->vtt = $this->fixBrokenUrls($ep->vtt, 'IMAGE_ORIGIN');
+                $ep->asset = $this->fixBrokenUrls($ep->asset, 'VIDEO_ORIGIN');
 
                 $title=DB::table('title')->where('id',$id)->first();
                 $title=DB::table('title')->where('id',$id)->first();
