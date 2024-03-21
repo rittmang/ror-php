@@ -20,10 +20,10 @@ class WebisodeController extends Controller
         if(DB::table('title')->where('id',$id)->where('type','Series')->exists()){
             $webisodes=DB::table('webisodes')->where('title_id',$id)->orderBy('season','asc')->orderBy('episode','asc')->select('season','episode','wide_poster','ep_name','asset','duration')->get();
             $title=DB::table('title')->where('id',$id)->select('id','name','age','year','lang','genre','description','wide_poster','trailer_link')->first();
-            $title->wide_poster = $this->fixBrokenUrls($title->wide_poster);
+            $title->wide_poster = $this->fixBrokenUrls($title->wide_poster, 'IMAGE_ORIGIN');
             $max_season=DB::table('webisodes')->where('title_id',$id)->max('season');
             foreach($webisodes as $ep){
-                $ep->wide_poster = $this->fixBrokenUrls($ep->wide_poster);
+                $ep->wide_poster = $this->fixBrokenUrls($ep->wide_poster, 'IMAGE_ORIGIN');
             }
             return view('movies/series',['title'=>$title,'webisodes'=>$webisodes,'max_season'=>$max_season]);
         }
@@ -33,9 +33,11 @@ class WebisodeController extends Controller
         if(DB::table('title')->where('id',$id)->where('type','Series')->exists()){
             if(DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode)->exists()){
                 $ep=DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode)->first();
-                $ep->wide_poster = $this->fixBrokenUrls($ep->wide_poster);
+                $ep->wide_poster = $this->fixBrokenUrls($ep->wide_poster, 'IMAGE_ORIGIN');
                 $title=DB::table('title')->where('id',$id)->first();
-                $title->long_poster = $this->fixBrokenUrls($title->long_poster);
+                $title->long_poster = $this->fixBrokenUrls($title->long_poster, 'IMAGE_ORIGIN');
+                $ep->asset = $this->fixBrokenUrls($title->asset, 'VIDEO_ORIGIN');
+
                 $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(config('movie.firebase'));
                 $database=$factory->createDatabase();
                 $count=$database->getReference("{$id}/S{$season}/E{$episode}")->getValue();
@@ -64,7 +66,9 @@ class WebisodeController extends Controller
         if(DB::table('title')->where('id',$id)->where('type','Series')->exists()){
             if(DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode)->exists()){
                 $ep=DB::table('webisodes')->where('title_id',$id)->where('season',$season)->where('episode',$episode)->first();
-                $ep->wide_poster = $this->fixBrokenUrls($ep->wide_poster);
+                $ep->wide_poster = $this->fixBrokenUrls($ep->wide_poster, 'IMAGE_ORIGIN');
+                $ep->asset = $this->fixBrokenUrls($title->asset, 'VIDEO_ORIGIN');
+
                 $title=DB::table('title')->where('id',$id)->first();
                 $title=DB::table('title')->where('id',$id)->first();
                 $factory=(new Factory)->withServiceAccount(__DIR__.'/firebase-pk.json')->withDatabaseUri(config('movie.firebase'));

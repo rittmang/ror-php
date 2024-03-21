@@ -238,7 +238,7 @@ return [
     'messagingSenderId'=>env('messagingSenderId'),
     'appId'=>env('appId'),
     'imagesUrl'=>env('IMAGE_ORIGIN'),
-    'previewUrl'=>env('PREVIEW_ORIGIN')
-
+    'previewUrl'=>env('PREVIEW_ORIGIN'),
+    'videoUrl'=>env('VIDEO_ORIGIN')
 
 ];
