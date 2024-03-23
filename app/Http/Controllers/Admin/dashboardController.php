@@ -121,6 +121,9 @@ class dashboardController extends Controller
         $client=SearchClient::create(config('admin.algolia_appid'),config('admin.algolia_apikey'));
         $index=$client->initIndex(config('admin.algolia_index'));
         $titles=DB::table('title')->orderBy('id','asc')->get(['id AS objectID','name','year','type','long_poster','age','duration','studio','lang']);
+        foreach ($titles as $title) {
+            $title->long_poster = $this->fixBrokenUrls($title->long_poster, 'IMAGE_ORIGIN');
+        }
         $index->saveObjects($titles,['autoGenerateObjectIDIfNotExist'=>true]);
         return redirect('dashboard/titles')->with('editStatus','Records synced with search index');
     }

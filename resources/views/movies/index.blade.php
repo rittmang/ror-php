@@ -656,6 +656,7 @@
                         <div>
                             <a href="/@{{objectID}}">
                                 @{{#helpers.highlight}}{ "attribute": "name" }@{{/helpers.highlight}}
+                                (@{{year}})
                             </a>
                         </div>
                     `,
