@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="movie/css/responsive.css" />
     <link rel="apple-touch-icon" sizes="40X40" href="/favicon-movies.png">
     <link rel="icon" type="image/png" sizes="40X40" href="/favicon-movies.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css/themes/algolia-min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
 
 </head>
 
@@ -95,7 +97,7 @@
                                         <a href="#" class="search-toggle device-search">
                                             <i class="ri-search-line"></i>
                                         </a>
-                                        <div class="search-box iq-search-bar d-search">
+                                        <!-- <div class="search-box iq-search-bar d-search">
                                             <form action="#" class="searchbox">
                                                 <div class="form-group position-relative">
                                                     <input type="text" class="text search-input font-size-12"
@@ -103,7 +105,10 @@
                                                     <i class="search-link ri-search-line"></i>
                                                 </div>
                                             </form>
+                                        </div> -->
+                                        <div id="search-box" class="search-box iq-search-bar">
                                         </div>
+                                        <div id="hits" class="search-box iq-show"></div>
                                     </li>
                                     @if(Auth::user()->is_admin)
                                         <li onclick="location.href='/dashboard';" class="nav-item" style="cursor: pointer;">
@@ -600,6 +605,8 @@
     </div>
 
     <!-- back-to-top End -->
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.20.0/dist/algoliasearch-lite.umd.js" integrity="sha256-DABVk+hYj0mdUzo+7ViJC6cwLahQIejFvC+my2M/wfM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.58.0/dist/instantsearch.production.min.js" integrity="sha256-IldlBIzcOLJCgPJdBbkRKOkajl4luaY/JtDMglPneks=" crossorigin="anonymous"></script>
     <!-- jQuery, Popper JS -->
     <script src="movie/js/jquery-3.4.1.min.js"></script>
     <script src="movie/js/popper.min.js"></script>
@@ -617,6 +624,47 @@
     <script src="movie/js/slick-animation.min.js"></script>
     <!-- Custom JS-->
     <script src="movie/js/custom.js"></script>
+    <script>
+        const search = instantsearch({
+        indexName: 'title',
+        searchClient: algoliasearch('05XKD58WI7', 'fee6b64af1eb23cd078162ca14824755'),
+        searchFunction(helper) {
+            const searchResults = document.querySelector('#hits');
+            if (helper.state.query === '') {
+            // Hide the results container when there is no query
+            searchResults.style.display = 'none';
+            } else {
+            // Show the results container when there is a query
+            searchResults.style.display = '';
+            helper.search(); // Perform the search
+            }
+        },
+        });
+
+        search.addWidget(
+        instantsearch.widgets.searchBox({
+            container: '#search-box',
+            placeholder: 'type here to search...',
+        })
+        );
+
+        search.addWidget(
+            instantsearch.widgets.hits({
+                container: '#hits',
+                templates: {
+                    item: `
+                        <div>
+                            <a href="/@{{objectID}}">
+                                @{{#helpers.highlight}}{ "attribute": "name" }@{{/helpers.highlight}}
+                            </a>
+                        </div>
+                    `,
+                },
+            })
+        );
+
+        search.start();
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('.delete_continue').on('click', function(e) {

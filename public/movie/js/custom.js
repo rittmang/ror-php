@@ -29,7 +29,7 @@ Index Of Script
 
 (function (jQuery) {
 	"use strict";
-	jQuery(document).ready(function() {
+	jQuery(document).ready(function () {
 
 		function activaTab(pill) {
 			jQuery(pill).addClass('active show');
@@ -42,7 +42,7 @@ Index Of Script
 			var height = jQuery("#main-header").height();
 			jQuery('.iq-height').css('height', height + 'px');
 		}
-		jQuery(function() {
+		jQuery(function () {
 			var header = jQuery("#main-header"),
 				yOffset = 0,
 				triggerPoint = 80;
@@ -50,7 +50,7 @@ Index Of Script
 			headerHeight();
 
 			jQuery(window).resize(headerHeight);
-			jQuery(window).on('scroll', function() {
+			jQuery(window).on('scroll', function () {
 
 				yOffset = jQuery(window).scrollTop();
 
@@ -62,7 +62,7 @@ Index Of Script
 
 			});
 		});
-		
+
 		/*---------------------------------------------------------------------
 			Back to Top
 		---------------------------------------------------------------------*/
@@ -78,15 +78,15 @@ Index Of Script
 			e.preventDefault();
 			$('html, body').animate({ scrollTop: 0 }, '300');
 		});
-		
+
 		/*---------------------------------------------------------------------
 			Header Menu Dropdown
 		---------------------------------------------------------------------*/
-		jQuery('[data-toggle=more-toggle]').on('click', function() {
+		jQuery('[data-toggle=more-toggle]').on('click', function () {
 			jQuery(this).next().toggleClass('show');
 		});
 
-		jQuery(document).on('click', function(e) {
+		jQuery(document).on('click', function (e) {
 			let myTargetElement = e.target;
 			let selector, mainElement;
 			if (jQuery(myTargetElement).hasClass('search-toggle') || jQuery(myTargetElement).parent().hasClass('search-toggle') || jQuery(myTargetElement).parent().parent().hasClass('search-toggle')) {
@@ -109,7 +109,17 @@ Index Of Script
 				mainElement.toggleClass('active');
 
 				e.preventDefault();
-			} else if (jQuery(myTargetElement).is('.search-input')) {} else {
+			}
+
+			// Add checks to see if the click is inside the search box or hits container
+			else if (jQuery(myTargetElement).closest('#search-box').length > 0 ||
+				jQuery(myTargetElement).closest('#hits').length > 0) {
+				// Do nothing if the click is inside the search box or hits container
+			}
+
+			else if (jQuery(myTargetElement).is('.search-input')) {
+
+			} else {
 				jQuery('.navbar-right li').removeClass('iq-show');
 				jQuery('.navbar-right li .search-toggle').removeClass('active');
 			}
@@ -159,29 +169,29 @@ Index Of Script
 			slidesToShow: 4,
 			slidesToScroll: 1,
 			responsive: [
-			{
-				breakpoint: 1200,
-				settings: {
-				slidesToShow: 3,
-				slidesToScroll: 1,
-				infinite: true,
-				dots: true
+				{
+					breakpoint: 1200,
+					settings: {
+						slidesToShow: 3,
+						slidesToScroll: 1,
+						infinite: true,
+						dots: true
+					}
+				},
+				{
+					breakpoint: 768,
+					settings: {
+						slidesToShow: 2,
+						slidesToScroll: 1
+					}
+				},
+				{
+					breakpoint: 480,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1
+					}
 				}
-			},
-			{
-				breakpoint: 768,
-				settings: {
-				slidesToShow: 2,
-				slidesToScroll: 1
-				}
-			},
-			{
-				breakpoint: 480,
-				settings: {
-				slidesToShow: 1,
-				slidesToScroll: 1
-				}
-			}
 			]
 		});
 
@@ -192,15 +202,15 @@ Index Of Script
 			fade: true,
 			asNavFor: '#top-ten-slider-nav',
 			responsive: [
-			{
-				breakpoint: 992,
-				settings: {
-				asNavFor: false,
-				arrows: true,
-				nextArrow: '<button class="NextArrow"><i class="ri-arrow-right-s-line"></i></button>',
-				prevArrow: '<button class="PreArrow"><i class="ri-arrow-left-s-line"></i></button>',
+				{
+					breakpoint: 992,
+					settings: {
+						asNavFor: false,
+						arrows: true,
+						nextArrow: '<button class="NextArrow"><i class="ri-arrow-right-s-line"></i></button>',
+						prevArrow: '<button class="PreArrow"><i class="ri-arrow-left-s-line"></i></button>',
+					}
 				}
-			}
 			]
 		});
 		jQuery('#top-ten-slider-nav').slick({
@@ -210,18 +220,18 @@ Index Of Script
 			dots: false,
 			arrows: true,
 			infinite: true,
-			vertical:true,
+			vertical: true,
 			verticalSwiping: true,
 			centerMode: false,
-			nextArrow:'<button class="NextArrow"><i class="ri-arrow-down-s-line"></i></button>',
-			prevArrow:'<button class="PreArrow"><i class="ri-arrow-up-s-line"></i></button>',
+			nextArrow: '<button class="NextArrow"><i class="ri-arrow-down-s-line"></i></button>',
+			prevArrow: '<button class="PreArrow"><i class="ri-arrow-up-s-line"></i></button>',
 			focusOnSelect: true,
-			responsive: [		    
+			responsive: [
 				{
-				breakpoint: 1200,
-				settings: {
-					slidesToShow: 2,
-				}
+					breakpoint: 1200,
+					settings: {
+						slidesToShow: 2,
+					}
 				},
 				{
 					breakpoint: 600,
@@ -241,29 +251,29 @@ Index Of Script
 			slidesToShow: 4,
 			slidesToScroll: 1,
 			responsive: [
-			{
-				breakpoint: 1024,
-				settings: {
-				slidesToShow: 3,
-				slidesToScroll: 1,
-				infinite: true,
-				dots: true,
+				{
+					breakpoint: 1024,
+					settings: {
+						slidesToShow: 3,
+						slidesToScroll: 1,
+						infinite: true,
+						dots: true,
+					}
+				},
+				{
+					breakpoint: 600,
+					settings: {
+						slidesToShow: 2,
+						slidesToScroll: 1,
+					}
+				},
+				{
+					breakpoint: 480,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1,
+					}
 				}
-			},
-			{
-				breakpoint: 600,
-				settings: {
-				slidesToShow: 2,
-				slidesToScroll: 1,
-				}
-			},
-			{
-				breakpoint: 480,
-				settings: {
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				}
-			}
 			]
 		});
 
@@ -276,38 +286,38 @@ Index Of Script
 			slidesToShow: 4,
 			slidesToScroll: 1,
 			responsive: [
-			{
-				breakpoint: 1024,
-				settings: {
-				slidesToShow: 3,
-				slidesToScroll: 1,
-				infinite: true,
-				dots: true,
+				{
+					breakpoint: 1024,
+					settings: {
+						slidesToShow: 3,
+						slidesToScroll: 1,
+						infinite: true,
+						dots: true,
+					}
+				},
+				{
+					breakpoint: 600,
+					settings: {
+						slidesToShow: 2,
+						slidesToScroll: 1,
+					}
+				},
+				{
+					breakpoint: 480,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1,
+					}
 				}
-			},
-			{
-				breakpoint: 600,
-				settings: {
-				slidesToShow: 2,
-				slidesToScroll: 1,
-				}
-			},
-			{
-				breakpoint: 480,
-				settings: {
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				}
-			}
 			]
 		});
 
 		jQuery('#trending-slider').slick({
 			slidesToShow: 1,
-			slidesToScroll: 1,		 
+			slidesToScroll: 1,
 			arrows: false,
 			fade: true,
-			asNavFor: '#trending-slider-nav',	
+			asNavFor: '#trending-slider-nav',
 		});
 		jQuery('#trending-slider-nav').slick({
 			slidesToShow: 5,
@@ -317,34 +327,34 @@ Index Of Script
 			arrows: false,
 			infinite: true,
 			centerMode: true,
-			centerPadding:0,
+			centerPadding: 0,
 			focusOnSelect: true,
 			responsive: [
-			{
-				breakpoint: 1024,
-				settings: {
-				slidesToShow: 2,
-				slidesToScroll: 1,
+				{
+					breakpoint: 1024,
+					settings: {
+						slidesToShow: 2,
+						slidesToScroll: 1,
+					}
+				},
+				{
+					breakpoint: 600,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1
+					}
 				}
-			},
-			{
-				breakpoint: 600,
-				settings: {
-				slidesToShow: 1,
-				slidesToScroll: 1
-				}
-			}
 			]
 		});
-		
+
 		jQuery('#tvshows-slider').slick({
 			centerMode: true,
 			centerPadding: '200px',
 			slidesToShow: 1,
 			nextArrow: '<button class="NextArrow"><i class="ri-arrow-right-s-line"></i></button>',
 			prevArrow: '<button class="PreArrow"><i class="ri-arrow-left-s-line"></i></button>',
-			arrows:true,
-			dots:false,
+			arrows: true,
+			dots: false,
 			responsive: [
 				{
 					breakpoint: 991,
@@ -371,30 +381,30 @@ Index Of Script
 			Owl Carousel
 		----------------------------------------------------------------------- */
 		jQuery('.episodes-slider1').owlCarousel({
-			loop:true,
-			margin:20,
-			nav:true,
+			loop: true,
+			margin: 20,
+			nav: true,
 			navText: ["<i class='ri-arrow-left-s-line'></i>", "<i class='ri-arrow-right-s-line'></i>"],
-			dots:false,
-			responsive:{
-				0:{
-					items:1
+			dots: false,
+			responsive: {
+				0: {
+					items: 1
 				},
-				600:{
-					items:1
+				600: {
+					items: 1
 				},
-				1000:{
-					items:4
+				1000: {
+					items: 4
 				}
 			}
 		});
-		
+
 		/*---------------------------------------------------------------------
 			Page Loader
 		----------------------------------------------------------------------- */
 		jQuery("#load").fadeOut();
 		jQuery("#loading").delay(0).fadeOut("slow");
-		
+
 		jQuery('.widget .fa.fa-angle-down, #main .fa.fa-angle-down').on('click', function () {
 			jQuery(this).next('.children, .sub-menu').slideToggle();
 		});
@@ -402,34 +412,34 @@ Index Of Script
 		/*---------------------------------------------------------------------
 		Mobile Menu Overlay
 		----------------------------------------------------------------------- */
-		jQuery(document).on("click", function(event){
-	    var $trigger = jQuery(".main-header .navbar");
-	    if($trigger !== event.target && !$trigger.has(event.target).length){
-			jQuery(".main-header .navbar-collapse").collapse('hide');
-			jQuery('body').removeClass('nav-open');
-	    }            
+		jQuery(document).on("click", function (event) {
+			var $trigger = jQuery(".main-header .navbar");
+			if ($trigger !== event.target && !$trigger.has(event.target).length) {
+				jQuery(".main-header .navbar-collapse").collapse('hide');
+				jQuery('body').removeClass('nav-open');
+			}
 		});
-		jQuery('.c-toggler').on("click", function(){
+		jQuery('.c-toggler').on("click", function () {
 			jQuery('body').addClass('nav-open');
-		}); 
+		});
 
 		/*---------------------------------------------------------------------
 		  Equal Height of Tab Pane
-		-----------------------------------------------------------------------*/		
-		jQuery('.trending-content').each(function () {			
-			var highestBox = 0;			
-			jQuery('.tab-pane', this).each(function () {				
+		-----------------------------------------------------------------------*/
+		jQuery('.trending-content').each(function () {
+			var highestBox = 0;
+			jQuery('.tab-pane', this).each(function () {
 				if (jQuery(this).height() > highestBox) {
 					highestBox = jQuery(this).height();
 				}
-			});			 
+			});
 			jQuery('.tab-pane', this).height(highestBox);
-		}); 
+		});
 
 		/*---------------------------------------------------------------------
-	 		Active Class for Pricing Table
-  	 	-----------------------------------------------------------------------*/
-		jQuery("#my-table tr th").on("click", function (){
+				Active Class for Pricing Table
+			  -----------------------------------------------------------------------*/
+		jQuery("#my-table tr th").on("click", function () {
 			jQuery('#my-table tr th').children().removeClass('active');
 			jQuery(this).children().addClass('active');
 			jQuery("#my-table td").each(function () {
@@ -440,23 +450,23 @@ Index Of Script
 			var col = jQuery(this).index();
 			jQuery("#my-table tr td:nth-child(" + parseInt(col + 1) + ")").addClass('active');
 		});
-		
+
 		/*---------------------------------------------------------------------
 			Select 2 Dropdown
 		-----------------------------------------------------------------------*/
-		if (jQuery('select').hasClass('season-select')){
+		if (jQuery('select').hasClass('season-select')) {
 			jQuery('select').select2({
 				theme: 'bootstrap4',
 				allowClear: false,
 				width: 'resolve'
 			});
 		}
-		if (jQuery('select').hasClass('pro-dropdown')) {			
+		if (jQuery('select').hasClass('pro-dropdown')) {
 			jQuery('.pro-dropdown').select2({
-				theme: 'bootstrap4',			
-				minimumResultsForSearch: Infinity,			
+				theme: 'bootstrap4',
+				minimumResultsForSearch: Infinity,
 				width: 'resolve'
-			});	
+			});
 			jQuery('#lang').select2({
 				theme: 'bootstrap4',
 				placeholder: 'Language Preference',
@@ -522,7 +532,7 @@ Index Of Script
 		// 		slideChangeTransitionStart: function () {
 		// 			$('.aos-slide').hide(0);
 		// 			$('.aos-slide').removeClass('aos-init').removeClass('aos-animate');
-					
+
 		// 		},
 		// 	},
 		// 	pagination: {
@@ -533,7 +543,7 @@ Index Of Script
 		// 		prevEl: '.swiper-button-prev',
 		// 	},
 		// });
-	
+
 		// AOS.init();	
 
 	});
