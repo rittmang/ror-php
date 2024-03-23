@@ -68,7 +68,7 @@
                                                 <a href="#" class="search-toggle">
                                                     <i class="ri-search-line"></i>
                                                 </a>
-                                                <div class="search-box iq-search-bar">
+                                                <!-- <div class="search-box iq-search-bar">
                                                     <form action="#" class="searchbox">
                                                         <div class="form-group position-relative">
                                                             <input type="text" class="text search-input font-size-12"
@@ -76,7 +76,9 @@
                                                             <i class="search-link ri-search-line"></i>
                                                         </div>
                                                     </form>
-                                                </div>
+                                                </div> -->
+                                                <!-- <div id="search-box" class="search-box iq-search-bar"></div>
+                                                <div id="hits" class="search-box iq-show"></div> -->
                                             </li>
                                             @if(Auth::user()->is_admin)
                                                 <li onclick="location.href='/dashboard';" class="nav-item"
@@ -106,8 +108,7 @@
                                                 </div>
                                             </form>
                                         </div> -->
-                                        <div id="search-box" class="search-box iq-search-bar">
-                                        </div>
+                                        <div id="search-box" class="search-box iq-search-bar"></div>
                                         <div id="hits" class="search-box iq-show"></div>
                                     </li>
                                     @if(Auth::user()->is_admin)
@@ -628,6 +629,7 @@
         const search = instantsearch({
         indexName: 'title',
         searchClient: algoliasearch('05XKD58WI7', 'fee6b64af1eb23cd078162ca14824755'),
+        autofocus: true,
         searchFunction(helper) {
             const searchResults = document.querySelector('#hits');
             if (helper.state.query === '') {
@@ -653,16 +655,26 @@
                 container: '#hits',
                 templates: {
                     item: `
-                        <div>
-                            <a href="/@{{objectID}}">
+                    <a href="/@{{objectID}}" data-object-id="@{{objectID}}" data-type="@{{type}}" class="hit-item-link">
+                        <div class="hit-item">
+                            <img src="@{{long_poster}}" alt="" class="hit-image">
+                            <div class="hit-content">
                                 @{{#helpers.highlight}}{ "attribute": "name" }@{{/helpers.highlight}}
                                 (@{{year}})
-                            </a>
+                            </div>
                         </div>
-                    `,
+                    </a>
+                `,
                 },
             })
         );
+
+        search.on('render', function() {
+            document.querySelectorAll('#hits a[data-type="Series"]').forEach(function(link) {
+                var objectId = link.getAttribute('data-object-id');
+                link.href = '/webseries/' + objectId;
+            });
+        });
 
         search.start();
     </script>
