@@ -2459,7 +2459,7 @@ span.flatpickr-weekday,
 .ais-InfiniteResults-list,
 .ais-Hits-list,
 .ais-Results-list {
-	margin-top: 2rem !important;
+	margin-top: 0rem !important;
 	display: grid !important;
 }
 

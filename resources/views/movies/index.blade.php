@@ -109,7 +109,7 @@
                                             </form>
                                         </div> -->
                                         <div id="search-box" class="search-box iq-search-bar"></div>
-                                        <div id="hits" class="search-box iq-show"></div>
+                                        <div id="hits" class="search-box iq-show" style="margin-top:2rem;"></div>
                                     </li>
                                     @if(Auth::user()->is_admin)
                                         <li onclick="location.href='/dashboard';" class="nav-item" style="cursor: pointer;">
