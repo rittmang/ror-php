@@ -77,8 +77,8 @@
                                                         </div>
                                                     </form>
                                                 </div> -->
-                                                <div id="search-box" class="search-box iq-search-bar"></div>
-                                                <div id="hits" class="search-box iq-show" style="margin-top:2rem;"></div>
+                                                <div id="search-box-mobile" class="search-box iq-search-bar"></div>
+                                                <div id="hits-mobile" class="search-box iq-show" style="margin-top:2rem;"></div>
                                             </li>
                                             @if(Auth::user()->is_admin)
                                                 <li onclick="location.href='/dashboard';" class="nav-item"
@@ -108,8 +108,8 @@
                                                 </div>
                                             </form>
                                         </div> -->
-                                        <div id="search-box" class="search-box iq-search-bar"></div>
-                                        <div id="hits" class="search-box iq-show" style="margin-top:2rem;"></div>
+                                        <div id="search-box-desktop" class="search-box iq-search-bar"></div>
+                                        <div id="hits-desktop" class="search-box iq-show" style="margin-top:2rem;"></div>
                                     </li>
                                     @if(Auth::user()->is_admin)
                                         <li onclick="location.href='/dashboard';" class="nav-item" style="cursor: pointer;">
@@ -631,13 +631,16 @@
         searchClient: algoliasearch('05XKD58WI7', 'fee6b64af1eb23cd078162ca14824755'),
         autofocus: true,
         searchFunction(helper) {
-            const searchResults = document.querySelector('#hits');
+            const searchResultsDesktop = document.querySelector('#hits-desktop');
+            const searchResultsMobile = document.querySelector('#hits-mobile');
             if (helper.state.query === '') {
             // Hide the results container when there is no query
-            searchResults.style.display = 'none';
+            searchResultsDesktop.style.display = 'none';
+            searchResultsMobile.style.display = 'none';
             } else {
             // Show the results container when there is a query
-            searchResults.style.display = '';
+            searchResultsDesktop.style.display = '';
+            searchResultsMobile.style.display = '';
             helper.search(); // Perform the search
             }
         },
@@ -645,14 +648,41 @@
 
         search.addWidget(
         instantsearch.widgets.searchBox({
-            container: '#search-box',
+            container: '#search-box-desktop',
             placeholder: 'type here to search...',
         })
         );
 
         search.addWidget(
+        instantsearch.widgets.searchBox({
+            container: '#search-box-mobile',
+            placeholder: 'type here to search...',
+        })
+        );
+
+
+        search.addWidget(
             instantsearch.widgets.hits({
-                container: '#hits',
+                container: '#hits-desktop',
+                templates: {
+                    item: `
+                    <a href="/@{{objectID}}" data-object-id="@{{objectID}}" data-type="@{{type}}" class="hit-item-link">
+                        <div class="hit-item">
+                            <img src="@{{long_poster}}" alt="" class="hit-image">
+                            <div class="hit-content">
+                                @{{#helpers.highlight}}{ "attribute": "name" }@{{/helpers.highlight}}
+                                (@{{year}})
+                            </div>
+                        </div>
+                    </a>
+                `,
+                },
+            })
+        );
+
+        search.addWidget(
+            instantsearch.widgets.hits({
+                container: '#hits-mobile',
                 templates: {
                     item: `
                     <a href="/@{{objectID}}" data-object-id="@{{objectID}}" data-type="@{{type}}" class="hit-item-link">
@@ -670,7 +700,12 @@
         );
 
         search.on('render', function() {
-            document.querySelectorAll('#hits a[data-type="Series"]').forEach(function(link) {
+            document.querySelectorAll('#hits-desktop a[data-type="Series"]').forEach(function(link) {
+                var objectId = link.getAttribute('data-object-id');
+                link.href = '/webseries/' + objectId;
+            });
+
+            document.querySelectorAll('#hits-mobile a[data-type="Series"]').forEach(function(link) {
                 var objectId = link.getAttribute('data-object-id');
                 link.href = '/webseries/' + objectId;
             });

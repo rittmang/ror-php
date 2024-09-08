@@ -117,6 +117,16 @@ Index Of Script
 				// Do nothing if the click is inside the search box or hits container
 			}
 
+			else if (jQuery(myTargetElement).closest('#search-box-mobile').length > 0 ||
+				jQuery(myTargetElement).closest('#hits-mobile').length > 0) {
+				// Do nothing if the click is inside the search box or hits container
+			}
+
+			else if (jQuery(myTargetElement).closest('#search-box-desktop').length > 0 ||
+				jQuery(myTargetElement).closest('#hits-desktop').length > 0) {
+				// Do nothing if the click is inside the search box or hits container
+			}
+
 			else if (jQuery(myTargetElement).is('.search-input')) {
 
 			} else {
